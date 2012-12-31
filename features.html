@@ -67,14 +67,27 @@
 <ul>
 <li>JGit SmartHTTP servlet</li>
 <li>Browser and git client authentication</li>
-<li>Four <em>per-repository</em> access control configurations with a Read-Only control flag<ul>
-<li><img src="blank.png" alt="anonymous"/> <em>Anonymous View, Clone & Push</em></li>
+<li>Four <em>per-repository</em> access restriction configurations with a Read-Only control flag<ul>
+<li><img src="blank.png" alt="anonymous"/> <em>Anonymous View, Clone &amp; Push</em></li>
 <li><img src="lock_go_16x16.png" alt="push"/> <em>Authenticated Push</em></li>
-<li><img src="lock_pull_16x16.png" alt="clone"/> <em>Authenticated Clone & Push</em></li>
-<li><img src="shield_16x16.png" alt="view"/> <em>Authenticated View, Clone & Push</em></li>
+<li><img src="lock_pull_16x16.png" alt="clone"/> <em>Authenticated Clone &amp; Push</em></li>
+<li><img src="shield_16x16.png" alt="view"/> <em>Authenticated View, Clone &amp; Push</em></li>
 <li><img src="cold_16x16.png" alt="freeze"/> Freeze repository (i.e. deny push, make read-only)</li>
 </ul>
 </li>
+<li>Six <em>per-user/team</em> repository access permissions<ul>
+<li><strong>V</strong> (view in web ui, RSS feeds, download zip)</li>
+<li><strong>R</strong> (clone)</li>
+<li><strong>RW</strong> (clone and push)</li>
+<li><strong>RWC</strong> (clone and push with ref creation)</li>
+<li><strong>RWD</strong> (clone and push with ref creation, deletion)</li>
+<li><strong>RW+</strong> (clone and push with ref creation, deletion, rewind)</li>
+</ul>
+</li>
+<li>Optional feature to allow users to create personal repositories</li>
+<li>Optional feature to fork a repository to a personal repository</li>
+<li>Optional feature to create a repository on push</li>
+<li><em>Experimental</em> built-in Garbage Collection</li>
 <li>Ability to federate with one or more other Gitblit instances</li>
 <li>RSS/JSON RPC interface</li>
 <li>Java/Swing Gitblit Manager tool </li>
@@ -106,7 +119,7 @@
 <li>Single text file for users configuration</li>
 <li>Optional utility pages<ul>
 <li><img src="book_16x16.png" alt="docs"/> Docs page which enumerates all Markdown files within a repository</li>
-<li><img src="bug_16x16.png" alt="tickets"/> Ticgit ticket pages <em>(based on last MIT release bf57b032 2009-01-27)</em></li>
+<li><img src="bug_16x16.png" alt="tickets"/> <strong>readonly</strong> Ticgit ticket pages <em>(based on last MIT release bf57b032 2009-01-27)</em></li>
 </ul>
 </li>
 <li>Translations<ul>
@@ -115,6 +128,7 @@
 <li>Spanish</li>
 <li>Polish</li>
 <li>Korean</li>
+<li>Brazilian Portuguese</li>
 </ul>
 </li>
 </ul>
@@ -123,8 +137,8 @@
 
 <ul>
 <li>Out-of-the-box integrated stack requiring minimal configuration</li>
-<li>Automatically generates a self-signed certificate for <em>localhost</em> https communications<br/>
-(includes script to generate a self-signed certificate for <em>your hostname</em>, see <a href="/setup.html">setup</a> for details)</li>
+<li>Automatic generation of ssl certificate for https communications</li>
+<li>Integrated GUI tool to facilitate x509 PKI including ssl and client certificate generation, client certificate revocation, and client certificate distribution</li>
 <li>Single text file for configuring server and gitblit</li>
 <li>A Windows service installation script and configuration tool</li>
 <li>Built-in AJP connector for Apache httpd </li>
@@ -135,19 +149,9 @@
 <ul>
 <li>HTTP/HTTPS are the only supported Git protocols</li>
 <li>Built-in access controls are not path-based, they are repository-based.</li>
-<li>Only Administrators can create, rename or delete repositories</li>
-<li>Only Administrators can create, modify or delete users</li>
-<li>Only Administrators can create, modify or delete teams</li>
-<li>Native Git may be needed to periodically run git-gc as <a href="http://eclipse.org/jgit" title="Eclipse JGit Site">JGit</a> does not fully support the git-gc featureset.</li>
-</ul>
-
-<h3> Caveats</h3>
-
-<ul>
-<li>Gitblit may have security holes.  Patches welcome.  :)</li>
 </ul>		</div> <!-- markdown -->
 		<footer>
-			<p class="pull-right">generated 2012-08-25</p>
+			<p class="pull-right">generated 2012-12-31</p>
 		The content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 License</a>.
 		</footer>			
 	</div> <!-- container -->	

@@ -138,7 +138,7 @@ You can not trust the url in the address bar of your browser since your browser 
 <p>There are two possible workarounds for this issue.  In <code>gitblit.properties</code> or <code>web.xml</code>:</p>
 
 <ol>
-<li>try setting <em>web.mountParameters</em> to <em>false</em>.<br/>This changes the url scheme from mounted (<em>/commit/myrepo.git/abcdef</em>) to parameterized (<em>/commit/?r=myrepo.git&h=abcdef</em>).</li>
+<li>try setting <em>web.mountParameters</em> to <em>false</em>.<br/>This changes the url scheme from mounted (<em>/commit/myrepo.git/abcdef</em>) to parameterized (<em>/commit/?r=myrepo.git&amp;h=abcdef</em>).</li>
 <li>try changing <em>web.forwardSlashCharacter</em> to an asterisk or a <strong>!</strong></li>
 </ol>
 
@@ -159,6 +159,13 @@ Add <em>-Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true</em> to <
 <li><em>web.mountParameters = false</em> and use non-pretty, parameterized urls</li>
 <li><em>web.forwardSlashCharacter = !</em> which tells Gitblit to use <strong>!</strong> instead of <strong>/</strong></li>
 </ol>
+
+<h4> UTF-8 Filenames</h4>
+
+<p>Tomcat also dislikes urls with non-ASCII characters. If your repositories have non-ASCII filenames you will have to modify your connector properties to allow UTF-8 encoded urls.</p>
+
+<p><a href="http://wiki.apache.org/tomcat/FAQ/CharacterEncoding">Tomcat Character Encoding</a><br/>
+<a href="http://tomcat.apache.org/tomcat-6.0-doc/config/http.html">Tomcat Connector Properties</a></p>
 
 <h2> General Interest Questions</h2>
 
@@ -263,7 +270,7 @@ committer: james
 
 <p>Yes.  Most messages are localized to a standard Java properties file.		</div> <!-- markdown -->
 		<footer>
-			<p class="pull-right">generated 2012-08-25</p>
+			<p class="pull-right">generated 2012-12-31</p>
 		The content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 License</a>.
 		</footer>			
 	</div> <!-- container -->	

@@ -392,7 +392,7 @@ federation.example4.include = somerepo.git
 
 <h2> Federation Client</h2>
 
-<p>Instead of setting up a full-blown pulling Gitblit instance, you can also use the <a href="http://code.google.com/p/gitblit/downloads/detail?name=fedclient-1.1.0.zip">federation client</a> command-line utility.  This is a packaged subset of the federation feature in a smaller, simpler command-line only tool.</p>
+<p>Instead of setting up a full-blown pulling Gitblit instance, you can also use the <a href="http://code.google.com/p/gitblit/downloads/detail?name=fedclient-1.2.0.zip">federation client</a> command-line utility.  This is a packaged subset of the federation feature in a smaller, simpler command-line only tool.</p>
 
 <p>The <em>federation client</em> relies on many of the same dependencies as Gitblit and will download them on first execution.</p>
 
@@ -402,6 +402,12 @@ federation.example4.include = somerepo.git
 
 <p>By default this tool does not daemonize itself; it executes and then quits.  This allows you to use the native scheduling feature of your OS.  Of course, if you'd rather use Gitblit's scheduler you may use that by specifying the <code>--daemon</code> parameter.</p>
 
+<h3> http.sslVerify</h3>
+
+<p>If you are pulling from a Gitblit with a self-signed SSL certificate you will need to configure Git/JGit to bypass certificate verification.<br/>
+(<a href="http://www.kernel.org/pub/software/scm/git/docs/git-config.html">Git-Config Manual Page</a>)</p>
+
+<pre>git config --global --bool --add http.sslVerify false</pre>
 <h3> Command-Line Parameters</h3>
 
 <p>Instead of using <code>federation.properties</code> you may directly specify a Gitblit instance to pull from with command-line parameters.</p>
@@ -414,7 +420,7 @@ java -jar fedclient.jar --url https://go.gitblit.com --mirror --bare --token 123
 
 </code></pre>		</div> <!-- markdown -->
 		<footer>
-			<p class="pull-right">generated 2012-08-25</p>
+			<p class="pull-right">generated 2012-12-31</p>
 		The content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 License</a>.
 		</footer>			
 	</div> <!-- container -->	

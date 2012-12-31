@@ -65,7 +65,7 @@
 <h2> Gitblit WAR Setup</h2>
 
 <ol>
-<li>Download <a href="http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.1.0.war">Gitblit WAR 1.1.0</a> to the webapps folder of your servlet container.</li>
+<li>Download <a href="http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.2.0.war">Gitblit WAR 1.2.0</a> to the webapps folder of your servlet container.</li>
 <li>You may have to manually extract the WAR (zip file) to a folder within your webapps folder.</li>
 <li>Copy the <code>WEB-INF/users.conf</code> file to a location outside the webapps folder that is accessible by your servlet container.<br/>
 Optionally copy the example hook scripts in <code>WEB-INF/groovy</code> to a location outside the webapps folder that is accesible by your servlet container.</li>
@@ -74,6 +74,7 @@ Open <code>web.xml</code> in your favorite text editor and make sure to review a
 <li>&lt;context-parameter&gt; <em>git.repositoryFolder</em> (set the full path to your repositories folder)</li>
 <li>&lt;context-parameter&gt; <em>groovy.scriptsFolder</em> (set the full path to your Groovy hook scripts folder)</li>
 <li>&lt;context-parameter&gt; <em>groovy.grapeFolder</em> (set the full path to your Groovy Grape artifact cache)</li>
+<li>&lt;context-parameter&gt; <em>web.projectsFile</em> (set the full path to your projects metadata file)</li>
 <li>&lt;context-parameter&gt; <em>realm.userService</em> (set the full path to <code>users.conf</code>)</li>
 <li>&lt;context-parameter&gt; <em>git.packedGitLimit</em> (set larger than the size of your largest repository)</li>
 <li>&lt;context-parameter&gt; <em>git.streamFileThreshold</em> (set larger than the size of your largest committed file)</li>
@@ -88,7 +89,7 @@ Open <code>web.xml</code> in your favorite text editor and make sure to review a
 <h2> Gitblit GO Setup</h2>
 
 <ol>
-<li>Download and unzip <a href="http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.1.0.zip">Gitblit GO 1.1.0</a>.<br/>
+<li>Download and unzip <a href="http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.2.0.zip">Gitblit GO 1.2.0</a>.<br/>
 <em>Its best to eliminate spaces in the path name.</em> </li>
 <li>The server itself is configured through a simple text file.<br/>
 Open <code>gitblit.properties</code> in your favorite text editor and make sure to review and set:<ul>
@@ -97,25 +98,31 @@ Open <code>gitblit.properties</code> in your favorite text editor and make sure 
 <li><em>groovy.grapeFolder</em> (path may be relative or absolute)</li>
 <li><em>server.tempFolder</em> (path may be relative or absolute)</li>
 <li><em>server.httpPort</em> and <em>server.httpsPort</em></li>
-<li><em>server.httpBindInterface</em> and <em>server.httpsBindInterface</em><br/>
+<li><em>server.httpBindInterface</em> and <em>server.httpsBindInterface</em></li>
+<li><em>server.storePassword</em>
 <strong>https</strong> is strongly recommended because passwords are insecurely transmitted form your browser/git client using Basic authentication!</li>
 <li><em>git.packedGitLimit</em> (set larger than the size of your largest repository)</li>
 <li><em>git.streamFileThreshold</em> (set larger than the size of your largest committed file)</li>
 </ul>
 </li>
+<li>Execute <code>authority.cmd</code> or <code>java -jar authority.jar</code> from a command-line<ol>
+<li>fill out the fields in the <em>new certificate defaults</em> dialog</li>
+<li>enter the store password used in <em>server.storePassword</em> when prompted.  This generates an SSL certificate for <strong>localhost</strong>.</li>
+<li>you may want to generate an SSL certificate for the hostname or ip address hostnames you are serving from<br/><strong>NOTE:</strong> You can only have <strong>one</strong> SSL certificate specified for a port.</li>
+<li>exit the authority app</li>
+</ol>
+</li>
 <li>Execute <code>gitblit.cmd</code> or <code>java -jar gitblit.jar</code> from a command-line</li>
-<li>Wait a minute or two while all dependencies are downloaded and your self-signed <em>localhost</em> certificate is generated.<br/>
-Please see the section titled <strong>Creating your own Self-Signed Certificate</strong> to generate a certificate for <em>your hostname</em>.</li>
 <li>Open your browser to <a href="http://localhost:8080">http://localhost:8080</a> or <a href="https://localhost:8443">https://localhost:8443</a> depending on your chosen configuration.</li>
 <li>Enter the default administrator credentials: <strong>admin / admin</strong> and click the <em>Login</em> button  <br/>
 <strong>NOTE:</strong> Make sure to change the administrator username and/or password!! </li>
 </ol>
 
-<h3> Creating your own Self-Signed Certificate</h3>
+<h3> Creating your own Self-Signed SSL Certificate</h3>
 
-<p>Gitblit GO automatically generates an ssl certificate for you that is bound to <em>localhost</em>.</p>
+<p>Gitblit GO (and Gitblit Certificate Authority) automatically generates a Certificate Authority (CA) certificate and an ssl certificate signed by this CA certificate that is bound to <em>localhost</em>.</p>
 
-<p>Remote Eclipse/EGit/JGit clients (&lt;= 1.1.0) will fail to communicate using this certificate because JGit always verifies the hostname of the certificate, regardless of the <em>http.sslVerify=false</em> client-side setting.</p>
+<p>Remote Eclipse/EGit/JGit clients (&lt;= 2.1.0) will fail to communicate using this certificate because JGit always verifies the hostname of the certificate, regardless of the <em>http.sslVerify=false</em> client-side setting.</p>
 
 <p>The EGit failure message is something like:</p>
 
@@ -123,18 +130,62 @@ Please see the section titled <strong>Creating your own Self-Signed Certificate<
 Reason: https:/myserver.com/git/myrepo.git: cannot open git-upload-pack
 </code></pre>
 
-<p>If you want to serve your repositories to another machine over https then you will want to generate your own certificate.</p>
+<p>If you want to serve your repositories to another machine over https then you will want to generate a new certificate for the hostname or ip address you are serving from.</p>
 
 <ol>
-<li>Review the contents of <code>makekeystore.cmd</code> or <code>makekeystore_jdk.cmd</code></li>
-<li>Set <em>your hostname</em> into the <em>HOSTNAME</em> variable.</li>
-<li>Execute the script.<br/>This will generate a new certificate and keystore for <em>your hostname</em> protected by <em>server.storePassword</em>.</li>
+<li><code>authority.cmd</code> or <code>java -jar authority.jar</code></li>
+<li>Click the <em>new ssl certificate</em> button (red rosette in the toolbar in upper left of window)</li>
+<li>Enter the hostname or ip address</li>
+<li>Make sure the checkbox <em>serve https with this certificate</em> is checked</li>
+<li>In the keystore password prompt, enter the <em>server.storePassword</em> password</li>
 </ol>
 
-<p><strong>NOTE:</strong><br/>
-If you use <code>makekeystore_jdk.cmd</code>, the certificate password AND the keystore password must match and must be set as <em>server.storePassword</em> or specified with the <em>storePassword</em> command-line parameter!</p>
+<p>If you decide to change the value of <em>server.storePassword</em> (recommended) <u>after</u> you have already started Gitblit or Gitblit Certificate Authority, then you will have to delete the following files and then restart the Gitblit Certificate Authority app:</p>
 
-<p>Additionally, if you want to change the value of <em>server.storePassword</em> (recommended) you will have to generate a new certificate afterwards.</p>
+<ol>
+<li>serverKeyStore.jks</li>
+<li>serverTrustStore.jks</li>
+<li>certs/caKeyStore.jks</li>
+<li>certs/ca.crt</li>
+<li>certs/caRevocationList.crl (optional)</li>
+</ol>
+
+<h3> Client SSL Certificates</h3>
+
+<p>SINCE 1.2.0</p>
+
+<p>Gitblit supports X509 certificate authentication.  This authentication method relies on your servlet container to validate/verify/trust your client certificate and can be used by your browser and your git client.</p>
+
+<p>All X509 certificates have a <em>distinguished name (DN)</em> which is a signature of several fields like:</p>
+
+<pre><code>C=US,O=Gitblit,OU=Gitblit,CN=james
+</code></pre>
+
+<p>Gitblit must be able to map the DN of the certificate to an <em>existing</em> account username.  The default mapping is to extract the <em>common name (CN)</em> value from the DN and use that as the account name.  If the CN is a valid account, then the user is authenticated.  The servlet container which runs Gitblit validates, verifies, and trusts the certificate passed to Gitblit.  If you need to specify an alternative DN mapping you may do so with the <em>git.certificateUsernameOIDs</em> setting, but this mapping must be matched to the user account name.</p>
+
+<p>How do you make your servlet container trust a client certificate?</p>
+
+<p>In the WAR variant, you will have to manually setup your servlet container to:
+1. want/need client certificates
+2. trust a CA certificate used to sign your client certificates
+3. generate client certificates signed by your CA certificate</p>
+
+<p>Alternatively, Gitblit GO is designed to facilitate use of client certificate authentication.  Gitblit GO ships with a tool that simplifies creation and management of client certificates, Gitblit Certificate Authority.</p>
+
+<h4> Creating SSL Certificates with Gitblit Certificate Authority</h4>
+
+<p>When you generate a new client certificate, a zip file bundle is created which includes a P12 keystore for browsers and a PEM keystore for Git.  Both of these are password-protected.  Additionally, a personalized README file is generated with setup instructions for popular browsers and Git.  The README is generated from <code>certs\instructions.tmpl</code> and can be modified to suit your needs.</p>
+
+<ol>
+<li><code>authority.cmd</code> or <code>java -jar authority.jar</code></li>
+<li>Select the user for which to generate the certificate</li>
+<li>Click the <em>new certificate</em> button and enter the expiration date of the certificate.  You must also enter a password for the generated keystore.  This password is <em>not</em> the same as the user's login password.  This password is used to protect the privatekey and public certificate you will generate for the selected user.  You must also enter a password hint for the user.</li>
+<li>If your mail server settings are properly configured you will have a <em>send email</em> checkbox which you can use to immediately send the generated certificate bundle to the user.</li>
+</ol>
+
+<h4> Certificate Inspection and Advanced Troubleshooting</h4>
+
+<p>X509 certificates can be confusing and tricky even with the simplified Gitblit Certificate Authority tool.  If you find you need more tooling to understand your keystores, certificates, and certificate revocation lists (CRLs), I highly recommend <a href="http://portecle.sourceforge.net">Portecle</a> which can be conveniently launched as a <a href="http://portecle.sourceforge.net/webstart/portecle.jnlp">Java Web Start app</a>.</p>
 
 <h3> Running as a Windows Service</h3>
 
@@ -176,6 +227,7 @@ C:\Program Files\Java\jre6\bin\server\jvm.dll</pre></li>
 --httpPort             HTTP port for to serve. (port &lt;= 0 will disable this connector)
 --httpsPort            HTTPS port to serve.  (port &lt;= 0 will disable this connector)
 --ajpPort              AJP port to serve.  (port &lt;= 0 will disable this connector)
+--alias                Alias in keystore of SSL cert to use for https serving
 --storePassword        Password for SSL (https) keystore.
 --shutdownPort         Port for Shutdown Monitor to listen on. (port &lt;= 0 will disable this monitor)
 --tempFolder           Folder for server to extract built-in webapp
@@ -246,6 +298,11 @@ ProxyPreserveHost On
 # Additionally you will want to tell Gitblit the original scheme and port
 #RequestHeader set X-Forwarded-Proto https
 #RequestHeader set X-Forwarded-Port 443
+
+# If you are using subdomain proxying then you will want to tell Gitblit the appropriate
+# context path for your repository url.
+# If you are not using subdomain proxying, then ignore this setting.
+#RequestHeader set X-Forwarded-Context /
 
 #ProxyPass /gitblit ajp://localhost:8009/gitblit
 </pre><br/>
@@ -328,7 +385,7 @@ Overwrite the <code>users.conf</code> file with your backup <em>(if it was locat
 
 <h4> Repository Names</h4>
 
-<p>Repository names must be unique and are CASE-SENSITIVE ON CASE-SENSITIVE FILESYSTEMS.  The name must be composed of letters, digits, or <code>/ _ - .</code><br/>
+<p>Repository names must be unique and are CASE-SENSITIVE ON CASE-SENSITIVE FILESYSTEMS.  The name must be composed of letters, digits, or <code>/ _ - . ~</code><br/>
 Whitespace is illegal.</p>
 
 <p>Repositories can be grouped within subfolders.  e.g. <em>libraries/mycoollib.git</em> and <em>libraries/myotherlib.git</em></p>
@@ -338,6 +395,98 @@ Whitespace is illegal.</p>
 <h4> Repository Owner</h4>
 
 <p>The <em>Repository Owner</em> has the special permission of being able to edit a repository through the web UI.  The Repository Owner is not permitted to rename the repository, delete the repository, or reassign ownership to another user.</p>
+
+<h3> Access Restrictions and Access Permissions</h3>
+
+<p><img src="permissions_matrix.png" alt="permissions matrix" title="Permissions and Restrictions"/></p>
+
+<h4> Discrete Permissions (Gitblit v1.2.0+)</h4>
+
+<p>Since v1.2.0, Gitblit supports more discrete permissions.  While Gitblit does not offer a built-in solution for branch-based permissions like Gitolite, it does allow for the following repository access permissions:</p>
+
+<ul>
+<li><strong>V</strong> (view in web ui, RSS feeds, download zip)</li>
+<li><strong>R</strong> (clone)</li>
+<li><strong>RW</strong> (clone and push)</li>
+<li><strong>RWC</strong> (clone and push with ref creation)</li>
+<li><strong>RWD</strong> (clone and push with ref creation, deletion)</li>
+<li><strong>RW+</strong> (clone and push with ref creation, deletion, rewind)</li>
+</ul>
+
+<p>These permission codes are combined with the repository path to create a user permission:</p>
+
+<pre><code>RW:mygroup/myrepo.git
+</code></pre>
+
+<h4> Discrete Permissions with Regex Matching (Gitblit v1.2.0+)</h4>
+
+<p>Gitblit also supports <em>case-insensitive</em> regex matching for repository permissions.  The following permission grants push privileges to all repositories in the <em>mygroup</em> folder.</p>
+
+<pre><code>RW:mygroup/.*
+</code></pre>
+
+<h5> Exclusions</h5>
+
+<p>When using regex matching it may also be useful to exclude specific repositories or to exclude regex repository matches.  You may specify the <strong>X</strong> permission for exclusion.  The following example grants clone permission to all repositories except the repositories in mygroup.  The user/team will have no access whatsoever to these repositories.</p>
+
+<pre><code>X:mygroup/.*
+R:.*
+</code></pre>
+
+<h5> Order is Important</h5>
+
+<p>The preceding example should suggest that order of permissions is important with regex matching.  Here are the rules for determining the permission that is applied to a repository request:</p>
+
+<ol>
+<li>If the user is an admin or repository owner, then RW+</li>
+<li>Else if user has an explicit permission, use that</li>
+<li>Else check for the first regex match in user permissions</li>
+<li>Else check for the HIGHEST permission from team memberships<ol>
+<li>If the team is an admin team, then RW+</li>
+<li>Else if a team has an explicit permission, use that</li>
+<li>Else check for the first regex match in team permissions</li>
+</ol>
+</li>
+</ol>
+
+<h4> No-So-Discrete Permissions (Gitblit &lt;= v1.1.0)</h4>
+
+<p>Prior to v1.2.0, Gitblit has two main access permission groupings:</p>
+
+<ol>
+<li>what you are permitted to do as an anonymous user</li>
+<li><strong>RW+</strong> for any permitted user</li>
+</ol>
+
+<h4> Committer Verification</h4>
+
+<p>You may optionally enable committer verification which requires that each commit be committed by the authenticated user pushing the commits.  i.e. If Bob is pushing the commits, Bob <strong>must</strong> be the committer of those commits.</p>
+
+<p><strong>How is this enforced?</strong></p>
+
+<p>Bob must set his <em>user.name</em> and <em>user.email</em> values for the repository to match his Gitblit user account <strong>BEFORE</strong> committing to his repository.
+<pre>
+[user "bob"]
+    displayName = Bob Jones
+    emailAddress = bob@somewhere.com
+</pre>
+<pre>
+    git config user.name "Bob Jones"
+    git config user.email bob@somewhere.com	
+</pre>
+or</p>
+
+<pre><code>git config user.name bob
+git config user.email bob@somewhere.com    
+</code></pre>
+
+<p>If the Gitblit account does not specify an email address, then the committer email address is ignored.  However, if the account does specify an address it must match the committer's email address.  Display name or username can be used as the committer name.</p>
+
+<p>All checks are case-insensitive.</p>
+
+<p><strong>What about merges?</strong></p>
+
+<p>You can not use fast-forward merges on your client when using committer verification.  You must specify <em>--no-ff</em> to ensure that a merge commit is created with your identity as the committer.  Only the first parent chain is traversed when verifying commits.</p>
 
 <h3> Teams</h3>
 
@@ -353,11 +502,13 @@ Whitespace is illegal.</p>
     password = admin
     role = &quot;#admin&quot;
     role = &quot;#notfederated&quot;
-    repository = repo1.git
-    repository = repo2.git
+    repository = RW+:repo1.git
+    repository = RW+:repo2.git
 
 [user &quot;hannibal&quot;]
     password = bossman
+    repository = RWD:topsecret.git
+    repository = RW+:ateam/[A-Za-z0-9-~_\\./]+
 
 [user &quot;faceman&quot;]
     password = vanity
@@ -373,7 +524,7 @@ Whitespace is illegal.</p>
     user = faceman
     user = murdock
     user = babaracus
-    repository = topsecret.git
+    repository = RW:topsecret.git
     mailingList = list@ateam.org
     postReceiveScript = sendmail
 </code></pre>
@@ -390,18 +541,60 @@ Whitespace is illegal.</p>
 @teamname=&amp;mailinglist,!username1,!username2,!username3,repository1,repository2,repository3...
 </code></pre>
 
-<h4> Usernames</h4>
+<h3> Usernames</h3>
 
 <p>Usernames must be unique and are case-insensitive.<br/>
 Whitespace is illegal.</p>
 
-<h4> Passwords</h4>
+<h3> Passwords</h3>
 
 <p>User passwords are CASE-SENSITIVE and may be <em>plain</em>, <em>md5</em>, or <em>combined-md5</em> formatted (see <code>gitblit.properties</code> -&gt; <em>realm.passwordStorage</em>).</p>
 
-<h4> User Roles</h4>
+<h3> User Roles</h3>
 
-<p>There are two actual <em>roles</em> in Gitblit: <em>#admin</em>, which grants administrative powers to that user, and <em>#notfederated</em>, which prevents an account from being pulled by another Gitblit instance.  Administrators automatically have access to all repositories.  All other <em>roles</em> are repository names.  If a repository is access-restricted, the user must have the repository's name within his/her roles to bypass the access restriction.  This is how users are granted access to a restricted repository.</p>
+<p>There are four actual <em>roles</em> in Gitblit:</p>
+
+<ul>
+<li><em>#admin</em>, which grants administrative powers to that user</li>
+<li><em>#notfederated</em>, which prevents an account from being pulled by another Gitblit instance</li>
+<li><em>#create</em>, which allows the user the power to create personal repositories</li>
+<li><em>#fork</em>, which allows the user to create a personal fork of an existing Gitblit-hosted repository</li>
+</ul>
+
+<p>Administrators automatically have access to all repositories.  All other <em>roles</em> are repository permissions.  If a repository is access-restricted, the user must have the repository's name within his/her roles to bypass the access restriction.  This is how users are granted access to a restricted repository.</p>
+
+<p><strong>NOTE:</strong><br/>
+The following roles are equivalent:</p>
+
+<ul>
+<li>myrepo.git</li>
+<li>RW+:myrepo.git</li>
+</ul>
+
+<p>This is to preserve backwards-compatibility with Gitblit &lt;= 1.1.0 which granted rewind power to all access-permitted users.</p>
+
+<h3> Personal Repositories &amp; Forks</h3>
+
+<p>Personal Repositories and Forks are related but are controlled individually.</p>
+
+<h4> Creating a Personal Repository</h4>
+
+<p>A user may be granted the power to create personal repositories by specifying the <em>#create</em> role through the web ui or through the RPC mechanism via the Gitblit Manager.  Personal repositories are exactly like common/shared repositories except that the owner has a few additional administrative powers for that repository, like rename and delete.</p>
+
+<h4> Creating a Fork</h4>
+
+<p>A user may also be granted the power to fork an existing repository hosted on your Gitblit server to their own personal clone by specifying the <em>#fork</em> role through the web ui or via the Gitblit Manager.</p>
+
+<p>Forks are mostly likely personal repositories or common/shared repositories except for two important differences:</p>
+
+<ol>
+<li>Forks inherit a view/clone access list from the origin repository.<br/>
+i.e. if Team A has clone access to the origin repository, then by default Team A also has clone access to the fork.  This is to facilitate collaboration.</li>
+<li>Forks are always listed in the fork network, regardless of any access restriction set on the fork.<br/>
+In other words, if you fork <em>RepoA.git</em> to <em>~me/RepoA.git</em> and then set the access restriction of <em>~me/RepoA.git</em> to <em>Authenticated View, Clone, &amp; Push</em> your fork will still be listed in the fork network for <em>RepoA.git</em>.</li>
+</ol>
+
+<p>If you really must have an invisible fork, the clone it locally, create a new personal repository for your invisible fork, and push it back to that personal repository.</p>
 
 <h2> Alternative Authentication and Authorization</h2>
 
@@ -669,7 +862,7 @@ After specifying branches, only the content from those branches can be searched 
 <p><strong>NOTE:</strong><br/>
 The default self-signed certificate generated by Gitlbit GO is bound to <em>localhost</em>.<br/>
 If you are using Eclipse/EGit/JGit clients, you will have to generate your own certificate that specifies the exact hostname used in your clone/push url.<br/>
-You must do this because Eclipse/EGit/JGit (&lt;= 1.1.0) always verifies certificate hostnames, regardless of the <em>http.sslVerify=false</em> client-side setting. </p>
+You must do this because Eclipse/EGit/JGit (&lt;= 2.1.0) always verifies certificate hostnames, regardless of the <em>http.sslVerify=false</em> client-side setting. </p>
 
 <ul>
 <li><strong>Eclipse/EGit/JGit</strong><ol>
@@ -683,6 +876,13 @@ Value = <em>false</em></pre></li>
 <pre>git config --global --bool --add http.sslVerify false</pre></li>
 </ul>
 
+<h3> Http Post Buffer Size</h3>
+
+<p>You may find the default post buffer of your git client is too small to push large deltas to Gitblit.  Sometimes this can be observed on your client as <em>hanging</em> during a push.  Other times it can be observed by git erroring out with a message like: error: RPC failed; result=52, HTTP code = 0.</p>
+
+<p>This can be adjusted on your client by changing the default post buffer size:
+<pre>git config --global http.postBuffer 524288000</pre></p>
+
 <h3> Cloning an Access Restricted Repository </h3>
 
 <ul>
@@ -694,7 +894,7 @@ My testing indicates that your username must be embedded in the url.  YMMV.<br/>
 <pre>https://username@yourserver/git/your/repository</pre></li>
 </ul>		</div> <!-- markdown -->
 		<footer>
-			<p class="pull-right">generated 2012-08-25</p>
+			<p class="pull-right">generated 2012-12-31</p>
 		The content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 License</a>.
 		</footer>			
 	</div> <!-- container -->	

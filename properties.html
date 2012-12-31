@@ -135,12 +135,48 @@
 <span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
 <span style="color:#000080;">git.enableGitServlet</span> = <span style="color:#800000;">true</span><br/>
 <br/>
+<span style="color:#004000;"># If you want to restrict all git servlet access to those with valid X509 client</span><br/>
+<span style="color:#004000;"># certificates then set this value to true.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#000080;">git.requiresClientCertificate</span> = <span style="color:#800000;">false</span><br/>
+<br/>
+<span style="color:#004000;"># Enforce date checks on client certificates to ensure that they are not being</span><br/>
+<span style="color:#004000;"># used prematurely and that they have not expired.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#000080;">git.enforceCertificateValidity</span> = <span style="color:#800000;">true</span><br/>
+<br/>
+<span style="color:#004000;"># List of OIDs to extract from a client certificate DN to map a certificate to</span><br/>
+<span style="color:#004000;"># an account username.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># e.g. git.certificateUsernameOIDs = CN</span><br/>
+<span style="color:#004000;"># e.g. git.certificateUsernameOIDs = FirstName LastName</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#000080;">git.certificateUsernameOIDs</span> = <span style="color:#800000;">CN</span><br/>
+<br/>
 <span style="color:#004000;"># Only serve/display bare repositories.</span><br/>
 <span style="color:#004000;"># If there are non-bare repositories in git.repositoriesFolder and this setting</span><br/>
 <span style="color:#004000;"># is true, they will be excluded from the ui.</span><br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># <i>SINCE 0.9.0</i></span><br/>
 <span style="color:#000080;">git.onlyAccessBareRepositories</span> = <span style="color:#800000;">false</span><br/>
+<br/>
+<span style="color:#004000;"># Allow an authenticated user to create a destination repository on a push if</span><br/>
+<span style="color:#004000;"># the repository does not already exist.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Administrator accounts can create a repository in any project.</span><br/>
+<span style="color:#004000;"># These repositories are created with the default access restriction and authorization</span><br/>
+<span style="color:#004000;"># control values.  The pushing account is set as the owner.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Non-administrator accounts with the CREATE role may create personal repositories.</span><br/>
+<span style="color:#004000;"># These repositories are created as VIEW restricted for NAMED users.</span><br/>
+<span style="color:#004000;"># The pushing account is set as the owner.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#000080;">git.allowCreateOnPush</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># The default access restriction for new repositories.</span><br/>
 <span style="color:#004000;"># Valid values are NONE, PUSH, CLONE, VIEW</span><br/>
@@ -159,6 +195,67 @@
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># <i>SINCE 1.1.0</i></span><br/>
 <span style="color:#000080;">git.defaultAuthorizationControl</span> = <span style="color:#800000;">NAMED</span><br/>
+<br/>
+<span style="color:#004000;"># Enable JGit-based garbage collection. (!!EXPERIMENTAL!!)</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># USE AT YOUR OWN RISK!</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># If enabled, the garbage collection executor scans all repositories once a day</span><br/>
+<span style="color:#004000;"># at the hour of your choosing.  The GC executor will take each repository &quot;offline&quot;,</span><br/>
+<span style="color:#004000;"># one-at-a-time, to check if the repository satisfies it's GC trigger requirements.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># While the repository is offline it will be inaccessible from the web UI or from</span><br/>
+<span style="color:#004000;"># any of the other services (git, rpc, rss, etc).</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Gitblit's GC Executor MAY NOT PLAY NICE with the other Git kids on the block,</span><br/>
+<span style="color:#004000;"># especially on Windows systems, so if you are using other tools please coordinate</span><br/>
+<span style="color:#004000;"># their usage with your GC Executor schedule or do not use this feature.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># The GC algorithm complex and the JGit team advises caution when using their</span><br/>
+<span style="color:#004000;"># young implementation of GC.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># http://wiki.eclipse.org/EGit/New<em>and</em>Noteworthy/2.1#Garbage<em>Collector</em>and<em>Repository</em>Storage_Statistics</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># EXPERIMENTAL</span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#000080;">git.enableGarbageCollection</span> = <span style="color:#800000;">false</span><br/>
+<br/>
+<span style="color:#004000;"># Hour of the day for the GC Executor to scan repositories.</span><br/>
+<span style="color:#004000;"># This value is in 24-hour time.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#000080;">git.garbageCollectionHour</span> = <span style="color:#800000;">0</span><br/>
+<br/>
+<span style="color:#004000;"># The default minimum total filesize of loose objects to trigger early garbage</span><br/>
+<span style="color:#004000;"># collection.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># You may specify a custom threshold for a repository in the repository's settings.</span><br/>
+<span style="color:#004000;"># Common unit suffixes of k, m, or g are supported.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#000080;">git.defaultGarbageCollectionThreshold</span> = <span style="color:#800000;">500k</span><br/>
+<br/>
+<span style="color:#004000;"># The default period, in days, between GCs for a repository.  If the total filesize</span><br/>
+<span style="color:#004000;"># of the loose object exceeds <em>git.garbageCollectionThreshold</em> or the repository's</span><br/>
+<span style="color:#004000;"># custom threshold, this period will be short-circuited.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># e.g. if a repository collects 100KB of loose objects every day with a 500KB</span><br/>
+<span style="color:#004000;"># threshold and a period of 7 days, it will take 5 days for the loose objects to</span><br/>
+<span style="color:#004000;"># be collected, packed, and pruned.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># OR</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># if a repository collects 10KB of loose objects every day with a 500KB threshold</span><br/>
+<span style="color:#004000;"># and a period of 7 days, it will take the full 7 days for the loose objects to be</span><br/>
+<span style="color:#004000;"># collected, packed, and pruned.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># You may specify a custom period for a repository in the repository's settings.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># The minimum value is 1 day since the GC Executor only runs once a day.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#000080;">git.defaultGarbageCollectionPeriod</span> = <span style="color:#800000;">7</span><br/>
 <br/>
 <span style="color:#004000;"># Number of bytes of a pack file to load into memory in a single read operation.</span><br/>
 <span style="color:#004000;"># This is the &quot;page size&quot; of the JGit buffer cache, used for all pack access</span><br/>
@@ -356,12 +453,18 @@
 <span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
 <span style="color:#000080;">web.allowCookieAuthentication</span> = <span style="color:#800000;">true</span><br/>
 <br/>
+<span style="color:#004000;"># Config file for storing project metadata</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#000080;">web.projectsFile</span> = <span style="color:#800000;">projects.conf</span><br/>
+<br/>
 <span style="color:#004000;"># Either the full path to a user config file (users.conf)</span><br/>
 <span style="color:#004000;"># OR the full path to a simple user properties file (users.properties)</span><br/>
 <span style="color:#004000;"># OR a fully qualified class name that implements the IUserService interface.</span><br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># Alternative user services:</span><br/>
 <span style="color:#004000;"># com.gitblit.LdapUserService</span><br/>
+<span style="color:#004000;"># com.gitblit.RedmineUserService</span><br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># Any custom user service implementation must have a public default constructor.</span><br/>
 <span style="color:#004000;"># </span><br/>
@@ -445,6 +548,19 @@
 <span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
 <span style="color:#000080;">web.allowZipDownloads</span> = <span style="color:#800000;">true</span><br/>
 <br/>
+<span style="color:#004000;"># If <em>web.allowZipDownloads=true</em> the following formats will be displayed for</span><br/>
+<span style="color:#004000;"># download compressed archive links:</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># zip   = standard .zip</span><br/>
+<span style="color:#004000;"># tar   = standard tar format (preserves *nix permissions and symlinks)</span><br/>
+<span style="color:#004000;"># gz    = gz-compressed tar</span><br/>
+<span style="color:#004000;"># xz    = xz-compressed tar</span><br/>
+<span style="color:#004000;"># bzip2 = bzip2-compressed tar</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#000080;">web.compressedDownloads</span> = <span style="color:#800000;">zip gz</span><br/>
+<br/>
 <span style="color:#004000;"># Allow optional Lucene integration. Lucene indexing is an opt-in feature.</span><br/>
 <span style="color:#004000;"># A repository may specify branches to index with Lucene instead of using Git</span><br/>
 <span style="color:#004000;"># commit traversal. There are scenarios where you may want to completely disable</span><br/>
@@ -454,12 +570,31 @@
 <span style="color:#004000;"># <i>SINCE 0.9.0</i></span><br/>
 <span style="color:#000080;">web.allowLuceneIndexing</span> = <span style="color:#800000;">true</span><br/>
 <br/>
+<span style="color:#004000;"># Allows an authenticated user to create forks of a repository</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># set this to false if you want to disable all fork controls on the web site</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#000080;">web.allowForking</span> = <span style="color:#800000;">true</span><br/>
+<br/>
+<span style="color:#004000;"># Controls the length of shortened commit hash ids</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#000080;">web.shortCommitIdLength</span> = <span style="color:#800000;">6</span><br/>
+<br/>
 <span style="color:#004000;"># Use Clippy (Flash solution) to provide a copy-to-clipboard button.</span><br/>
 <span style="color:#004000;"># If false, a button with a more primitive JavaScript-based prompt box will</span><br/>
 <span style="color:#004000;"># offer a 3-step (click, ctrl+c, enter) copy-to-clipboard alternative.</span><br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
 <span style="color:#000080;">web.allowFlashCopyToClipboard</span> = <span style="color:#800000;">true</span><br/>
+<br/>
+<span style="color:#004000;"># Default maximum number of commits that a repository may contribute to the</span><br/>
+<span style="color:#004000;"># activity page, regardless of the selected duration.  This setting may be valuable</span><br/>
+<span style="color:#004000;"># for an extremely busy server.  This value may also be configed per-repository</span><br/>
+<span style="color:#004000;"># in Edit Repository. 0 disables this throttle.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#000080;">web.maxActivityCommits</span> = <span style="color:#800000;">0</span><br/>
 <br/>
 <span style="color:#004000;"># Default number of entries to include in RSS Syndication links</span><br/>
 <span style="color:#004000;"># </span><br/>
@@ -664,7 +799,7 @@
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
 <span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#000080;">web.prettyPrintExtensions</span> = <span style="color:#800000;">c cpp cs css htm html java js php pl prefs properties py rb sh sql xml vb</span><br/>
+<span style="color:#000080;">web.prettyPrintExtensions</span> = <span style="color:#800000;">c cpp cs css frm groovy htm html java js php pl prefs properties py rb scala sh sql xml vb</span><br/>
 <br/>
 <span style="color:#004000;"># Registered extensions for markdown transformation</span><br/>
 <span style="color:#004000;"># </span><br/>
@@ -1002,6 +1137,16 @@
 <span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
 <span style="color:#000080;">realm.ldap.email</span> = <span style="color:#800000;">email</span><br/>
 <br/>
+<span style="color:#004000;"># The RedmineUserService must be backed by another user service for standard user</span><br/>
+<span style="color:#004000;"># and team management.</span><br/>
+<span style="color:#004000;"># default: users.conf</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#000080;">realm.redmine.backingUserService</span> = <span style="color:#800000;">users.conf</span><br/>
+<br/>
+<span style="color:#004000;"># URL of the Redmine.</span><br/>
+<span style="color:#000080;">realm.redmine.url</span> = <span style="color:#800000;">http://example.com/redmine</span><br/>
+<br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># Server Settings</span><br/>
 <span style="color:#004000;"># </span><br/>
@@ -1076,14 +1221,46 @@
 <span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
 <span style="color:#000080;">server.ajpBindInterface</span> = <span style="color:#800000;">localhost</span><br/>
 <br/>
+<span style="color:#004000;"># Alias of certificate to use for https/SSL serving.  If blank the first</span><br/>
+<span style="color:#004000;"># certificate found in the keystore will be used.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#000080;">server.certificateAlias</span> = <span style="color:#800000;">localhost</span><br/>
+<br/>
 <span style="color:#004000;"># Password for SSL keystore.</span><br/>
 <span style="color:#004000;"># Keystore password and certificate password must match.</span><br/>
 <span style="color:#004000;"># This is provided for convenience, its probably more secure to set this value</span><br/>
 <span style="color:#004000;"># using the --storePassword command line parameter.</span><br/>
 <span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># If you are using the official JRE or JDK from Oracle you may not have the</span><br/>
+<span style="color:#004000;"># JCE Unlimited Strength Jurisdiction Policy files bundled with your JVM.  Because</span><br/>
+<span style="color:#004000;"># of this, your store/key password can not exceed 7 characters.  If you require</span><br/>
+<span style="color:#004000;"># longer passwords you may need to install the JCE Unlimited Strength Jurisdiction</span><br/>
+<span style="color:#004000;"># Policy files from Oracle.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># http://www.oracle.com/technetwork/java/javase/downloads/index.html</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Gitblit and the Gitblit Certificate Authority will both indicate if Unlimited</span><br/>
+<span style="color:#004000;"># Strength encryption is available.</span><br/>
+<span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
 <span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
 <span style="color:#000080;">server.storePassword</span> = <span style="color:#800000;">gitblit</span><br/>
+<br/>
+<span style="color:#004000;"># If serving over https (recommended) you might consider requiring clients to</span><br/>
+<span style="color:#004000;"># authenticate with ssl certificates.  If enabled, only https clients with the</span><br/>
+<span style="color:#004000;"># a valid client certificate will be able to access Gitblit.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># If disabled, client certificate authentication is optional and will be tried</span><br/>
+<span style="color:#004000;"># first before falling-back to form authentication or basic authentication.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Requiring client certificates to access any of Gitblit may be too extreme,</span><br/>
+<span style="color:#004000;"># consider this carefully.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#000080;">server.requireClientCertificates</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Port for shutdown monitor to listen on.</span><br/>
 <span style="color:#004000;"># </span><br/>
@@ -1092,7 +1269,7 @@
 <span style="color:#000080;">server.shutdownPort</span> = <span style="color:#800000;">8081</span><br/>
 		</div> <!-- markdown -->
 		<footer>
-			<p class="pull-right">generated 2012-08-25</p>
+			<p class="pull-right">generated 2012-12-31</p>
 		The content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 License</a>.
 		</footer>			
 	</div> <!-- container -->	
