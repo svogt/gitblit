@@ -1,70 +1,150 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-	<head>
-		<title>Gitblit</title>
-		<link rel="stylesheet" href="./bootstrap/css/bootstrap.css"/>
-		<link rel="stylesheet" type="text/css" href="./gitblit.css"/>
-		<link rel="shortcut icon" type="image/png" href="./gitblt-favicon.png" />
-		<meta name="ROBOTS" content="INDEX">
-		<meta http-equiv="imagetoolbar" content="no" />
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="keywords" content="java git server" />
-
-		<script type="text/javascript" src="./bootstrap/js/jquery.js"></script>
-		<script type="text/javascript" src="./bootstrap/js/bootstrap.js"></script>
+<head>
+<!-- Begin Header -->
+<title>Gitblit</title>
+<meta charset="utf-8">
+<meta name="ROBOTS" content="INDEX">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<script type="text/javascript" src="./fancybox/query.mousewheel-3.0.4.pack.js"></script>
-		<script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-		<link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-		
-		<script type="text/javascript" src="./screenshots.js"></script>		
-		
-		<script type="text/javascript" src="prettify/prettify.js"></script>
-		<link href="prettify/prettify.css" type="text/css" rel="stylesheet" />
-		
-		<!-- Place this tag in your head or just before your close body tag -->
-		<link rel="canonical" href="http://gitblit.com" />
-		<link rel="publisher" href="https://plus.google.com/114464678392593421684" />
-		<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-		
-		<script type="text/javascript">
+<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+<link rel='shortcut icon' type='image/png' href='./gitblt-favicon.png' />
+<link rel="stylesheet" href="./prettify/prettify.css" />
+<!-- Google Plus Profile Page -->
+<link rel="publisher" href="https://plus.google.com/114464678392593421684" />
+<style type="text/css"> a.gpluspage { margin-top:3px;text-decoration: none; } </style>
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-24377072-1']);
-  _gaq.push(['_trackPageview']);
+<!-- Google Plus One -->
+<link rel="canonical" href="http://gitblit.com" />
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<style type="text/css"> div.gplusone { margin-top:12px; } </style>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-
-	</head>
-	<body onload="prettyPrint()">
+<script src="./prettify/prettify.js"></script>
+<script src="./bootstrap/js/jquery.js"></script>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body onload='prettyPrint()'>		<!-- Navigation Bar -->
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
-					<a class="brand" href="http://gitblit.com" title="gitblit homepage">
-						<img src="gitblt_25_white.png" width="79" height="25" alt="gitblit" class="logo"/>
-					</a>
-					
-					<ul class="nav">
-						<li><a href='index.html'>overview</a></li><li><a href='features.html'>features</a></li><li><a href='screenshots.html'>screenshots</a></li><li><a href='setup.html'>setup</a></li><li><a href='federation.html'>federation</a></li><li><a href='rpc.html'>rpc</a></li><li><a href='faq.html'>faq</a></li><li class='active'><a href='properties.html'>settings</a></li><li><a href='design.html'>design</a></li><li><a href='releases.html'>releases</a></li><li><a href='roadmap.html'>roadmap</a></		
-						<!-- Google Plus Badge -->
-						<li><a href="https://plus.google.com/114464678392593421684?prsrc=3" style="margin-top:3px;text-decoration: none;"><img src="https://ssl.gstatic.com/images/icons/gplus-16.png" width="16" height="16" style="border: 0;"/></a></li>
-						<!-- Google Plus One -->
-						<li><div style="margin-top:14px;"><g:plusone size="small" href="http://gitblit.com"></g:plusone></div></li>
-					</ul>
+          			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+          			</a>
+          			<a class="brand" href="./"><img src="./gitblt_25_white.png" alt="Gitblit"></img></a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>about<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='index.html'>overview</a></li>
+<li><a href='features.html'>features</a></li>
+<li><a href='screenshots.html'>screenshots</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>documentation<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li class='dropdown-submenu'> <!-- Submenu -->
+<a tabindex='-1' href='#'>Gitblit GO</a>
+<ul class='dropdown-menu'>
+<li><a href='setup_go.html'>setup GO</a></li>
+<li><a href='upgrade_go.html'>upgrade GO</a></li>
+</ul></li> <!-- End Submenu -->
+<li class='divider'></li>
+<li class='dropdown-submenu'> <!-- Submenu -->
+<a tabindex='-1' href='#'>Gitblit WAR</a>
+<ul class='dropdown-menu'>
+<li><a href='setup_war.html'>setup WAR</a></li>
+<li><a href='upgrade_war.html'>upgrade WAR</a></li>
+</ul></li> <!-- End Submenu -->
+<li class='divider'></li>
+<li class='dropdown-submenu'> <!-- Submenu -->
+<a tabindex='-1' href='#'>Gitblit Express</a>
+<ul class='dropdown-menu'>
+<li><a href='setup_express.html'>setup Express</a></li>
+<li><a href='upgrade_express.html'>upgrade Express</a></li>
+</ul></li> <!-- End Submenu -->
+<li class='divider'></li>
+<li><a href='administration.html'>administration</a></li>
+<li><a href='setup_authentication.html'>authentication</a></li>
+<li><a href='setup_hooks.html'>push hooks</a></li>
+<li><a href='setup_lucene.html'>lucene indexing</a></li>
+<li><a href='setup_proxy.html'>reverse proxies</a></li>
+<li><a href='setup_clientmenus.html'>client app menus</a></li>
+<li class='divider'></li>
+<li><a href='setup_viewer.html'>Gitblit as a viewer</a></li>
+<li class='divider'></li>
+<li><a href='setup_client.html'>git client setup</a></li>
+<li class='divider'></li>
+<li><a href='federation.html'>federation</a></li>
+<li class='divider'></li>
+<li><a href='properties.html'>settings</a></li>
+<li><a href='faq.html'>faq</a></li>
+<li class='divider'></li>
+<li><a href='design.html'>design</a></li>
+<li><a href='rpc.html'>rpc</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>releases<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='releasenotes.html'>release notes</a></li>
+<li><a href='releases.html'>release history</a></li>
+<li class='divider'></li>
+<li><a href='roadmap.html'>roadmap</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>downloads<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.3.0.zip'>Gitblit GO (Windows)</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.3.0.tar.gz'>Gitblit GO (Linux/OSX)</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.3.0.war'>Gitblit WAR</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=express-1.3.0.zip'>Gitblit Express</a></li>
+<li class='divider'></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=manager-1.3.0.zip'>Gitblit Manager</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=fedclient-1.3.0.zip'>Federation Client</a></li>
+<li class='divider'></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gbapi-1.3.0.zip'>API Library</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>links<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='https://demo-gitblit.rhcloud.com'>Gitblit Demo (RELEASE)</a></li>
+<li><a href='https://next-gitblit.rhcloud.com'>Gitblit Next (SNAPSHOT)</a></li>
+<li class='divider'></li>
+<li><a href='https://github.com/gitblit/gitblit'>Github</a></li>
+<li><a href='http://code.google.com/p/gitblit/issues/list'>Issues</a></li>
+<li><a href='http://groups.google.com/group/gitblit'>Discussion</a></li>
+<li><a href='https://plus.google.com/114464678392593421684'>Google+</a></li>
+<li><a href='http://www.ohloh.net/p/gitblit'>Ohloh</a></li>
+</ul></li> <!-- End Menu -->
+<li class='divider-vertical'></li>
+<li><a href='https://plus.google.com/114464678392593421684?prsrc=3' class='gpluspage'><img src='https://ssl.gstatic.com/images/icons/gplus-16.png' width='16' height='16 style='order: 0;'/></a></li><li><div class='gplusone'><g:plusone size='small' href='http://gitblit.com'></g:plusone></div></li>
+						</ul>
+					</div><!--/.nav-collapse -->
 				</div>
 			</div>
-		</div>
-		<div class="container">
-			<div class="markdown">
-<h2> gitblit.properties</h2>
-
+		</div><!-- end Navigation Bar -->
+<div class='container'>
+<!-- Begin Markdown -->
+<h2 class="section" id="H1"><a href="#H1" class="sectionlink"><i class="icon-share-alt"> </i></a>gitblit.properties</h2>
 <p><span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Gitblit Settings</span><br/>
+<span style="color:#004000;"># </span><br/>
+<br/>
+<span style="color:#004000;"># This settings file supports parameterization from the command-line for the</span><br/>
+<span style="color:#004000;"># following command-line parameters:</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># --baseFolder    ${baseFolder}    SINCE 1.2.1</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Settings that support ${baseFolder} parameter substitution are indicated with the</span><br/>
+<span style="color:#004000;"># BASEFOLDER attribute.  If the --baseFolder argument is unspecified, ${baseFolder}</span><br/>
+<span style="color:#004000;"># and it's trailing / will be discarded from the setting value leaving a relative</span><br/>
+<span style="color:#004000;"># path that is equivalent to pre-1.2.1 releases.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># e.g. &quot;${baseFolder}/git&quot; becomes &quot;git&quot;, if --baseFolder is unspecified</span><br/>
+<span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># Git Servlet Settings</span><br/>
 <span style="color:#004000;"># </span><br/>
 <br/>
@@ -74,9 +154,10 @@
 <span style="color:#004000;"># Use forward slashes even on Windows!!</span><br/>
 <span style="color:#004000;"># e.g. c:/gitrepos</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
-<span style="color:#000080;">git.repositoriesFolder</span> = <span style="color:#800000;">git</span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#000080;">git.repositoriesFolder</span> = <span style="color:#800000;">${baseFolder}/git</span><br/>
 <br/>
 <span style="color:#004000;"># Build the available repository list at startup and cache this list for reuse.</span><br/>
 <span style="color:#004000;"># This reduces disk io when presenting the repositories page, responding to rpcs,</span><br/>
@@ -86,7 +167,7 @@
 <span style="color:#004000;"># For this case you can use curl, wget, etc to issue an rpc request to clear the</span><br/>
 <span style="color:#004000;"># cache (e.g. https://localhost/rpc?req=CLEAR<em>REPOSITORY</em>CACHE)</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.1.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.1.0</span><br/>
 <span style="color:#000080;">git.cacheRepositoryList</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Search the repositories folder subfolders for other repositories.</span><br/>
@@ -95,13 +176,13 @@
 <span style="color:#004000;"># e.g. c:/gitrepos/libraries/mylibrary.git</span><br/>
 <span style="color:#004000;"># c:/gitrepos/libraries/myotherlibrary.git</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">git.searchRepositoriesSubfolders</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Maximum number of folders to recurse into when searching for repositories.</span><br/>
 <span style="color:#004000;"># The default value, -1, disables depth limits.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.1.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.1.0</span><br/>
 <span style="color:#000080;">git.searchRecursionDepth</span> = <span style="color:#800000;">-1</span><br/>
 <br/>
 <span style="color:#004000;"># List of regex exclusion patterns to match against folders found in</span><br/>
@@ -109,9 +190,9 @@
 <span style="color:#004000;"># Use forward slashes even on Windows!!</span><br/>
 <span style="color:#004000;"># e.g. test/jgit.git</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>CASE-SENSITIVE</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 1.1.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># CASE-SENSITIVE</span><br/>
+<span style="color:#004000;"># SINCE 1.1.0</span><br/>
 <span style="color:#000080;">git.searchExclusions</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># List of regex url patterns for extracting a repository name when locating</span><br/>
@@ -121,10 +202,27 @@
 <span style="color:#004000;"># If no matches are found then the submodule repository name is assumed to be</span><br/>
 <span style="color:#004000;"># whatever trails the last / character. (e.g. gitblit.git).</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>CASE-SENSITIVE</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 1.1.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># CASE-SENSITIVE</span><br/>
+<span style="color:#004000;"># SINCE 1.1.0</span><br/>
 <span style="color:#000080;">git.submoduleUrlPatterns</span> = <span style="color:#800000;">.*?://github.com/(.*)</span><br/>
+<br/>
+<span style="color:#004000;"># Specify the interface for Git Daemon to bind it's service.</span><br/>
+<span style="color:#004000;"># You may specify an ip or an empty value to bind to all interfaces.</span><br/>
+<span style="color:#004000;"># Specifying localhost will result in Gitblit ONLY listening to requests to</span><br/>
+<span style="color:#004000;"># localhost.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#000080;">git.daemonBindInterface</span> = <span style="color:#800000;">localhost</span><br/>
+<br/>
+<span style="color:#004000;"># port for serving the Git Daemon service.  &lt;= 0 disables this service.</span><br/>
+<span style="color:#004000;"># On Unix/Linux systems, ports &lt; 1024 require root permissions.</span><br/>
+<span style="color:#004000;"># Recommended value: 9418</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#000080;">git.daemonPort</span> = <span style="color:#800000;">9418</span><br/>
 <br/>
 <span style="color:#004000;"># Allow push/pull over http/https with JGit servlet.</span><br/>
 <span style="color:#004000;"># If you do NOT want to allow Git clients to clone/push to Gitblit set this</span><br/>
@@ -132,19 +230,19 @@
 <span style="color:#004000;"># If you set this false, consider changing the <em>web.otherUrls</em> setting to</span><br/>
 <span style="color:#004000;"># indicate your clone/push urls.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">git.enableGitServlet</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># If you want to restrict all git servlet access to those with valid X509 client</span><br/>
 <span style="color:#004000;"># certificates then set this value to true.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
 <span style="color:#000080;">git.requiresClientCertificate</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Enforce date checks on client certificates to ensure that they are not being</span><br/>
 <span style="color:#004000;"># used prematurely and that they have not expired.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
 <span style="color:#000080;">git.enforceCertificateValidity</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># List of OIDs to extract from a client certificate DN to map a certificate to</span><br/>
@@ -153,15 +251,15 @@
 <span style="color:#004000;"># e.g. git.certificateUsernameOIDs = CN</span><br/>
 <span style="color:#004000;"># e.g. git.certificateUsernameOIDs = FirstName LastName</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
 <span style="color:#000080;">git.certificateUsernameOIDs</span> = <span style="color:#800000;">CN</span><br/>
 <br/>
 <span style="color:#004000;"># Only serve/display bare repositories.</span><br/>
 <span style="color:#004000;"># If there are non-bare repositories in git.repositoriesFolder and this setting</span><br/>
 <span style="color:#004000;"># is true, they will be excluded from the ui.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.9.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.9.0</span><br/>
 <span style="color:#000080;">git.onlyAccessBareRepositories</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Allow an authenticated user to create a destination repository on a push if</span><br/>
@@ -175,7 +273,7 @@
 <span style="color:#004000;"># These repositories are created as VIEW restricted for NAMED users.</span><br/>
 <span style="color:#004000;"># The pushing account is set as the owner.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
 <span style="color:#000080;">git.allowCreateOnPush</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># The default access restriction for new repositories.</span><br/>
@@ -185,7 +283,7 @@
 <span style="color:#004000;"># CLONE = anonymous view, authenticated clone &amp; push</span><br/>
 <span style="color:#004000;"># VIEW = authenticated view, clone, &amp; push</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">git.defaultAccessRestriction</span> = <span style="color:#800000;">NONE</span><br/>
 <br/>
 <span style="color:#004000;"># The default authorization control for new repositories.</span><br/>
@@ -193,8 +291,19 @@
 <span style="color:#004000;"># AUTHENTICATED = any authenticated user is granted restricted access</span><br/>
 <span style="color:#004000;"># NAMED = only named users/teams are granted restricted access</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.1.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.1.0</span><br/>
 <span style="color:#000080;">git.defaultAuthorizationControl</span> = <span style="color:#800000;">NAMED</span><br/>
+<br/>
+<span style="color:#004000;"># The default incremental push tag prefix.  Tag prefix applied to a repository</span><br/>
+<span style="color:#004000;"># that has automatic push tags enabled and does not specify a custom tag prefix.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># If incremental push tags are enabled, the tips of each branch in the push will</span><br/>
+<span style="color:#004000;"># be tagged with an increasing revision integer.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># e.g. refs/tags/r2345 or refs/tags/rev_2345</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">git.defaultIncrementalPushTagPrefix</span> = <span style="color:#800000;">r</span><br/>
 <br/>
 <span style="color:#004000;"># Enable JGit-based garbage collection. (!!EXPERIMENTAL!!)</span><br/>
 <span style="color:#004000;"># </span><br/>
@@ -217,14 +326,14 @@
 <span style="color:#004000;"># http://wiki.eclipse.org/EGit/New<em>and</em>Noteworthy/2.1#Garbage<em>Collector</em>and<em>Repository</em>Storage_Statistics</span><br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># EXPERIMENTAL</span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">git.enableGarbageCollection</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Hour of the day for the GC Executor to scan repositories.</span><br/>
 <span style="color:#004000;"># This value is in 24-hour time.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
 <span style="color:#000080;">git.garbageCollectionHour</span> = <span style="color:#800000;">0</span><br/>
 <br/>
 <span style="color:#004000;"># The default minimum total filesize of loose objects to trigger early garbage</span><br/>
@@ -233,7 +342,7 @@
 <span style="color:#004000;"># You may specify a custom threshold for a repository in the repository's settings.</span><br/>
 <span style="color:#004000;"># Common unit suffixes of k, m, or g are supported.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
 <span style="color:#000080;">git.defaultGarbageCollectionThreshold</span> = <span style="color:#800000;">500k</span><br/>
 <br/>
 <span style="color:#004000;"># The default period, in days, between GCs for a repository.  If the total filesize</span><br/>
@@ -254,7 +363,7 @@
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># The minimum value is 1 day since the GC Executor only runs once a day.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
 <span style="color:#000080;">git.defaultGarbageCollectionPeriod</span> = <span style="color:#800000;">7</span><br/>
 <br/>
 <span style="color:#004000;"># Number of bytes of a pack file to load into memory in a single read operation.</span><br/>
@@ -268,8 +377,8 @@
 <span style="color:#004000;"># Common unit suffixes of k, m, or g are supported.</span><br/>
 <span style="color:#004000;"># Documentation courtesy of the Gerrit project.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">git.packedGitWindowSize</span> = <span style="color:#800000;">8k</span><br/>
 <br/>
 <span style="color:#004000;"># Maximum number of bytes to load and cache in memory from pack files. If JGit</span><br/>
@@ -285,8 +394,8 @@
 <span style="color:#004000;"># Common unit suffixes of k, m, or g are supported.</span><br/>
 <span style="color:#004000;"># Documentation courtesy of the Gerrit project.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">git.packedGitLimit</span> = <span style="color:#800000;">10m</span><br/>
 <br/>
 <span style="color:#004000;"># Maximum number of bytes to reserve for caching base objects that multiple deltafied</span><br/>
@@ -299,8 +408,8 @@
 <span style="color:#004000;"># Common unit suffixes of k, m, or g are supported.</span><br/>
 <span style="color:#004000;"># Documentation courtesy of the Gerrit project.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">git.deltaBaseCacheLimit</span> = <span style="color:#800000;">10m</span><br/>
 <br/>
 <span style="color:#004000;"># Maximum number of pack files to have open at once. A pack file must be opened</span><br/>
@@ -313,8 +422,8 @@
 <span style="color:#004000;"># Default on JGit is 128 file descriptors on all platforms.</span><br/>
 <span style="color:#004000;"># Documentation courtesy of the Gerrit project.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">git.packedGitOpenFiles</span> = <span style="color:#800000;">128</span><br/>
 <br/>
 <span style="color:#004000;"># Largest object size, in bytes, that JGit will allocate as a contiguous byte</span><br/>
@@ -334,8 +443,8 @@
 <span style="color:#004000;"># Common unit suffixes of k, m, or g are supported.</span><br/>
 <span style="color:#004000;"># Documentation courtesy of the Gerrit project.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">git.streamFileThreshold</span> = <span style="color:#800000;">50m</span><br/>
 <br/>
 <span style="color:#004000;"># When true, JGit will use mmap() rather than malloc()+read() to load data from</span><br/>
@@ -351,8 +460,8 @@
 <span style="color:#004000;"># predictable behavior.</span><br/>
 <span style="color:#004000;"># Documentation courtesy of the Gerrit project.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">git.packedGitMmap</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># </span><br/>
@@ -363,16 +472,18 @@
 <span style="color:#004000;"># Use forward slashes even on Windows!!</span><br/>
 <span style="color:#004000;"># e.g. c:/groovy</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
-<span style="color:#000080;">groovy.scriptsFolder</span> = <span style="color:#800000;">groovy</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#004000;"># SINCE 0.8.0</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#000080;">groovy.scriptsFolder</span> = <span style="color:#800000;">${baseFolder}/groovy</span><br/>
 <br/>
 <span style="color:#004000;"># Specify the directory Grape uses for downloading libraries.</span><br/>
 <span style="color:#004000;"># http://groovy.codehaus.org/Grape</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
-<span style="color:#000080;">groovy.grapeFolder</span> = <span style="color:#800000;">groovy/grape</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#000080;">groovy.grapeFolder</span> = <span style="color:#800000;">${baseFolder}/groovy/grape</span><br/>
 <br/>
 <span style="color:#004000;"># Scripts to execute on Pre-Receive.</span><br/>
 <span style="color:#004000;"># </span><br/>
@@ -391,9 +502,9 @@
 <span style="color:#004000;"># you may customize the control-flow for a specific repository by checking the</span><br/>
 <span style="color:#004000;"># <em>repository</em> variable.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>CASE-SENSITIVE</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># CASE-SENSITIVE</span><br/>
+<span style="color:#004000;"># SINCE 0.8.0</span><br/>
 <span style="color:#000080;">groovy.preReceiveScripts</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># Scripts to execute on Post-Receive.</span><br/>
@@ -411,9 +522,9 @@
 <span style="color:#004000;"># you may customize the control-flow for a specific repository by checking the</span><br/>
 <span style="color:#004000;"># <em>repository</em> variable.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>CASE-SENSITIVE</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># CASE-SENSITIVE</span><br/>
+<span style="color:#004000;"># SINCE 0.8.0</span><br/>
 <span style="color:#000080;">groovy.postReceiveScripts</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># Repository custom fields for Groovy Hook mechanism</span><br/>
@@ -427,9 +538,56 @@
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># e.g. &quot;commitMsgRegex=Commit Message Regular Expression&quot; anotherProperty=Another</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">groovy.customFields</span> = <span style="color:#800000;"></span><br/>
+<br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Fanout Settings</span><br/>
+<span style="color:#004000;"># </span><br/>
+<br/>
+<span style="color:#004000;"># Fanout is a PubSub notification service that can be used by Sparkleshare</span><br/>
+<span style="color:#004000;"># to eliminate repository change polling.  The fanout service runs in a separate</span><br/>
+<span style="color:#004000;"># thread on a separate port from the Gitblit http/https application.</span><br/>
+<span style="color:#004000;"># This service is provided so that Sparkleshare may be used with Gitblit in</span><br/>
+<span style="color:#004000;"># firewalled environments or where reliance on Sparkleshare's default notifications</span><br/>
+<span style="color:#004000;"># server (notifications.sparkleshare.org) is unwanted.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># This service maintains an open socket connection from the client to the</span><br/>
+<span style="color:#004000;"># Fanout PubSub service. This service may not work properly behind a proxy server.</span><br/>
+<br/>
+<span style="color:#004000;"># Specify the interface for Fanout to bind it's service.</span><br/>
+<span style="color:#004000;"># You may specify an ip or an empty value to bind to all interfaces.</span><br/>
+<span style="color:#004000;"># Specifying localhost will result in Gitblit ONLY listening to requests to</span><br/>
+<span style="color:#004000;"># localhost.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.2.1</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#000080;">fanout.bindInterface</span> = <span style="color:#800000;">localhost</span><br/>
+<br/>
+<span style="color:#004000;"># port for serving the Fanout PubSub service.  &lt;= 0 disables this service.</span><br/>
+<span style="color:#004000;"># On Unix/Linux systems, ports &lt; 1024 require root permissions.</span><br/>
+<span style="color:#004000;"># Recommended value: 17000</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.2.1</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#000080;">fanout.port</span> = <span style="color:#800000;">0</span><br/>
+<br/>
+<span style="color:#004000;"># Use Fanout NIO service.  If false, a multi-threaded socket service will be used.</span><br/>
+<span style="color:#004000;"># Be advised, the socket implementation spawns a thread per connection plus the</span><br/>
+<span style="color:#004000;"># connection acceptor thread.  The NIO implementation is completely single-threaded.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.2.1</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#000080;">fanout.useNio</span> = <span style="color:#800000;">true</span><br/>
+<br/>
+<span style="color:#004000;"># Concurrent connection limit.  &lt;= 0 disables concurrent connection throttling.</span><br/>
+<span style="color:#004000;"># If &gt; 0, only the specified number of concurrent connections will be allowed</span><br/>
+<span style="color:#004000;"># and all other connections will be rejected.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.2.1</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#000080;">fanout.connectionLimit</span> = <span style="color:#800000;">0</span><br/>
 <br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># Authentication Settings</span><br/>
@@ -437,26 +595,33 @@
 <br/>
 <span style="color:#004000;"># Require authentication to see everything but the admin pages</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">web.authenticateViewPages</span> = <span style="color:#800000;">false</span><br/>
+<br/>
+<span style="color:#004000;"># If web.authenticateViewPages=true you may optionally require a client-side</span><br/>
+<span style="color:#004000;"># basic authentication prompt instead of the standard form-based login.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.enforceHttpBasicAuthentication</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Require admin authentication for the admin functions and pages</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">web.authenticateAdminPages</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Allow Gitblit to store a cookie in the user's browser for automatic</span><br/>
 <span style="color:#004000;"># authentication.  The cookie is generated by the user service.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.allowCookieAuthentication</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Config file for storing project metadata</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
-<span style="color:#000080;">web.projectsFile</span> = <span style="color:#800000;">projects.conf</span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#000080;">web.projectsFile</span> = <span style="color:#800000;">${baseFolder}/projects.conf</span><br/>
 <br/>
 <span style="color:#004000;"># Either the full path to a user config file (users.conf)</span><br/>
 <span style="color:#004000;"># OR the full path to a simple user properties file (users.properties)</span><br/>
@@ -465,25 +630,28 @@
 <span style="color:#004000;"># Alternative user services:</span><br/>
 <span style="color:#004000;"># com.gitblit.LdapUserService</span><br/>
 <span style="color:#004000;"># com.gitblit.RedmineUserService</span><br/>
+<span style="color:#004000;"># com.gitblit.SalesforceUserService</span><br/>
+<span style="color:#004000;"># com.gitblit.WindowsUserService</span><br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># Any custom user service implementation must have a public default constructor.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
-<span style="color:#000080;">realm.userService</span> = <span style="color:#800000;">users.conf</span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#000080;">realm.userService</span> = <span style="color:#800000;">${baseFolder}/users.conf</span><br/>
 <br/>
 <span style="color:#004000;"># How to store passwords.</span><br/>
 <span style="color:#004000;"># Valid values are plain, md5, or combined-md5.  md5 is the hash of password.</span><br/>
 <span style="color:#004000;"># combined-md5 is the hash of username.toLowerCase()+password.</span><br/>
 <span style="color:#004000;"># Default is md5.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">realm.passwordStorage</span> = <span style="color:#800000;">md5</span><br/>
 <br/>
 <span style="color:#004000;"># Minimum valid length for a plain text password.</span><br/>
 <span style="color:#004000;"># Default value is 5.  Absolute minimum is 4.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">realm.minPasswordLength</span> = <span style="color:#800000;">5</span><br/>
 <br/>
 <span style="color:#004000;"># </span><br/>
@@ -491,8 +659,55 @@
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># If blank Gitblit is displayed.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.siteName</span> = <span style="color:#800000;"></span><br/>
+<br/>
+<span style="color:#004000;"># You may specify a different logo image for the header but it must be 120x45px.</span><br/>
+<span style="color:#004000;"># If the specified file does not exist, the default Gitblit logo will be used.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#000080;">web.headerLogo</span> = <span style="color:#800000;">${baseFolder}/logo.png</span><br/>
+<br/>
+<span style="color:#004000;"># You may specify a custom header background CSS color.  If unspecified, the</span><br/>
+<span style="color:#004000;"># default color will be used.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># e.g. web.headerBackgroundColor = #002060</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.headerBackgroundColor</span> = <span style="color:#800000;"></span><br/>
+<br/>
+<span style="color:#004000;"># You may specify a custom header foreground CSS color.  If unspecified, the</span><br/>
+<span style="color:#004000;"># default color will be used.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># e.g. web.headerForegroundColor = white</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.headerForegroundColor</span> = <span style="color:#800000;"></span><br/>
+<br/>
+<span style="color:#004000;"># You may specify a custom header foreground hover CSS color.  If unspecified, the</span><br/>
+<span style="color:#004000;"># default color will be used.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># e.g. web.headerHoverColor = white</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.headerHoverColor</span> = <span style="color:#800000;"></span><br/>
+<br/>
+<span style="color:#004000;"># You may specify a custom header border CSS color.  If unspecified, the default</span><br/>
+<span style="color:#004000;"># color will be used.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># e.g. web.headerBorderColor = #002060</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.headerBorderColor</span> = <span style="color:#800000;"></span><br/>
+<br/>
+<span style="color:#004000;"># You may specify a custom header border CSS color.  If unspecified, the default</span><br/>
+<span style="color:#004000;"># color will be used.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># e.g. web.headerBorderFocusColor = #ff9900</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.headerBorderFocusColor</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># If <em>web.authenticateAdminPages</em>=true, users with &quot;admin&quot; role can create</span><br/>
 <span style="color:#004000;"># repositories, create users, and edit repository metadata.</span><br/>
@@ -500,52 +715,53 @@
 <span style="color:#004000;"># If <em>web.authenticateAdminPages</em>=false, any user can execute the aforementioned</span><br/>
 <span style="color:#004000;"># functions.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.allowAdministration</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Allows rpc clients to list repositories and possibly manage or administer the</span><br/>
 <span style="color:#004000;"># Gitblit server, if the authenticated account has administrator permissions.</span><br/>
 <span style="color:#004000;"># See <em>web.enableRpcManagement</em> and <em>web.enableRpcAdministration</em>.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.7.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.7.0</span><br/>
 <span style="color:#000080;">web.enableRpcServlet</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Allows rpc clients to manage repositories and users of the Gitblit instance,</span><br/>
 <span style="color:#004000;"># if the authenticated account has administrator permissions.</span><br/>
 <span style="color:#004000;"># Requires <em>web.enableRpcServlet=true</em>.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.7.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.7.0</span><br/>
 <span style="color:#000080;">web.enableRpcManagement</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Allows rpc clients to control the server settings and monitor the health of this</span><br/>
 <span style="color:#004000;"># this Gitblit instance, if the authenticated account has administrator permissions.</span><br/>
 <span style="color:#004000;"># Requires <em>web.enableRpcServlet=true</em> and <em>web.enableRpcManagement</em>.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.7.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.7.0</span><br/>
 <span style="color:#000080;">web.enableRpcAdministration</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Full path to a configurable robots.txt file.  With this file you can control</span><br/>
 <span style="color:#004000;"># what parts of your Gitblit server respectable robots are allowed to traverse.</span><br/>
 <span style="color:#004000;"># http://googlewebmastercentral.blogspot.com/2008/06/improving-on-robots-exclusion-protocol.html</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
-<span style="color:#000080;">web.robots.txt</span> = <span style="color:#800000;"></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#000080;">web.robots.txt</span> = <span style="color:#800000;">${baseFolder}/robots.txt</span><br/>
 <br/>
 <span style="color:#004000;"># If true, the web ui layout will respond and adapt to the browser's dimensions.</span><br/>
 <span style="color:#004000;"># if false, the web ui will use a 940px fixed-width layout.</span><br/>
 <span style="color:#004000;"># http://twitter.github.com/bootstrap/scaffolding.html#responsive</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">web.useResponsiveLayout</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Allow Gravatar images to be displayed in Gitblit pages.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.8.0</span><br/>
 <span style="color:#000080;">web.allowGravatar</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Allow dynamic zip downloads.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.allowZipDownloads</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># If <em>web.allowZipDownloads=true</em> the following formats will be displayed for</span><br/>
@@ -557,8 +773,8 @@
 <span style="color:#004000;"># xz    = xz-compressed tar</span><br/>
 <span style="color:#004000;"># bzip2 = bzip2-compressed tar</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
 <span style="color:#000080;">web.compressedDownloads</span> = <span style="color:#800000;">zip gz</span><br/>
 <br/>
 <span style="color:#004000;"># Allow optional Lucene integration. Lucene indexing is an opt-in feature.</span><br/>
@@ -567,7 +783,7 @@
 <span style="color:#004000;"># Lucene indexing despite a repository specifying indexed branches.  One such</span><br/>
 <span style="color:#004000;"># scenario is on a resource-constrained federated Gitblit mirror.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.9.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.9.0</span><br/>
 <span style="color:#000080;">web.allowLuceneIndexing</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Allows an authenticated user to create forks of a repository</span><br/>
@@ -578,14 +794,14 @@
 <br/>
 <span style="color:#004000;"># Controls the length of shortened commit hash ids</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
 <span style="color:#000080;">web.shortCommitIdLength</span> = <span style="color:#800000;">6</span><br/>
 <br/>
 <span style="color:#004000;"># Use Clippy (Flash solution) to provide a copy-to-clipboard button.</span><br/>
 <span style="color:#004000;"># If false, a button with a more primitive JavaScript-based prompt box will</span><br/>
 <span style="color:#004000;"># offer a 3-step (click, ctrl+c, enter) copy-to-clipboard alternative.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.8.0</span><br/>
 <span style="color:#000080;">web.allowFlashCopyToClipboard</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Default maximum number of commits that a repository may contribute to the</span><br/>
@@ -593,19 +809,19 @@
 <span style="color:#004000;"># for an extremely busy server.  This value may also be configed per-repository</span><br/>
 <span style="color:#004000;"># in Edit Repository. 0 disables this throttle.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
 <span style="color:#000080;">web.maxActivityCommits</span> = <span style="color:#800000;">0</span><br/>
 <br/>
 <span style="color:#004000;"># Default number of entries to include in RSS Syndication links</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.syndicationEntries</span> = <span style="color:#800000;">25</span><br/>
 <br/>
 <span style="color:#004000;"># Show the size of each repository on the repositories page.</span><br/>
 <span style="color:#004000;"># This requires recursive traversal of each repository folder.  This may be</span><br/>
 <span style="color:#004000;"># non-performant on some operating systems and/or filesystems.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.2</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.2</span><br/>
 <span style="color:#000080;">web.showRepositorySizes</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># List of custom regex expressions that can be displayed in the Filters menu</span><br/>
@@ -614,27 +830,29 @@
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># Use !!! to separate the filters</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.8.0</span><br/>
 <span style="color:#000080;">web.customFilters</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># Show federation registrations (without token) and the current pull status</span><br/>
 <span style="color:#004000;"># to non-administrator users.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">web.showFederationRegistrations</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># This is the message displayed when <em>web.authenticateViewPages=true</em>.</span><br/>
 <span style="color:#004000;"># This can point to a file with Markdown content.</span><br/>
 <span style="color:#004000;"># Specifying &quot;gitblit&quot; uses the internal login message.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.7.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.7.0</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
 <span style="color:#000080;">web.loginMessage</span> = <span style="color:#800000;">gitblit</span><br/>
 <br/>
 <span style="color:#004000;"># This is the message displayed above the repositories table.</span><br/>
 <span style="color:#004000;"># This can point to a file with Markdown content.</span><br/>
 <span style="color:#004000;"># Specifying &quot;gitblit&quot; uses the internal welcome message.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
 <span style="color:#000080;">web.repositoriesMessage</span> = <span style="color:#800000;">gitblit</span><br/>
 <br/>
 <span style="color:#004000;"># Ordered list of charsets/encodings to use when trying to display a blob.</span><br/>
@@ -643,8 +861,8 @@
 <span style="color:#004000;"># decode the blob content, UTF-8 will be used with the standard malformed</span><br/>
 <span style="color:#004000;"># input/unmappable character replacement strings.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">web.blobEncodings</span> = <span style="color:#800000;">UTF-8 ISO-8859-1</span><br/>
 <br/>
 <span style="color:#004000;"># Manually set the default timezone to be used by Gitblit for display in the</span><br/>
@@ -652,8 +870,8 @@
 <span style="color:#004000;"># value will default to the JVM timezone.</span><br/>
 <span style="color:#004000;"># e.g. America/New_York, US/Pacific, UTC, Europe/Berlin</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.9.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.9.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">web.timezone</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># Use the client timezone when formatting dates.</span><br/>
@@ -661,31 +879,31 @@
 <span style="color:#004000;"># server overhead because a Wicket session is created.  All Gitblit pages</span><br/>
 <span style="color:#004000;"># attempt to be stateless, if possible.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">web.useClientTimezone</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Time format</span><br/>
 <span style="color:#004000;"># <a href="http://download.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html">http://download.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html</a></span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.8.0</span><br/>
 <span style="color:#000080;">web.timeFormat</span> = <span style="color:#800000;">HH:mm</span><br/>
 <br/>
 <span style="color:#004000;"># Short date format</span><br/>
 <span style="color:#004000;"># <a href="http://download.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html">http://download.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html</a></span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.datestampShortFormat</span> = <span style="color:#800000;">yyyy-MM-dd</span><br/>
 <br/>
 <span style="color:#004000;"># Long date format</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.8.0</span><br/>
 <span style="color:#000080;">web.datestampLongFormat</span> = <span style="color:#800000;">EEEE, MMMM d, yyyy</span><br/>
 <br/>
 <span style="color:#004000;"># Long timestamp format</span><br/>
 <span style="color:#004000;"># <a href="http://download.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html">http://download.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html</a></span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.datetimestampLongFormat</span> = <span style="color:#800000;">EEEE, MMMM d, yyyy HH:mm Z</span><br/>
 <br/>
 <span style="color:#004000;"># Mount URL parameters</span><br/>
@@ -696,8 +914,8 @@
 <span style="color:#004000;"># if false:</span><br/>
 <span style="color:#004000;"># http://localhost/commit/?r=myrepo&amp;h=abcdef</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">web.mountParameters</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Some servlet containers (e.g. Tomcat &gt;= 6.0.10) disallow '/' (%2F) encoding</span><br/>
@@ -709,70 +927,109 @@
 <span style="color:#004000;"># Add <em>-Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true</em> to your</span><br/>
 <span style="color:#004000;"># <em>CATALINA_OPTS</em> or to your JVM launch parameters</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.2</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.2</span><br/>
 <span style="color:#000080;">web.forwardSlashCharacter</span> = <span style="color:#800000;">/</span><br/>
 <br/>
 <span style="color:#004000;"># Show other URLs on the summary page for accessing your git repositories</span><br/>
-<span style="color:#004000;"># Use spaces to separate urls. {0} is the token for the repository name.</span><br/>
-<span style="color:#004000;"># e.g.</span><br/>
-<span style="color:#004000;"># web.otherUrls = ssh://localhost/git/{0} git://localhost/git/{0}</span><br/>
+<span style="color:#004000;"># Use spaces to separate urls.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># {0} is the token for the repository name</span><br/>
+<span style="color:#004000;"># {1} is the token for the username</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># The username is only practical if you have setup your other git serving</span><br/>
+<span style="color:#004000;"># solutions accounts to have the same username as the Gitblit account.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># e.g.</span><br/>
+<span style="color:#004000;"># web.otherUrls = ssh://localhost/git/{0} git://localhost/git/{0} https://{1}@localhost/r/{0}</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.otherUrls</span> = <span style="color:#800000;"></span><br/>
+<br/>
+<span style="color:#004000;"># Should app-specific clone links be displayed for SourceTree, SparkleShare, etc?</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.allowAppCloneLinks</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Choose how to present the repositories list.</span><br/>
 <span style="color:#004000;"># grouped = group nested/subfolder repositories together (no sorting)</span><br/>
 <span style="color:#004000;"># flat = flat list of repositories (sorting allowed)</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.repositoryListType</span> = <span style="color:#800000;">grouped</span><br/>
 <br/>
 <span style="color:#004000;"># If using a grouped repository list and there are repositories at the</span><br/>
 <span style="color:#004000;"># root level of your repositories folder, you may specify the displayed</span><br/>
 <span style="color:#004000;"># group name with this setting.  This value is only used for web presentation.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.repositoryRootGroupName</span> = <span style="color:#800000;">main</span><br/>
 <br/>
 <span style="color:#004000;"># Display the repository swatch color next to the repository name link in the</span><br/>
 <span style="color:#004000;"># repositories list.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.8.0</span><br/>
 <span style="color:#000080;">web.repositoryListSwatches</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Choose the diff presentation style: gitblt, gitweb, or plain</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.diffStyle</span> = <span style="color:#800000;">gitblit</span><br/>
 <br/>
 <span style="color:#004000;"># Control if email addresses are shown in web ui</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.showEmailAddresses</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Shows a combobox in the page links header with commit, committer, and author</span><br/>
 <span style="color:#004000;"># search selection.  Default search is commit.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.showSearchTypeSelection</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Generates a line graph of repository activity over time on the Summary page.</span><br/>
 <span style="color:#004000;"># This uses the Google Charts API.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.generateActivityGraph</span> = <span style="color:#800000;">true</span><br/>
 <br/>
-<span style="color:#004000;"># The number of days to show on the activity page.</span><br/>
-<span style="color:#004000;"># Value must exceed 0 else default of 14 is used</span><br/>
+<span style="color:#004000;"># The default number of days to show on the activity page.</span><br/>
+<span style="color:#004000;"># Value must exceed 0 else default of 7 is used</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
-<span style="color:#000080;">web.activityDuration</span> = <span style="color:#800000;">14</span><br/>
+<span style="color:#004000;"># SINCE 0.8.0</span><br/>
+<span style="color:#000080;">web.activityDuration</span> = <span style="color:#800000;">7</span><br/>
+<br/>
+<span style="color:#004000;"># Choices for days of activity to display.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.activityDurationChoices</span> = <span style="color:#800000;">1 3 7 14 21 28</span><br/>
+<br/>
+<span style="color:#004000;"># The number of days of commits to cache in memory for the dashboard, activity,</span><br/>
+<span style="color:#004000;"># and project pages.  A value of 0 will disable all caching and will parse commits</span><br/>
+<span style="color:#004000;"># in each repository per-request.  If the value &gt; 0 these pages will try to fulfill</span><br/>
+<span style="color:#004000;"># requests using the commit cache.  If the request specifies a period which falls</span><br/>
+<span style="color:#004000;"># outside the commit cache window, then the cache will be ignored and the request</span><br/>
+<span style="color:#004000;"># will be fulfilled by brute-force parsing all relevant commits per-repository.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Consider the values specified for <em>web.activityDurationChoices</em> when setting</span><br/>
+<span style="color:#004000;"># the cache size AND consider adjusting the JVM -Xmx heap parameter appropriately.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#000080;">web.activityCacheDays</span> = <span style="color:#800000;">14</span><br/>
+<br/>
+<span style="color:#004000;"># Case-insensitive list of authors to exclude from metrics.  Useful for</span><br/>
+<span style="color:#004000;"># eliminating bots.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.metricAuthorExclusions</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># The number of commits to display on the summary page</span><br/>
 <span style="color:#004000;"># Value must exceed 0 else default of 20 is used</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.summaryCommitCount</span> = <span style="color:#800000;">16</span><br/>
 <br/>
 <span style="color:#004000;"># The number of tags/branches to display on the summary page.</span><br/>
@@ -780,113 +1037,138 @@
 <span style="color:#004000;"># 0 = hide tags/branches</span><br/>
 <span style="color:#004000;"># N = N tags/branches</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.summaryRefsCount</span> = <span style="color:#800000;">5</span><br/>
 <br/>
 <span style="color:#004000;"># The number of items to show on a page before showing the first, prev, next</span><br/>
-<span style="color:#004000;"># pagination links.  A default if 50 is used for any invalid value.</span><br/>
+<span style="color:#004000;"># pagination links.  A default of 50 is used for any invalid value.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.itemsPerPage</span> = <span style="color:#800000;">50</span><br/>
+<br/>
+<span style="color:#004000;"># The number of reflog changes to display on the overview page</span><br/>
+<span style="color:#004000;"># Value must exceed 0 else default of 5 is used</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.overviewReflogCount</span> = <span style="color:#800000;">5</span><br/>
+<br/>
+<span style="color:#004000;"># The number of reflog changes to show on a reflog page before show the first,</span><br/>
+<span style="color:#004000;"># prev, next pagination links.  A default of 10 is used for any invalid value.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.reflogChangesPerPage</span> = <span style="color:#800000;">10</span><br/>
 <br/>
 <span style="color:#004000;"># Registered file extensions to ignore during Lucene indexing</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.9.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 0.9.0</span><br/>
 <span style="color:#000080;">web.luceneIgnoreExtensions</span> = <span style="color:#800000;">7z arc arj bin bmp dll doc docx exe gif gz jar jpg lib lzh odg odf odt pdf ppt png so swf xcf xls xlsx zip</span><br/>
 <br/>
 <span style="color:#004000;"># Registered extensions for google-code-prettify</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#000080;">web.prettyPrintExtensions</span> = <span style="color:#800000;">c cpp cs css frm groovy htm html java js php pl prefs properties py rb scala sh sql xml vb</span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#000080;">web.prettyPrintExtensions</span> = <span style="color:#800000;">aea agc basic c cbm cl clj cpp cs css dart el erl erlang frm fs go groovy hs htm html java js latex lisp ll llvm lsp lua ml moxie mumps n nemerle pascal php pl prefs properties proto py r R rb rd Rd rkt s S scala scm sh Splus sql ss tcl tex vb vbs vhd vhdl wiki xml xq xquery yaml yml ymlapollo</span><br/>
 <br/>
 <span style="color:#004000;"># Registered extensions for markdown transformation</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>CASE-SENSITIVE</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># CASE-SENSITIVE</span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.markdownExtensions</span> = <span style="color:#800000;">md mkd markdown MD MKD</span><br/>
 <br/>
 <span style="color:#004000;"># Image extensions</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.imageExtensions</span> = <span style="color:#800000;">bmp jpg gif png</span><br/>
 <br/>
 <span style="color:#004000;"># Registered extensions for binary blobs</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.binaryExtensions</span> = <span style="color:#800000;">jar pdf tar.gz zip</span><br/>
 <br/>
 <span style="color:#004000;"># Aggressive heap management will run the garbage collector on every generated</span><br/>
 <span style="color:#004000;"># page.  This slows down page generation a little but improves heap consumption.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">web.aggressiveHeapManagement</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Run the webapp in debug mode</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">web.debugMode</span> = <span style="color:#800000;">false</span><br/>
+<br/>
+<span style="color:#004000;"># Force a default locale for all users, ignoring the browser's settings.</span><br/>
+<span style="color:#004000;"># An empty value allows Gitblit to use the translation preferred by the browser.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Changing this value while the server is running will only affect new sessions.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># e.g. web.forceDefaultLocale = en</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">web.forceDefaultLocale</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># Enable/disable global regex substitutions (i.e. shared across repositories)</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">regex.global</span> = <span style="color:#800000;">true</span><br/>
 <br/>
 <span style="color:#004000;"># Example global regex substitutions</span><br/>
 <span style="color:#004000;"># Use !!! to separate the search pattern and the replace pattern</span><br/>
 <span style="color:#004000;"># searchpattern!!!replacepattern</span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">regex.global.bug</span> = <span style="color:#800000;">\\b(Bug:)(\\s*[#]?|-){0,1}(\\d+)\\b!!!&lt;a href=&quot;http://somehost/bug/$3&quot;&gt;Bug-Id: $3&lt;/a&gt;</span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">regex.global.changeid</span> = <span style="color:#800000;">\\b(Change-Id:\\s*)([A-Za-z0-9]*)\\b!!!&lt;a href=&quot;http://somehost/changeid/$2&quot;&gt;Change-Id: $2&lt;/a&gt;</span><br/>
 <br/>
 <span style="color:#004000;"># Example per-repository regex substitutions overrides global</span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
 <span style="color:#000080;">regex.myrepository.bug</span> = <span style="color:#800000;">\\b(Bug:)(\\s*[#]?|-){0,1}(\\d+)\\b!!!&lt;a href=&quot;http://elsewhere/bug/$3&quot;&gt;Bug-Id: $3&lt;/a&gt;</span><br/>
 <br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># Mail Settings</span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># Mail settings are used to notify administrators of received federation proposals</span><br/>
 <span style="color:#004000;"># </span><br/>
 <br/>
 <span style="color:#004000;"># ip or hostname of smtp server</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">mail.server</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># port to use for smtp requests</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">mail.port</span> = <span style="color:#800000;">25</span><br/>
 <br/>
 <span style="color:#004000;"># debug the mail executor</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">mail.debug</span> = <span style="color:#800000;">false</span><br/>
+<br/>
+<span style="color:#004000;"># use SMTPs flag</span><br/>
+<span style="color:#000080;">mail.smtps</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># if your smtp server requires authentication, supply the credentials here</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">mail.username</span> = <span style="color:#800000;"></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">mail.password</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># from address for generated emails</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">mail.fromAddress</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># List of email addresses for the Gitblit administrators</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">mail.adminAddresses</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># List of email addresses for sending push email notifications.</span><br/>
@@ -896,13 +1178,13 @@
 <span style="color:#004000;"># notifications for all repositories (regardless of access restrictions!)</span><br/>
 <span style="color:#004000;"># will be sent to these addresses.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.8.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 0.8.0</span><br/>
 <span style="color:#000080;">mail.mailingLists</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># Federation Settings</span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># A Gitblit federation is a way to backup one Gitblit instance to another.</span><br/>
 <span style="color:#004000;"># </span><br/>
@@ -914,7 +1196,7 @@
 <span style="color:#004000;"># The source Gitblit instance will also append your external IP address to your</span><br/>
 <span style="color:#004000;"># identification to differentiate multiple pulling systems behind a single proxy.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">federation.name</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># Specify the passphrase of this Gitblit instance.</span><br/>
@@ -927,9 +1209,9 @@
 <span style="color:#004000;"># Changing your passphrase will break any registrations you have established with other</span><br/>
 <span style="color:#004000;"># Gitblit instances.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>CASE-SENSITIVE</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED <em>(only to enable or disable federation)</em></i></span><br/>
+<span style="color:#004000;"># CASE-SENSITIVE</span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED <em>(only to enable or disable federation)</em></span><br/>
 <span style="color:#000080;">federation.passphrase</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># Control whether or not this Gitblit instance can receive federation proposals</span><br/>
@@ -937,18 +1219,19 @@
 <span style="color:#004000;"># process.  Proposals help to simplify that process by allowing a remote Gitblit</span><br/>
 <span style="color:#004000;"># instance to send your Gitblit instance the federation pull data.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">federation.allowProposals</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># The destination folder for cached federation proposals.</span><br/>
 <span style="color:#004000;"># Use forward slashes even on Windows!!</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
-<span style="color:#000080;">federation.proposalsFolder</span> = <span style="color:#800000;">proposals</span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#000080;">federation.proposalsFolder</span> = <span style="color:#800000;">${baseFolder}/proposals</span><br/>
 <br/>
 <span style="color:#004000;"># The default pull frequency if frequency is unspecified on a registration</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">federation.defaultFrequency</span> = <span style="color:#800000;">60 mins</span><br/>
 <br/>
 <span style="color:#004000;"># Federation Sets are named groups of repositories.  The Federation Sets are</span><br/>
@@ -957,15 +1240,15 @@
 <span style="color:#004000;"># This allows you to grant federation pull access to a subset of your available</span><br/>
 <span style="color:#004000;"># repositories.  Tokens for federation sets only grant repository pull access.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>CASE-SENSITIVE</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 0.6.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># CASE-SENSITIVE</span><br/>
+<span style="color:#004000;"># SINCE 0.6.0</span><br/>
 <span style="color:#000080;">federation.sets</span> = <span style="color:#800000;"></span><br/>
 <br/>
 <span style="color:#004000;"># Federation pull registrations</span><br/>
 <span style="color:#004000;"># Registrations are read once, at startup.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># frequency:</span><br/>
 <span style="color:#004000;"># The shortest frequency allowed is every 5 minutes</span><br/>
@@ -1020,11 +1303,59 @@
 <span style="color:#004000;"># Advanced Realm Settings</span><br/>
 <span style="color:#004000;"># </span><br/>
 <br/>
+<span style="color:#004000;"># Auto-creates user accounts based on the servlet container principal.  This</span><br/>
+<span style="color:#004000;"># assumes that your Gitblit install is a protected resource and your container's</span><br/>
+<span style="color:#004000;"># authentication process intercepts all Gitblit requests.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">realm.container.autoCreateAccounts</span> = <span style="color:#800000;">false</span><br/>
+<br/>
+<span style="color:#004000;"># The WindowsUserService must be backed by another user service for standard user</span><br/>
+<span style="color:#004000;"># and team management.</span><br/>
+<span style="color:#004000;"># default: users.conf</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">realm.windows.backingUserService</span> = <span style="color:#800000;">${baseFolder}/users.conf</span><br/>
+<br/>
+<span style="color:#004000;"># Allow or prohibit Windows guest account logins</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">realm.windows.allowGuests</span> = <span style="color:#800000;">false</span><br/>
+<br/>
+<span style="color:#004000;"># The default domain for authentication.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># If specified, this domain will be used for authentication UNLESS the supplied</span><br/>
+<span style="color:#004000;"># login name manually specifies a domain (.e.g. mydomain\james or james@mydomain)</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># If unspecified, the username must be specified in UPN format (name@domain).</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># if &quot;.&quot; (dot) is specified, ONLY the local account database will be used.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">realm.windows.defaultDomain</span> = <span style="color:#800000;"></span><br/>
+<br/>
+<span style="color:#004000;"># The SalesforceUserService must be backed by another user service for standard user</span><br/>
+<span style="color:#004000;"># and team management.</span><br/>
+<span style="color:#004000;"># default: users.conf</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">realm.salesforce.backingUserService</span> = <span style="color:#800000;">${baseFolder}/users.conf</span><br/>
+<br/>
+<span style="color:#004000;"># Restrict the Salesforce user to members of this org.</span><br/>
+<span style="color:#004000;"># default: 0 (i.e. do not check the Org ID)</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#000080;">realm.salesforce.orgId</span> = <span style="color:#800000;">0</span><br/>
+<br/>
 <span style="color:#004000;"># URL of the LDAP server.</span><br/>
 <span style="color:#004000;"># To use encrypted transport, use either ldaps:// URL for SSL or ldap+tls:// to</span><br/>
 <span style="color:#004000;"># send StartTLS command.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">realm.ldap.server</span> = <span style="color:#800000;">ldap://localhost</span><br/>
 <br/>
 <span style="color:#004000;"># Login username for LDAP searches.</span><br/>
@@ -1032,21 +1363,22 @@
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># e.g. mydomain\username</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">realm.ldap.username</span> = <span style="color:#800000;">cn=Directory Manager</span><br/>
 <br/>
 <span style="color:#004000;"># Login password for LDAP searches.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">realm.ldap.password</span> = <span style="color:#800000;">password</span><br/>
 <br/>
 <span style="color:#004000;"># The LdapUserService must be backed by another user service for standard user</span><br/>
 <span style="color:#004000;"># and team management.</span><br/>
 <span style="color:#004000;"># default: users.conf</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
-<span style="color:#000080;">realm.ldap.backingUserService</span> = <span style="color:#800000;">users.conf</span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#000080;">realm.ldap.backingUserService</span> = <span style="color:#800000;">${baseFolder}/users.conf</span><br/>
 <br/>
 <span style="color:#004000;"># Delegate team membership control to LDAP.</span><br/>
 <span style="color:#004000;"># </span><br/>
@@ -1056,7 +1388,7 @@
 <span style="color:#004000;"># If false, LDAP will only be used for authentication and Gitblit will maintain</span><br/>
 <span style="color:#004000;"># team memberships with the <em>realm.ldap.backingUserService</em>.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">realm.ldap.maintainTeams</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Root node for all LDAP users</span><br/>
@@ -1064,7 +1396,7 @@
 <span style="color:#004000;"># This is the root node from which subtree user searches will begin.</span><br/>
 <span style="color:#004000;"># If blank, Gitblit will search ALL nodes.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">realm.ldap.accountBase</span> = <span style="color:#800000;">OU=Users,OU=UserControl,OU=MyOrganization,DC=MyDomain</span><br/>
 <br/>
 <span style="color:#004000;"># Filter criteria for LDAP users</span><br/>
@@ -1076,7 +1408,7 @@
 <span style="color:#004000;"># Recognized variables are:</span><br/>
 <span style="color:#004000;"># ${username} - The text entered as the user name</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">realm.ldap.accountPattern</span> = <span style="color:#800000;">(&amp;(objectClass=person)(sAMAccountName=${username}))</span><br/>
 <br/>
 <span style="color:#004000;"># Root node for all LDAP groups to be used as Gitblit Teams</span><br/>
@@ -1084,7 +1416,7 @@
 <span style="color:#004000;"># This is the root node from which subtree team searches will begin.</span><br/>
 <span style="color:#004000;"># If blank, Gitblit will search ALL nodes.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">realm.ldap.groupBase</span> = <span style="color:#800000;">OU=Groups,OU=UserControl,OU=MyOrganization,DC=MyDomain</span><br/>
 <br/>
 <span style="color:#004000;"># Filter criteria for LDAP groups</span><br/>
@@ -1101,7 +1433,7 @@
 <span style="color:#004000;"># has an attribute &quot;fullName&quot; set to &quot;John&quot;, &quot;(fn=${fullName})&quot; will be</span><br/>
 <span style="color:#004000;"># translated to &quot;(fn=John)&quot;.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">realm.ldap.groupMemberPattern</span> = <span style="color:#800000;">(&amp;(objectClass=group)(member=${dn}))</span><br/>
 <br/>
 <span style="color:#004000;"># LDAP users or groups that should be given administrator privileges.</span><br/>
@@ -1111,8 +1443,8 @@
 <span style="color:#004000;"># </span><br/>
 <span style="color:#004000;"># e.g. realm.ldap.admins = john @git_admins &quot;@git admins&quot;</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SPACE-DELIMITED</i></span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SPACE-DELIMITED</span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">realm.ldap.admins</span> = <span style="color:#800000;">@Git_Admins</span><br/>
 <br/>
 <span style="color:#004000;"># Attribute(s) on the USER record that indicate their display (or full) name.</span><br/>
@@ -1123,7 +1455,7 @@
 <span style="color:#004000;"># ${personalTitle}. ${givenName} ${surname} - Will concatenate the 3</span><br/>
 <span style="color:#004000;"># attributes together, with a '.' after personalTitle</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">realm.ldap.displayName</span> = <span style="color:#800000;">displayName</span><br/>
 <br/>
 <span style="color:#004000;"># Attribute(s) on the USER record that indicate their email address.</span><br/>
@@ -1134,15 +1466,44 @@
 <span style="color:#004000;"># ${givenName}.${surname}@gitblit.com -Will concatenate the 2 attributes</span><br/>
 <span style="color:#004000;"># together with a '.' and '@' creating something like first.last@gitblit.com</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.0.0</i></span><br/>
+<span style="color:#004000;"># SINCE 1.0.0</span><br/>
 <span style="color:#000080;">realm.ldap.email</span> = <span style="color:#800000;">email</span><br/>
+<br/>
+<span style="color:#004000;"># Defines the cache period to be used when caching LDAP queries. This is currently</span><br/>
+<span style="color:#004000;"># only used for LDAP user synchronization.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Must be of the form '<long> <TimeUnit>' where <TimeUnit> is one of 'MILLISECONDS', 'SECONDS', 'MINUTES', 'HOURS', 'DAYS'</TimeUnit></TimeUnit></long></span><br/>
+<span style="color:#004000;"># default: 2 MINUTES</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#000080;">realm.ldap.ldapCachePeriod</span> = <span style="color:#800000;">2 MINUTES</span><br/>
+<br/>
+<span style="color:#004000;"># Defines whether to synchronize all LDAP users into the backing user service</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Valid values: true, false</span><br/>
+<span style="color:#004000;"># If left blank, false is assumed</span><br/>
+<span style="color:#000080;">realm.ldap.synchronizeUsers.enable</span> = <span style="color:#800000;">false</span><br/>
+<br/>
+<span style="color:#004000;"># Defines whether to delete non-existent LDAP users from the backing user service</span><br/>
+<span style="color:#004000;"># during synchronization. depends on  realm.ldap.synchronizeUsers.enable = true</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># Valid values: true, false</span><br/>
+<span style="color:#004000;"># If left blank, true is assumed</span><br/>
+<span style="color:#000080;">realm.ldap.synchronizeUsers.removeDeleted</span> = <span style="color:#800000;">true</span><br/>
+<br/>
+<span style="color:#004000;"># Attribute on the USER record that indicate their username to be used in gitblit</span><br/>
+<span style="color:#004000;"># when synchronizing users from LDAP</span><br/>
+<span style="color:#004000;"># if blank, Gitblit will use uid</span><br/>
+<span style="color:#004000;"># For MS Active Directory this may be sAMAccountName</span><br/>
+<span style="color:#000080;">realm.ldap.uid</span> = <span style="color:#800000;">uid</span><br/>
 <br/>
 <span style="color:#004000;"># The RedmineUserService must be backed by another user service for standard user</span><br/>
 <span style="color:#004000;"># and team management.</span><br/>
 <span style="color:#004000;"># default: users.conf</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
-<span style="color:#000080;">realm.redmine.backingUserService</span> = <span style="color:#800000;">users.conf</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#000080;">realm.redmine.backingUserService</span> = <span style="color:#800000;">${baseFolder}/users.conf</span><br/>
 <br/>
 <span style="color:#004000;"># URL of the Redmine.</span><br/>
 <span style="color:#000080;">realm.redmine.url</span> = <span style="color:#800000;">http://example.com/redmine</span><br/>
@@ -1153,45 +1514,52 @@
 <br/>
 <span style="color:#004000;"># The temporary folder to decompress the embedded gitblit webapp.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
-<span style="color:#000080;">server.tempFolder</span> = <span style="color:#800000;">temp</span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#004000;"># BASEFOLDER</span><br/>
+<span style="color:#000080;">server.tempFolder</span> = <span style="color:#800000;">${baseFolder}/temp</span><br/>
 <br/>
 <span style="color:#004000;"># Use Jetty NIO connectors.  If false, Jetty Socket connectors will be used.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.useNio</span> = <span style="color:#800000;">true</span><br/>
+<br/>
+<span style="color:#004000;"># Specify the maximum number of concurrent http/https worker threads to allow.</span><br/>
+<span style="color:#004000;"># </span><br/>
+<span style="color:#004000;"># SINCE 1.3.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
+<span style="color:#000080;">server.threadPoolSize</span> = <span style="color:#800000;">50</span><br/>
 <br/>
 <span style="color:#004000;"># Context path for the GO application.  You might want to change the context</span><br/>
 <span style="color:#004000;"># path if running Gitblit behind a proxy layer such as mod_proxy.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.7.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.7.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.contextPath</span> = <span style="color:#800000;">/</span><br/>
 <br/>
 <span style="color:#004000;"># Standard http port to serve.  &lt;= 0 disables this connector.</span><br/>
 <span style="color:#004000;"># On Unix/Linux systems, ports &lt; 1024 require root permissions.</span><br/>
 <span style="color:#004000;"># Recommended value: 80 or 8080</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.httpPort</span> = <span style="color:#800000;">0</span><br/>
 <br/>
 <span style="color:#004000;"># Secure/SSL https port to serve. &lt;= 0 disables this connector.</span><br/>
 <span style="color:#004000;"># On Unix/Linux systems, ports &lt; 1024 require root permissions.</span><br/>
 <span style="color:#004000;"># Recommended value: 443 or 8443</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.httpsPort</span> = <span style="color:#800000;">8443</span><br/>
 <br/>
 <span style="color:#004000;"># Port for serving an Apache JServ Protocol (AJP) 1.3 connector for integrating</span><br/>
 <span style="color:#004000;"># Gitblit GO into an Apache HTTP server setup.  &lt;= 0 disables this connector.</span><br/>
 <span style="color:#004000;"># Recommended value: 8009</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.9.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.9.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.ajpPort</span> = <span style="color:#800000;">0</span><br/>
 <br/>
 <span style="color:#004000;"># Specify the interface for Jetty to bind the standard connector.</span><br/>
@@ -1199,8 +1567,8 @@
 <span style="color:#004000;"># Specifying localhost will result in Gitblit ONLY listening to requests to</span><br/>
 <span style="color:#004000;"># localhost.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.httpBindInterface</span> = <span style="color:#800000;">localhost</span><br/>
 <br/>
 <span style="color:#004000;"># Specify the interface for Jetty to bind the secure connector.</span><br/>
@@ -1208,8 +1576,8 @@
 <span style="color:#004000;"># Specifying localhost will result in Gitblit ONLY listening to requests to</span><br/>
 <span style="color:#004000;"># localhost.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.httpsBindInterface</span> = <span style="color:#800000;">localhost</span><br/>
 <br/>
 <span style="color:#004000;"># Specify the interface for Jetty to bind the AJP connector.</span><br/>
@@ -1217,15 +1585,15 @@
 <span style="color:#004000;"># Specifying localhost will result in Gitblit ONLY listening to requests to</span><br/>
 <span style="color:#004000;"># localhost.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.9.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.9.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.ajpBindInterface</span> = <span style="color:#800000;">localhost</span><br/>
 <br/>
 <span style="color:#004000;"># Alias of certificate to use for https/SSL serving.  If blank the first</span><br/>
 <span style="color:#004000;"># certificate found in the keystore will be used.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.certificateAlias</span> = <span style="color:#800000;">localhost</span><br/>
 <br/>
 <span style="color:#004000;"># Password for SSL keystore.</span><br/>
@@ -1244,8 +1612,8 @@
 <span style="color:#004000;"># Gitblit and the Gitblit Certificate Authority will both indicate if Unlimited</span><br/>
 <span style="color:#004000;"># Strength encryption is available.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.storePassword</span> = <span style="color:#800000;">gitblit</span><br/>
 <br/>
 <span style="color:#004000;"># If serving over https (recommended) you might consider requiring clients to</span><br/>
@@ -1258,20 +1626,33 @@
 <span style="color:#004000;"># Requiring client certificates to access any of Gitblit may be too extreme,</span><br/>
 <span style="color:#004000;"># consider this carefully.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 1.2.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 1.2.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.requireClientCertificates</span> = <span style="color:#800000;">false</span><br/>
 <br/>
 <span style="color:#004000;"># Port for shutdown monitor to listen on.</span><br/>
 <span style="color:#004000;"># </span><br/>
-<span style="color:#004000;"># <i>SINCE 0.5.0</i></span><br/>
-<span style="color:#004000;"># <i>RESTART REQUIRED</i></span><br/>
+<span style="color:#004000;"># SINCE 0.5.0</span><br/>
+<span style="color:#004000;"># RESTART REQUIRED</span><br/>
 <span style="color:#000080;">server.shutdownPort</span> = <span style="color:#800000;">8081</span><br/>
-		</div> <!-- markdown -->
-		<footer>
-			<p class="pull-right">generated 2012-12-31</p>
-		The content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 License</a>.
-		</footer>			
-	</div> <!-- container -->	
+
+<!-- End Markdown -->
+<div ><ul class="pager"> <li class="next"><a href="faq.html">faq &rarr;</a></li></ul></div><footer class="footer"><p class="pull-right">generated 2013-07-14</p>
+<p>The content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 License</a>.</p>
+</footer>
+</div>
+<!-- Google Analytics -->
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-24377072-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
 </body>
 </html>

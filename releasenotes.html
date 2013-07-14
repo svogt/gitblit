@@ -1,0 +1,401 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<!-- Begin Header -->
+<title>Gitblit</title>
+<meta charset="utf-8">
+<meta name="ROBOTS" content="INDEX">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+<link rel='shortcut icon' type='image/png' href='./gitblt-favicon.png' />
+<link rel="stylesheet" href="./prettify/prettify.css" />
+<!-- Google Plus Profile Page -->
+<link rel="publisher" href="https://plus.google.com/114464678392593421684" />
+<style type="text/css"> a.gpluspage { margin-top:3px;text-decoration: none; } </style>
+
+<!-- Google Plus One -->
+<link rel="canonical" href="http://gitblit.com" />
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<style type="text/css"> div.gplusone { margin-top:12px; } </style>
+
+<script src="./prettify/prettify.js"></script>
+<script src="./bootstrap/js/jquery.js"></script>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body onload='prettyPrint()'>		<!-- Navigation Bar -->
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+          			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+          			</a>
+          			<a class="brand" href="./"><img src="./gitblt_25_white.png" alt="Gitblit"></img></a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>about<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='index.html'>overview</a></li>
+<li><a href='features.html'>features</a></li>
+<li><a href='screenshots.html'>screenshots</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>documentation<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li class='dropdown-submenu'> <!-- Submenu -->
+<a tabindex='-1' href='#'>Gitblit GO</a>
+<ul class='dropdown-menu'>
+<li><a href='setup_go.html'>setup GO</a></li>
+<li><a href='upgrade_go.html'>upgrade GO</a></li>
+</ul></li> <!-- End Submenu -->
+<li class='divider'></li>
+<li class='dropdown-submenu'> <!-- Submenu -->
+<a tabindex='-1' href='#'>Gitblit WAR</a>
+<ul class='dropdown-menu'>
+<li><a href='setup_war.html'>setup WAR</a></li>
+<li><a href='upgrade_war.html'>upgrade WAR</a></li>
+</ul></li> <!-- End Submenu -->
+<li class='divider'></li>
+<li class='dropdown-submenu'> <!-- Submenu -->
+<a tabindex='-1' href='#'>Gitblit Express</a>
+<ul class='dropdown-menu'>
+<li><a href='setup_express.html'>setup Express</a></li>
+<li><a href='upgrade_express.html'>upgrade Express</a></li>
+</ul></li> <!-- End Submenu -->
+<li class='divider'></li>
+<li><a href='administration.html'>administration</a></li>
+<li><a href='setup_authentication.html'>authentication</a></li>
+<li><a href='setup_hooks.html'>push hooks</a></li>
+<li><a href='setup_lucene.html'>lucene indexing</a></li>
+<li><a href='setup_proxy.html'>reverse proxies</a></li>
+<li><a href='setup_clientmenus.html'>client app menus</a></li>
+<li class='divider'></li>
+<li><a href='setup_viewer.html'>Gitblit as a viewer</a></li>
+<li class='divider'></li>
+<li><a href='setup_client.html'>git client setup</a></li>
+<li class='divider'></li>
+<li><a href='federation.html'>federation</a></li>
+<li class='divider'></li>
+<li><a href='properties.html'>settings</a></li>
+<li><a href='faq.html'>faq</a></li>
+<li class='divider'></li>
+<li><a href='design.html'>design</a></li>
+<li><a href='rpc.html'>rpc</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>releases<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='releasenotes.html'>release notes</a></li>
+<li><a href='releases.html'>release history</a></li>
+<li class='divider'></li>
+<li><a href='roadmap.html'>roadmap</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>downloads<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.3.0.zip'>Gitblit GO (Windows)</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.3.0.tar.gz'>Gitblit GO (Linux/OSX)</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.3.0.war'>Gitblit WAR</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=express-1.3.0.zip'>Gitblit Express</a></li>
+<li class='divider'></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=manager-1.3.0.zip'>Gitblit Manager</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=fedclient-1.3.0.zip'>Federation Client</a></li>
+<li class='divider'></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gbapi-1.3.0.zip'>API Library</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>links<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='https://demo-gitblit.rhcloud.com'>Gitblit Demo (RELEASE)</a></li>
+<li><a href='https://next-gitblit.rhcloud.com'>Gitblit Next (SNAPSHOT)</a></li>
+<li class='divider'></li>
+<li><a href='https://github.com/gitblit/gitblit'>Github</a></li>
+<li><a href='http://code.google.com/p/gitblit/issues/list'>Issues</a></li>
+<li><a href='http://groups.google.com/group/gitblit'>Discussion</a></li>
+<li><a href='https://plus.google.com/114464678392593421684'>Google+</a></li>
+<li><a href='http://www.ohloh.net/p/gitblit'>Ohloh</a></li>
+</ul></li> <!-- End Menu -->
+<li class='divider-vertical'></li>
+<li><a href='https://plus.google.com/114464678392593421684?prsrc=3' class='gpluspage'><img src='https://ssl.gstatic.com/images/icons/gplus-16.png' width='16' height='16 style='order: 0;'/></a></li><li><div class='gplusone'><g:plusone size='small' href='http://gitblit.com'></g:plusone></div></li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+			</div>
+		</div><!-- end Navigation Bar -->
+<div class='container'>
+<!-- Begin Markdown -->
+
+<!-- CURRENT RELEASE -->
+	<h3 id="1.3.0" class="section"><a href="#1.3.0" class="sectionlink"><i class="icon-share-alt"> </i></a>Current Release (1.3.0) <small>this is the current stable release</small></h3>
+	<table class="table">
+		<tbody>
+			<tr>
+				<td style="background-color:inherit;width:100px">2013-07-14</td>
+				<td style="background-color:inherit;">	
+		<p>Release highlights include:
+<ul>
+<li>integrated git daemon</li>
+<li>compare refs or commits page</li>
+<li>completed the Gitblit reflog (formerly pushlog) introduced in 1.2.1</li>
+<li>added new dashboard pages</li>
+<li>added a stars feature</li>
+<li>improved the repository url panel to show your access permission and to offer native app clone links</li>
+<li>improved navigation and theme</li>
+<li>customizable page header colors and logo</li>
+<li>recent activity commit caching to improve performance of dashboard and activity pages</li>
+<li>Windows authentication</li>
+<li>Salesforce.com authentication</li>
+<li>lots of bug fixes</li>
+</ul>
+<p> </p>
+Thank you to <a href="http://syntevo.com">syntevo</a>, <a href="http://atlassian.com">Atlassian</a>, <a href="http://fournova.com">fournova</a>, and <a href="http://github.com">Github</a> for their permission and use of their artwork for the native app clone menus.
+</p>
+	
+
+		<div class="alert alert-info">
+			<h4>Note</h4>
+			If you have forked repositories and your are upgrading to 1.3.0, please DO NOT RELOCATE your repositories folder when running 1.3.0 the first time.  Gitblit will update forked repository configs on the first execution and it is critical that ${git.repositoriesFolder} points to the same location used by 1.2.x.<p />
+		</div>
+
+   	<h4 style="color:red;">security</h4>
+	<ul>
+		<li>Raw servlet was insecure. If someone knew the exact repository name and path to a file, the raw blob could be retrieved bypassing security constraints. (<a href='http://code.google.com/p/gitblit/issues/detail?id=198'>issue 198</a>)</li>
+	</ul>
+   	<h4>fixes</h4>
+	<ul>
+		<li>Use bash instead of sh in Linux/OSX shell scripts (<a href='http://code.google.com/p/gitblit/issues/detail?id=154'>issue 154</a>)</li>
+		<li>Fix NPE when getting user's fork without repository list caching (<a href='http://code.google.com/p/gitblit/issues/detail?id=182'>issue 182</a>)</li>
+		<li>Fix internal error on folder history links (<a href='http://code.google.com/p/gitblit/issues/detail?id=192'>issue 192</a>)</li>
+		<li>Fix NPE in repositories panel when viewing a federation proposal (<a href='http://code.google.com/p/gitblit/issues/detail?id=195'>issue 195</a>)</li>
+		<li>Fix NPEs when initializing the context on a servlet containers which returns a null contextFolder (<a href='http://code.google.com/p/gitblit/issues/detail?id=199'>issue 199</a>)</li>
+		<li>Fixed incorrect icon file name for .doc files (<a href='http://code.google.com/p/gitblit/issues/detail?id=200'>issue 200</a>)</li>
+		<li>Do not queue emails with no recipients (<a href='http://code.google.com/p/gitblit/issues/detail?id=201'>issue 201</a>)</li>
+		<li>Disable view and blame links for deleted blobs (<a href='http://code.google.com/p/gitblit/issues/detail?id=216'>issue 216</a>)</li>
+		<li>Fixed 1.2.x regression with individually symlinked repositories (<a href='http://code.google.com/p/gitblit/issues/detail?id=217'>issue 217</a>)</li>
+		<li>Fixed UTF-8 encoding errors in email notifications (<a href='http://code.google.com/p/gitblit/issues/detail?id=218'>issue 218</a>)</li>
+		<li>Fixed NPE in 1.2.1 Federation Client (<a href='http://code.google.com/p/gitblit/issues/detail?id=219'>issue 219</a>)</li>
+		<li>Fixed extracting Groovy scripts on Express installs (<a href='http://code.google.com/p/gitblit/issues/detail?id=220'>issue 220</a>)</li>
+		<li>Ensure Redmine url is properly formatted (<a href='http://code.google.com/p/gitblit/issues/detail?id=223'>issue 223</a>)</li>
+		<li>Use standard ServletRequestWrapper instead of custom wrapper (<a href='http://code.google.com/p/gitblit/issues/detail?id=224'>issue 224</a>)</li>
+		<li>Switch commit message back to a pre and ensure that it is properly escaped when combined with commit message regex substitution (<a href='http://code.google.com/p/gitblit/issues/detail?id=242'>issue 242</a>)</li>
+		<li>Fixed AddIndexedBranch tool --branch parameter (<a href='http://code.google.com/p/gitblit/issues/detail?id=247'>issue 247</a>)</li>
+		<li>Improve NPE handling for hook script enumeration (<a href='http://code.google.com/p/gitblit/issues/detail?id=253'>issue 253</a>)</li>
+		<li>Workaround missing commit information in blame page (JGit bug 374382, <a href='http://code.google.com/p/gitblit/issues/detail?id=254'>issue 254</a>)</li>
+		<li>Ignore orphan &quot;.git&quot; folder in the repositories root folder (<a href='http://code.google.com/p/gitblit/issues/detail?id=256'>issue 256</a>)</li>
+		<li>Fixed bug where a null permission was added to a user model on a repository rename when the permission had really been inherited from a team membership (<a href='http://code.google.com/p/gitblit/issues/detail?id=259'>issue 259</a>)</li>
+		<li>Fixed committer verification with merge commits (<a href='http://code.google.com/p/gitblit/issues/detail?id=264'>issue 264</a>)</li>
+		<li>Fixed bug in submodule repository linking (<a href='http://code.google.com/p/gitblit/issues/detail?id=266'>issue 266</a>)</li>
+		<li>Could not reset settings with $ or { characters through Gitblit Manager because they are not properly escaped</li>
+		<li>Added more error checking to blob page and blame page</li>
+		<li>Disable SNI extensions for client SSL connections</li>
+		<li>Fixed prettify language extension loading</li>
+		<li>Fixed index out of bounds exceptions when generating client certificates for a user when the user's table has been filtered</li>
+		<li>Fixed AddindexedBranch tool when specifying the non-default branch.</li>
+		<li>Fixed submodule diff display</li>
+	</ul>
+   	<h4>changes</h4>
+	<ul>
+		<li>Retrieve summary and metric graphs from Google over https (<a href='http://code.google.com/p/gitblit/issues/detail?id=61'>issue 61</a>)</li>
+		<li>Persist originRepository (for forks) in the repository config instead of relying on parsing origin urls which are susceptible to filesystem relocation (<a href='http://code.google.com/p/gitblit/issues/detail?id=190'>issue 190</a>)</li>
+		<li>Improved error logging for servlet containers which provide a null contextFolder (<a href='http://code.google.com/p/gitblit/issues/detail?id=199'>issue 199</a>)</li>
+		<li>Improve Gerrit change ref decoration in the refs panel (<a href='http://code.google.com/p/gitblit/issues/detail?id=206'>issue 206</a>)</li>
+		<li>Display full commit message on commitdiff page (<a href='http://code.google.com/p/gitblit/issues/detail?id=258'>issue 258</a>)</li>
+		<li>Improved the repository url display.  This display now indicates your repository access permission, per-protocol.</li>
+		<li>Automatically encode/decode usernames for urls using %XX notation on space, @, and \</li>
+		<li>Disable Gson's pretty printing which has a huge performance gain</li>
+		<li>Properly set application/json content-type on api calls</li>
+		<li>Make days back filter choices a setting</li>
+		<li>Changed default days back filter setting to 7 days</li>
+		<li>Set rel=&quot;nofollow&quot; on compressed download links</li>
+		<li>Improved page title</li>
+		<li>Updated Polish translation</li>
+		<li>Updated Japanese translation</li>
+	</ul>
+   	<h4>additions</h4>
+	<ul>
+		<li>Added a ui for the ref log introduced in 1.2.1 (<a href='http://code.google.com/p/gitblit/issues/detail?id=177'>issue 177</a>)</li>
+		<li>Added weblogic.xml to WAR for deployment on WebLogic (<a href='http://code.google.com/p/gitblit/issues/detail?id=199'>issue 199</a>)</li>
+		<li>Support setting a custom header logo (<a href='http://code.google.com/p/gitblit/issues/detail?id=208'>issue 208</a>)</li>
+		<li>Support header color customizations (<a href='http://code.google.com/p/gitblit/issues/detail?id=209'>issue 209</a>)</li>
+		<li>Support username substitution in web.otherUrls (<a href='http://code.google.com/p/gitblit/issues/detail?id=213'>issue 213</a>)</li>
+		<li>Option to force client-side basic authentication instead of form-based authentication if web.authenticateViewPages=true (<a href='http://code.google.com/p/gitblit/issues/detail?id=222'>issue 222</a>)</li>
+		<li>Set author as tooltip of last change column in the repositories panel (<a href='http://code.google.com/p/gitblit/issues/detail?id=238'>issue 238</a>)</li>
+		<li>Setting to automatically create an user account based on an authenticated user principal from the servlet container (<a href='http://code.google.com/p/gitblit/issues/detail?id=246'>issue 246</a>)</li>
+		<li>Added WindowsUserService to authenticate users against Windows accounts (<a href='http://code.google.com/p/gitblit/issues/detail?id=250'>issue 250</a>)</li>
+		<li>Global and per-repository setting to exclude authors from metrics (<a href='http://code.google.com/p/gitblit/issues/detail?id=251'>issue 251</a>)</li>
+		<li>Added commit cache to improve Activity, Dashboard, and Project page generation times</li>
+		<li>Added SalesForce.com user service</li>
+		<li>Added simple star/unstar function to flag or bookmark interesting repositories</li>
+		<li>Added Dashboard page which shows a news feed for starred repositories and offers a filterable list of repositories you care about</li>
+		<li>Added client application menus for Git, SmartGit/Hg, SourceTree, Tower, GitHub for Windows, and GitHub for Mac</li>
+		<li>Added GO http/https connector thread pool size setting</li>
+		<li>Added a server setting to force a particular translation/Locale for all sessions</li>
+		<li>Added smart Git Daemon serving.  If enabled, git:// access will be offered for any repository which permits anonymous access.  If the repository permits anonymous cloning, anonymous git:// clone will be permitted while anonmymous git:// pushes will be rejected.</li>
+		<li>Option to automatically tag branch tips on each push with an incremental revision number</li>
+		<li>Implemented multiple repository owners</li>
+		<li>Optional periodic LDAP user and team pre-fetching &amp; synchronization</li>
+		<li>Added config setting to use SMTPS</li>
+		<li>Added option to index all local branches in AddIndexedBranches tool</li>
+		<li>Display name and version in Tomcat Manager</li>
+		<li>FogBugz post-receive hook script</li>
+		<li>Chinese translation</li>
+		<li>Support --baseFolder parameter in Federation Client</li>
+	</ul>
+   	<h4>new settings</h4>
+	<table class="table">
+		<tr>
+			<td><em>git.daemonBindInterface</em></td><td>localhost</td>
+		</tr>
+		<tr>
+			<td><em>git.daemonPort</em></td><td>0</td>
+		</tr>
+		<tr>
+			<td><em>git.defaultIncrementalPushTagPrefix</em></td><td>r</td>
+		</tr>
+		<tr>
+			<td><em>mail.smtps</em></td><td>false</td>
+		</tr>
+		<tr>
+			<td><em>realm.container.autoCreateAccounts</em></td><td>false</td>
+		</tr>
+		<tr>
+			<td><em>realm.salesforce.backingUserService</em></td><td>users.conf</td>
+		</tr>
+		<tr>
+			<td><em>realm.salesforce.orgId</em></td><td>0</td>
+		</tr>
+		<tr>
+			<td><em>realm.windows.defaultDomain</em></td><td></td>
+		</tr>
+		<tr>
+			<td><em>realm.windows.backingUserService</em></td><td>users.conf</td>
+		</tr>
+		<tr>
+			<td><em>web.activityDuration</em></td><td>7</td>
+		</tr>
+		<tr>
+			<td><em>web.activityDurationChoices</em></td><td>1 3 7 14 21 28</td>
+		</tr>
+		<tr>
+			<td><em>web.activityCacheDays</em></td><td>14</td>
+		</tr>
+		<tr>
+			<td><em>web.allowAppCloneLinks</em></td><td>true</td>
+		</tr>
+		<tr>
+			<td><em>web.forceDefaultLocale</em></td><td></td>
+		</tr>
+		<tr>
+			<td><em>web.headerLogo</em></td><td>${baseFolder}/logo.png</td>
+		</tr>
+		<tr>
+			<td><em>web.headerBackgroundColor</em></td><td></td>
+		</tr>
+		<tr>
+			<td><em>web.headerForegroundColor</em></td><td></td>
+		</tr>
+		<tr>
+			<td><em>web.headerHoverColor</em></td><td></td>
+		</tr>
+		<tr>
+			<td><em>web.headerBorderColor</em></td><td></td>
+		</tr>
+		<tr>
+			<td><em>web.headerBorderFocusColor</em></td><td></td>
+		</tr>
+		<tr>
+			<td><em>web.metricAuthorExclusions</em></td><td></td>
+		</tr>
+		<tr>
+			<td><em>web.overviewReflogCount</em></td><td>5</td>
+		</tr>
+		<tr>
+			<td><em>web.reflogChangesPerPage</em></td><td>10</td>
+		</tr>
+		<tr>
+			<td><em>server.nioThreadPoolSize</em></td><td>50</td>
+		</tr>
+	</table>
+   	<h4>dependency changes</h4>
+	<ul>
+		<li>JGit 3.0.0.201306101825-r</li>
+		<li>Iconic font</li>
+		<li>AngularJS 1.0.7</li>
+		<li>FreeMarker 2.3.19</li>
+		<li>Waffle 1.5</li>
+		<li>JNA 3.5.0</li>
+		<li>Guava 13.0.1</li>
+	</ul>
+   	<h4>contributors</h4>
+	<ul>
+		<li>Bandarupalli Satyanarayana</li>
+		<li>Chad Horohoe</li>
+		<li>Christian Aistleitner</li>
+		<li>Colin Bowern</li>
+		<li>David Ostrovsky</li>
+		<li>Egbert Teeselink</li>
+		<li>github/akquinet</li>
+		<li>github/dapengme</li>
+		<li>Hige Maniya</li>
+		<li>Hirotaka Honma</li>
+		<li>Ikslawek</li>
+		<li>James Moger</li>
+		<li>Jay Meyer</li>
+		<li>John Crygier</li>
+		<li>Kensuke Matsuzaki</li>
+		<li>Laurens Vrijnsen</li>
+		<li>Lee Grofit</li>
+		<li>Lukasz Jader</li>
+		<li>Martijn Laan</li>
+		<li>Matthias Bauer</li>
+		<li>Michael Pailloncy</li>
+		<li>Michael Schaefers</li>
+		<li>Oliver Doepner</li>
+		<li>Philip Boutros</li>
+		<li>Rafael Cavazin</li>
+		<li>Ryan Schneider</li>
+		<li>Sakurai Youhei</li>
+		<li>Sarah Haselbauer</li>
+		<li>Slawomir Bochenski</li>
+		<li>Stardrad Yin</li>
+		<li>Thomas Pummer</li>
+		<li>William Whittle</li>
+		<li>Yukihiko Sawanobori</li>
+	</ul>
+</td>
+			</tr>
+		</tbody>
+	</table>
+
+<!-- NEXT RELEASE -->
+
+<div>
+	<ul class="pager">
+		<li class="next"><a href="releases.html">All Releases &rarr;</a></li>
+	</ul>
+</div>
+
+<!-- End Markdown -->
+<footer class="footer"><p class="pull-right">generated 2013-07-14</p>
+<p>The content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 License</a>.</p>
+</footer>
+</div>
+<!-- Google Analytics -->
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-24377072-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+</body>
+</html>

@@ -1,69 +1,134 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-	<head>
-		<title>Gitblit</title>
-		<link rel="stylesheet" href="./bootstrap/css/bootstrap.css"/>
-		<link rel="stylesheet" type="text/css" href="./gitblit.css"/>
-		<link rel="shortcut icon" type="image/png" href="./gitblt-favicon.png" />
-		<meta name="ROBOTS" content="INDEX">
-		<meta http-equiv="imagetoolbar" content="no" />
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="keywords" content="java git server" />
-
-		<script type="text/javascript" src="./bootstrap/js/jquery.js"></script>
-		<script type="text/javascript" src="./bootstrap/js/bootstrap.js"></script>
+<head>
+<!-- Begin Header -->
+<title>Gitblit</title>
+<meta charset="utf-8">
+<meta name="ROBOTS" content="INDEX">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<script type="text/javascript" src="./fancybox/query.mousewheel-3.0.4.pack.js"></script>
-		<script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-		<link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-		
-		<script type="text/javascript" src="./screenshots.js"></script>		
-		
-		<script type="text/javascript" src="prettify/prettify.js"></script>
-		<link href="prettify/prettify.css" type="text/css" rel="stylesheet" />
-		
-		<!-- Place this tag in your head or just before your close body tag -->
-		<link rel="canonical" href="http://gitblit.com" />
-		<link rel="publisher" href="https://plus.google.com/114464678392593421684" />
-		<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-		
-		<script type="text/javascript">
+<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+<link rel='shortcut icon' type='image/png' href='./gitblt-favicon.png' />
+<link rel="stylesheet" href="./prettify/prettify.css" />
+<!-- Google Plus Profile Page -->
+<link rel="publisher" href="https://plus.google.com/114464678392593421684" />
+<style type="text/css"> a.gpluspage { margin-top:3px;text-decoration: none; } </style>
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-24377072-1']);
-  _gaq.push(['_trackPageview']);
+<!-- Google Plus One -->
+<link rel="canonical" href="http://gitblit.com" />
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<style type="text/css"> div.gplusone { margin-top:12px; } </style>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-
-	</head>
-	<body onload="prettyPrint()">
+<script src="./prettify/prettify.js"></script>
+<script src="./bootstrap/js/jquery.js"></script>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body onload='prettyPrint()'>		<!-- Navigation Bar -->
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
-					<a class="brand" href="http://gitblit.com" title="gitblit homepage">
-						<img src="gitblt_25_white.png" width="79" height="25" alt="gitblit" class="logo"/>
-					</a>
-					
-					<ul class="nav">
-						<li><a href='index.html'>overview</a></li><li><a href='features.html'>features</a></li><li><a href='screenshots.html'>screenshots</a></li><li><a href='setup.html'>setup</a></li><li class='active'><a href='federation.html'>federation</a></li><li><a href='rpc.html'>rpc</a></li><li><a href='faq.html'>faq</a></li><li><a href='properties.html'>settings</a></li><li><a href='design.html'>design</a></li><li><a href='releases.html'>releases</a></li><li><a href='roadmap.html'>roadmap</a></		
-						<!-- Google Plus Badge -->
-						<li><a href="https://plus.google.com/114464678392593421684?prsrc=3" style="margin-top:3px;text-decoration: none;"><img src="https://ssl.gstatic.com/images/icons/gplus-16.png" width="16" height="16" style="border: 0;"/></a></li>
-						<!-- Google Plus One -->
-						<li><div style="margin-top:14px;"><g:plusone size="small" href="http://gitblit.com"></g:plusone></div></li>
-					</ul>
+          			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+          			</a>
+          			<a class="brand" href="./"><img src="./gitblt_25_white.png" alt="Gitblit"></img></a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>about<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='index.html'>overview</a></li>
+<li><a href='features.html'>features</a></li>
+<li><a href='screenshots.html'>screenshots</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>documentation<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li class='dropdown-submenu'> <!-- Submenu -->
+<a tabindex='-1' href='#'>Gitblit GO</a>
+<ul class='dropdown-menu'>
+<li><a href='setup_go.html'>setup GO</a></li>
+<li><a href='upgrade_go.html'>upgrade GO</a></li>
+</ul></li> <!-- End Submenu -->
+<li class='divider'></li>
+<li class='dropdown-submenu'> <!-- Submenu -->
+<a tabindex='-1' href='#'>Gitblit WAR</a>
+<ul class='dropdown-menu'>
+<li><a href='setup_war.html'>setup WAR</a></li>
+<li><a href='upgrade_war.html'>upgrade WAR</a></li>
+</ul></li> <!-- End Submenu -->
+<li class='divider'></li>
+<li class='dropdown-submenu'> <!-- Submenu -->
+<a tabindex='-1' href='#'>Gitblit Express</a>
+<ul class='dropdown-menu'>
+<li><a href='setup_express.html'>setup Express</a></li>
+<li><a href='upgrade_express.html'>upgrade Express</a></li>
+</ul></li> <!-- End Submenu -->
+<li class='divider'></li>
+<li><a href='administration.html'>administration</a></li>
+<li><a href='setup_authentication.html'>authentication</a></li>
+<li><a href='setup_hooks.html'>push hooks</a></li>
+<li><a href='setup_lucene.html'>lucene indexing</a></li>
+<li><a href='setup_proxy.html'>reverse proxies</a></li>
+<li><a href='setup_clientmenus.html'>client app menus</a></li>
+<li class='divider'></li>
+<li><a href='setup_viewer.html'>Gitblit as a viewer</a></li>
+<li class='divider'></li>
+<li><a href='setup_client.html'>git client setup</a></li>
+<li class='divider'></li>
+<li><a href='federation.html'>federation</a></li>
+<li class='divider'></li>
+<li><a href='properties.html'>settings</a></li>
+<li><a href='faq.html'>faq</a></li>
+<li class='divider'></li>
+<li><a href='design.html'>design</a></li>
+<li><a href='rpc.html'>rpc</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>releases<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='releasenotes.html'>release notes</a></li>
+<li><a href='releases.html'>release history</a></li>
+<li class='divider'></li>
+<li><a href='roadmap.html'>roadmap</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>downloads<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.3.0.zip'>Gitblit GO (Windows)</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.3.0.tar.gz'>Gitblit GO (Linux/OSX)</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gitblit-1.3.0.war'>Gitblit WAR</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=express-1.3.0.zip'>Gitblit Express</a></li>
+<li class='divider'></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=manager-1.3.0.zip'>Gitblit Manager</a></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=fedclient-1.3.0.zip'>Federation Client</a></li>
+<li class='divider'></li>
+<li><a href='http://code.google.com/p/gitblit/downloads/detail?name=gbapi-1.3.0.zip'>API Library</a></li>
+</ul></li> <!-- End Menu -->
+<li class='dropdown'> <!-- Menu -->
+<a class='dropdown-toggle' href='#' data-toggle='dropdown'>links<b class='caret'></b></a>
+<ul class='dropdown-menu'>
+<li><a href='https://demo-gitblit.rhcloud.com'>Gitblit Demo (RELEASE)</a></li>
+<li><a href='https://next-gitblit.rhcloud.com'>Gitblit Next (SNAPSHOT)</a></li>
+<li class='divider'></li>
+<li><a href='https://github.com/gitblit/gitblit'>Github</a></li>
+<li><a href='http://code.google.com/p/gitblit/issues/list'>Issues</a></li>
+<li><a href='http://groups.google.com/group/gitblit'>Discussion</a></li>
+<li><a href='https://plus.google.com/114464678392593421684'>Google+</a></li>
+<li><a href='http://www.ohloh.net/p/gitblit'>Ohloh</a></li>
+</ul></li> <!-- End Menu -->
+<li class='divider-vertical'></li>
+<li><a href='https://plus.google.com/114464678392593421684?prsrc=3' class='gpluspage'><img src='https://ssl.gstatic.com/images/icons/gplus-16.png' width='16' height='16 style='order: 0;'/></a></li><li><div class='gplusone'><g:plusone size='small' href='http://gitblit.com'></g:plusone></div></li>
+						</ul>
+					</div><!--/.nav-collapse -->
 				</div>
 			</div>
-		</div>
-		<div class="container">
-			<div class="markdown">
-<h2> Federating Gitblit</h2>
-
+		</div><!-- end Navigation Bar -->
+<div class='container'>
+<!-- Begin Markdown -->
+<h2 class="section" id="H1"><a href="#H1" class="sectionlink"><i class="icon-share-alt"> </i></a>Federating Gitblit</h2>
 <p><em>SINCE 0.6.0</em></p>
 
 <p>A Gitblit federation is a mechanism to clone repositories and keep them in sync from one Gitblit instance to another.  Federation can be used to maintain a mirror of your Gitblit instance, to aggregate repositories from developer workstations, or to initially clone groups of repositories to developer workstations.  If you are/were a Subversion user you might think of this as <a href="http://svnbook.red-bean.com/en/1.5/svn.ref.svnsync.html">svn-sync</a>, but better.</p>
@@ -75,24 +140,21 @@ Please review all the documentation to understand how it works and its limitatio
 
 <p><img src="fed_aggregation.png" alt="block diagram" title="Gitblit Federation Aggregation"/></p>
 
-<h3> Important Changes to Note</h3>
-
+<h3 class="section" id="H2"><a href="#H2" class="sectionlink"><i class="icon-share-alt"> </i></a>Important Changes to Note</h3>
 <p>The <em>Gitblit 0.8.0</em> federation protocol adds retrieval of teams and referenced push scripts.  Older clients will not know to request team or push script information. </p>
 
 <p>The <em>Gitblit 0.7.0</em> federation protocol is incompatible with the 0.6.0 federation protocol because of a change in the way timestamps are formatted.</p>
 
 <p>Gitblit 0.6.0 uses the default <a href="http://google-gson.googlecode.com">google-gson</a> timestamp serializer which generates locally formatted timestamps.  Unfortunately, this creates problems for distributed repositories and distributed developers.  Gitblit 0.7.0 corrects this error by serializing dates to the <a href="http://en.wikipedia.org/wiki/ISO_8601">iso8601</a> standard.  As a result 0.7.0 is not compatible with 0.6.0.  A partial backwards-compatibility fallback was considered but it would only work one direction and since the federation mechanism is bidirectional it was not implemented.</p>
 
-<h3> Origin Gitblit Instance Requirements</h3>
-
+<h3 class="section" id="H3"><a href="#H3" class="sectionlink"><i class="icon-share-alt"> </i></a>Origin Gitblit Instance Requirements</h3>
 <ul>
 <li><em>git.enableGitServlet</em> must be true, all Git clone and pull requests are handled through Gitblit's JGit servlet</li>
 <li><em>federation.passphrase</em> must be non-empty</li>
 <li>The Gitblit origin instance must be http/https accessible by the pulling Gitblit instance.<br/>That may require configuring port-forwarding on your router and/or opening ports on your firewall.</li>
 </ul>
 
-<h4> federation.passphrase</h4>
-
+<h4 class="section" id="H4"><a href="#H4" class="sectionlink"><i class="icon-share-alt"> </i></a>federation.passphrase</h4>
 <p>The passphrase is used to generate permission tokens that can be shared with other Gitblit instances.</p>
 
 <p>The passphrase value never needs to be shared, although if you give another Gitblit instance the <em>ALL</em> federation token then your passphrase will be transferred/backed-up along with all other server settings.</p>
@@ -104,22 +166,20 @@ Please review all the documentation to understand how it works and its limitatio
 <p><strong>NOTE</strong>:<br/>
 Changing your <em>federation.passphrase</em> will break any registrations you have established with other Gitblit instances.</p>
 
-<h3> Pulling Gitblit Instance Requirements</h3>
-
+<h3 class="section" id="H5"><a href="#H5" class="sectionlink"><i class="icon-share-alt"> </i></a>Pulling Gitblit Instance Requirements</h3>
 <ul>
 <li>consider setting <em>federation.allowProposals=true</em> to facilitate the registration process from origin Gitblit instances</li>
 <li>properly registered Gitblit instance including, at a minimum, url, <em>federation token</em>, and update frequency</li>
 </ul>
 
-<h3> Controlling What Gets Pulled</h3>
-
+<h3 class="section" id="H6"><a href="#H6" class="sectionlink"><i class="icon-share-alt"> </i></a>Controlling What Gets Pulled</h3>
 <p>If you want your repositories (and optionally users accounts and settings) to be pulled by another Gitblit instance, you need to register your origin Gitblit instance with a pulling Gitblit instance by providing the url of your Gitblit instance and a federation token.</p>
 
 <p>Gitblit generates the following standard federation tokens:
 <pre class='prettyprint lang-java'>
-String allToken = SHA1(passphrase + "-ALL");
-String usersAndRepositoriesToken = SHA1(passphrase + "-USERS_AND_REPOSITORIES");
-String repositoriesToken = SHA1(passphrase + "-REPOSITORIES");
+String allToken = SHA1(passphrase + &quot;-ALL&quot;);
+String usersAndRepositoriesToken = SHA1(passphrase + &quot;-USERS_AND_REPOSITORIES&quot;);
+String repositoriesToken = SHA1(passphrase + &quot;-REPOSITORIES&quot;);
 </pre></p>
 
 <p>The <em>ALL</em> token allows another Gitblit instance to pull all your repositories, user accounts, server settings, and referenced push scripts.<br/>
@@ -132,12 +192,10 @@ The <em>REPOSITORIES</em> token only allows pulling of the repositories.</p>
 
 <p>The three standard tokens grant access to ALL your non-excluded repositories.  However, if you only want to specify different groups of repositories to be federated then you need to define <em>federation sets</em>. </p>
 
-<h4> Federation Sets</h4>
-
+<h4 class="section" id="H7"><a href="#H7" class="sectionlink"><i class="icon-share-alt"> </i></a>Federation Sets</h4>
 <p>Federation Sets (<em>federation.sets</em>) are named groups of repositories.  The Federation Sets are defined in <code>gitblit.properties</code> and are available for selection in the repository settings page.  You can assign a repository to one or more sets and then distribute the federation token for the set.  This allows you to grant federation pull access to a subset of your available repositories.  Tokens for federation sets only grant pull access for the member repositories.</p>
 
-<h3> Federation Proposals (Origin Gitblit Instance)</h3>
-
+<h3 class="section" id="H8"><a href="#H8" class="sectionlink"><i class="icon-share-alt"> </i></a>Federation Proposals (Origin Gitblit Instance)</h3>
 <p>Once you have properly setup your passphrase and can see your federation tokens, you are ready to share them with a pulling Gitblit instance.</p>
 
 <p>The registration process can be partially automated by sending a <em>federation proposal</em> to the pulling Gitblit instance.<br/>
@@ -167,18 +225,15 @@ To send a proposal:</p>
 <p>Submitting a proposal does not automatically register your server with the pulling Gitblit instance.<br/>
 Registration is a manual process for an administrator.</p>
 
-<h3> Federation Proposals (Pulling Gitblit Instance)</h3>
-
+<h3 class="section" id="H9"><a href="#H9" class="sectionlink"><i class="icon-share-alt"> </i></a>Federation Proposals (Pulling Gitblit Instance)</h3>
 <p>If your Giblit instance has received a <em>federation proposal</em>, you will be alerted to that information the next time you login to Gitblit as an administrator.</p>
 
 <p>You may view the details of a proposal by scrolling down to the bottom of the repositories page and selecting a proposal.  Sample registration settings will be generated for you that you may copy &amp; paste into either your <code>gitblit.properties</code> file or your <code>web.xml</code> file.</p>
 
-<h3> Excluding Repositories (Origin Gitblit Instance)</h3>
-
+<h3 class="section" id="H10"><a href="#H10" class="sectionlink"><i class="icon-share-alt"> </i></a>Excluding Repositories (Origin Gitblit Instance)</h3>
 <p>You may exclude a repository from being pulled by any federated Gitblit instance by setting its <em>federation strategy</em> to EXCLUDE in the repository's settings page.</p>
 
-<h3> Excluding Repositories (Pulling Gitblit Instance)</h3>
-
+<h3 class="section" id="H11"><a href="#H11" class="sectionlink"><i class="icon-share-alt"> </i></a>Excluding Repositories (Pulling Gitblit Instance)</h3>
 <p>You may exclude repositories to pull in a federation registration.  You may exclude all or you may exclude based on a simple fuzzy pattern.  Only one wildcard character may be used within each pattern.  Patterns are space-separated within the exclude and include fields. </p>
 
 <pre><code>federation.example.exclude = skipit.git
@@ -196,24 +251,20 @@ federation.example.include = somerepo.git someotherrepo.git
 federation.example.include = common/* library/*
 </code></pre>
 
-<h3> Tracking Status (Pulling Gitblit Instance)</h3>
-
+<h3 class="section" id="H12"><a href="#H12" class="sectionlink"><i class="icon-share-alt"> </i></a>Tracking Status (Pulling Gitblit Instance)</h3>
 <p>Below the repositories list on the repositories page you will find a section named <em>federation registrations</em>.  This section enumerates the other gitblit servers you have configured to periodically pull.  The <em>status</em> of the latest pull will be indicated on the left with a colored circle, similar to the status of an executed unit test or Hudson/Jenkins build.  You can drill into the details of the registration to view the status of the last pull from each repository available from that origin Gitblit instance.  Additionally, you can specify the <em>federation.N.notifyOnError=true</em> flag, to be alerted via email of regressive status changes to individual registrations.</p>
 
-<h3> Tracking Status (Origin Gitblit Instance)</h3>
-
+<h3 class="section" id="H13"><a href="#H13" class="sectionlink"><i class="icon-share-alt"> </i></a>Tracking Status (Origin Gitblit Instance)</h3>
 <p>Origin Gitblit instances can not directly track the success or failure status of Pulling Gitblit instances.  However, the Pulling Gitblit instance may elect to send a status acknowledgment (<em>federation.N.sendStatus=true</em>) to the origin Gitblit server that indicates the per-repository status of the pull operation.  This is the same data that is displayed on the Pulling Gitblit instances ui.</p>
 
-<h3> How does it work? (Origin Gitblit Instances)</h3>
-
+<h3 class="section" id="H14"><a href="#H14" class="sectionlink"><i class="icon-share-alt"> </i></a>How does it work? (Origin Gitblit Instances)</h3>
 <p>A pulling Gitblit instance will periodically contact your Gitblit instance and will provide the token as proof that you have granted it federation access.  Your Gitblit instance will decide, based on the supplied token, if the requested data should be returned to the pulling Gitblit instance.  Gitblit data (user accounts, repository metadata, and server settings) are serialized as <a href="http://json.org">JSON</a> using <a href="http://google-gson.googlecode.com">google-gson</a> and returned to the pulling Gitblit instance.  Standard Git clone and pull operations are used to transfer commits.</p>
 
 <p>The federation process executes using an internal administrator account, <em>$gitblit</em>.  All the normal authentication and authorization processes are used for federation requests. For example, Git commands are authenticated as <em>$gitblit / token</em>.</p>
 
 <p>While the <em>$gitblit</em> account has access to all repositories, server settings, and user accounts, it is prohibited from accessing the web ui and it is disabled if <em>federation.passphrase</em> is empty.</p>
 
-<h3> How does it work? (Pulling Gitblit Instances)</h3>
-
+<h3 class="section" id="H15"><a href="#H15" class="sectionlink"><i class="icon-share-alt"> </i></a>How does it work? (Pulling Gitblit Instances)</h3>
 <p>Federated repositories defined in <code>gitblit.properties</code> are checked after Gitblit has been running for 1 minute.  The next registration check is scheduled at the completion of the current registration check based on the registration's specified frequency.</p>
 
 <ul>
@@ -225,13 +276,11 @@ federation.example.include = common/* library/*
 
 <p>After a repository has been cloned it is flagged as <em>isFederated</em> (which identifies it as being sourced from another Gitblit instance), <em>isFrozen</em> (which prevents Git pushes to this mirror) and <em>federationStrategy=EXCLUDED</em> (which prevents this repository from being pulled by another federated Gitblit instance).</p>
 
-<h4> Origin Verification</h4>
-
+<h4 class="section" id="H16"><a href="#H16" class="sectionlink"><i class="icon-share-alt"> </i></a>Origin Verification</h4>
 <p>During a federated pull operation, Gitblit does check that the <em>origin</em> of the local repository starts with the url of the federation registration.<br/>
 If they do not match, the repository is skipped and this is indicated in the log.</p>
 
-<h4> User Accounts &amp; Teams</h4>
-
+<h4 class="section" id="H17"><a href="#H17" class="sectionlink"><i class="icon-share-alt"> </i></a>User Accounts & Teams</h4>
 <p>By default all user accounts and teams (except the <em>admin</em> account) are automatically pulled when using the <em>ALL</em> token or the <em>USERS_AND_REPOSITORIES</em> token.  You may exclude a user account from being pulled by a federated Gitblit instance by checking <em>exclude from federation</em> in the edit user page.</p>
 
 <p>The pulling Gitblit instance will store a registration-specific <code>users.conf</code> file for the pulled user accounts and their repository permissions. This file is stored in the <em>federation.N.folder</em> folder.</p>
@@ -242,32 +291,28 @@ If they do not match, the repository is skipped and this is indicated in the log
 Upgrades from older Gitblit versions will not have the <em>#notfederated</em> role assigned to the <em>admin</em> account.  Without that role, your admin account WILL be transferred with an <em>ALL</em> or <em>USERS_AND_REPOSITORIES</em> token.<br/>
 Please consider adding the <em>#notfederated</em> role to your admin account!</p>
 
-<h4> Server Settings </h4>
-
+<h4 class="section" id="H18"><a href="#H18" class="sectionlink"><i class="icon-share-alt"> </i></a>Server Settings</h4>
 <p>Server settings are only pulled when using the <em>ALL</em> token.</p>
 
 <p>The pulling Gitblit instance will store a registration-specific <code>gitblit.properties</code> file for all pulled settings.  This file is stored in the <em>federation.N.folder</em> folder.</p>
 
 <p>These settings are unused by the pulling Gitblit instance.</p>
 
-<h4> Push Scripts </h4>
-
+<h4 class="section" id="H19"><a href="#H19" class="sectionlink"><i class="icon-share-alt"> </i></a>Push Scripts</h4>
 <p>Your Groovy push scripts are only pulled when using the <em>ALL</em> token.</p>
 
 <p>The pulling Gitblit instance will retrieve any referenced (i.e. used) push script and store it locally as <em>registration_scriptName.groovy</em> in the <em>federation.N.folder</em> folder.</p>
 
 <p>These scripts are unused by the pulling Gitblit instance.</p>
 
-<h3> Collisions and Conflict Resolution</h3>
-
+<h3 class="section" id="H20"><a href="#H20" class="sectionlink"><i class="icon-share-alt"> </i></a>Collisions and Conflict Resolution</h3>
 <p>Gitblit does <strong>not</strong> detect conflict and it does <strong>not</strong> offer conflict resolution of repositories, users, teams, or settings.</p>
 
 <p>If an object exists locally that has the same name as the remote object, it is assumed they are the same and the contents of the remote object are merged into the local object.  If you can not guarantee that this is the case, then you should not store any federated repositories directly in <em>git.repositoriesFolder</em> and you should not enable <em>mergeAccounts</em>.</p>
 
 <p>By default, federated repositories can not be pushed to, they are read-only by the <em>isFrozen</em> flag.  This flag is <strong>ONLY</strong> enforced by Gitblit's JGit servlet.  If you push to a federated repository after resetting the <em>isFrozen</em> flag or via some other Git access technique then you may break Gitblit's ability to continue pulling from the origin repository.  If you are only pushing to a local branch then you might be safe.</p>
 
-<h2> Federation Pull Registration Keys</h2>
-
+<h2 class="section" id="H21"><a href="#H21" class="sectionlink"><i class="icon-share-alt"> </i></a>Federation Pull Registration Keys</h2>
 <table class="table">
 <tr><th>federation.N.url</th>
 <td>string</td>
@@ -324,12 +369,10 @@ Please consider adding the <em>#notfederated</em> role to your admin account!</p
 <td>if <b>true</b>, send an email to the administrators on an error.<br/><em>default is false</em></td>
 </tr>
 </table>
-<h2> Example Federation Pull Registrations</h2>
-
+<h2 class="section" id="H22"><a href="#H22" class="sectionlink"><i class="icon-share-alt"> </i></a>Example Federation Pull Registrations</h2>
 <p>These examples would be entered into the <code>gitblit.properties</code> file of the pulling gitblit instance.</p>
 
-<h4> (Nearly) Perfect Mirror Example</h4>
-
+<h4 class="section" id="H23"><a href="#H23" class="sectionlink"><i class="icon-share-alt"> </i></a>(Nearly) Perfect Mirror Example</h4>
 <p><img src="fed_mirror.png" alt="block diagram" title="Gitblit Mirror"/></p>
 
 <p>This assumes that the <em>token</em> is the <em>ALL</em> token from the origin gitblit instance.</p>
@@ -348,8 +391,7 @@ federation.example1.mergeAccounts = true
 federation.example1.sendStatus = true
 </code></pre>
 
-<h4> Just Repositories Example</h4>
-
+<h4 class="section" id="H24"><a href="#H24" class="sectionlink"><i class="icon-share-alt"> </i></a>Just Repositories Example</h4>
 <p>This assumes that the <em>token</em> is the <em>REPOSITORIES</em> token from the origin gitblit instance.<br/>
 The repositories will be put in <em>git.repositoriesFolder</em>/example2.</p>
 
@@ -361,8 +403,7 @@ federation.example2.bare = true
 federation.example2.mirror = true
 </code></pre>
 
-<h4> All-but-One Repository Example</h4>
-
+<h4 class="section" id="H25"><a href="#H25" class="sectionlink"><i class="icon-share-alt"> </i></a>All-but-One Repository Example</h4>
 <p>This assumes that the <em>token</em> is the <em>REPOSITORIES</em> token from the origin gitblit instance.<br/>
 The repositories will be put in <em>git.repositoriesFolder</em>/example3.</p>
 
@@ -375,8 +416,7 @@ federation.example3.mirror = true
 federation.example3.exclude = somerepo.git
 </code></pre>
 
-<h4> Just One Repository Example</h4>
-
+<h4 class="section" id="H26"><a href="#H26" class="sectionlink"><i class="icon-share-alt"> </i></a>Just One Repository Example</h4>
 <p>This assumes that the <em>token</em> is the <em>REPOSITORIES</em> token from the origin gitblit instance.<br/>
 The repositories will be put in <em>git.repositoriesFolder</em>/example4.</p>
 
@@ -390,26 +430,22 @@ federation.example4.exclude = *
 federation.example4.include = somerepo.git
 </code></pre>
 
-<h2> Federation Client</h2>
-
-<p>Instead of setting up a full-blown pulling Gitblit instance, you can also use the <a href="http://code.google.com/p/gitblit/downloads/detail?name=fedclient-1.2.0.zip">federation client</a> command-line utility.  This is a packaged subset of the federation feature in a smaller, simpler command-line only tool.</p>
+<h2 class="section" id="H27"><a href="#H27" class="sectionlink"><i class="icon-share-alt"> </i></a>Federation Client</h2>
+<p>Instead of setting up a full-blown pulling Gitblit instance, you can also use the <a href="http://code.google.com/p/gitblit/downloads/detail?name=%FEDCLIENT%">federation client</a> command-line utility.  This is a packaged subset of the federation feature in a smaller, simpler command-line only tool.</p>
 
 <p>The <em>federation client</em> relies on many of the same dependencies as Gitblit and will download them on first execution.</p>
 
-<h3> federation.properties</h3>
-
+<h3 class="section" id="H28"><a href="#H28" class="sectionlink"><i class="icon-share-alt"> </i></a>federation.properties</h3>
 <p>You may use the <code>federation.properties</code> file to configure one or more Gitblit instances that you want to pull from.  This file is a subset of the standard <code>gitblit.properties</code> file.</p>
 
 <p>By default this tool does not daemonize itself; it executes and then quits.  This allows you to use the native scheduling feature of your OS.  Of course, if you'd rather use Gitblit's scheduler you may use that by specifying the <code>--daemon</code> parameter.</p>
 
-<h3> http.sslVerify</h3>
-
+<h3 class="section" id="H29"><a href="#H29" class="sectionlink"><i class="icon-share-alt"> </i></a>http.sslVerify</h3>
 <p>If you are pulling from a Gitblit with a self-signed SSL certificate you will need to configure Git/JGit to bypass certificate verification.<br/>
 (<a href="http://www.kernel.org/pub/software/scm/git/docs/git-config.html">Git-Config Manual Page</a>)</p>
 
 <pre>git config --global --bool --add http.sslVerify false</pre>
-<h3> Command-Line Parameters</h3>
-
+<h3 class="section" id="H30"><a href="#H30" class="sectionlink"><i class="icon-share-alt"> </i></a>Command-Line Parameters</h3>
 <p>Instead of using <code>federation.properties</code> you may directly specify a Gitblit instance to pull from with command-line parameters.</p>
 
 <pre><code>java -jar fedclient.jar --url https://go.gitblit.com --mirror --bare --token 123456789
@@ -418,11 +454,24 @@ federation.example4.include = somerepo.git
 java -jar fedclient.jar --url https://go.gitblit.com --mirror --bare --token 123456789
      --repositoriesFolder c:/mymirror --daemon --frequency &quot;24 hours&quot;
 
-</code></pre>		</div> <!-- markdown -->
-		<footer>
-			<p class="pull-right">generated 2012-12-31</p>
-		The content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 License</a>.
-		</footer>			
-	</div> <!-- container -->	
+</code></pre>
+<!-- End Markdown -->
+<footer class="footer"><p class="pull-right">generated 2013-07-14</p>
+<p>The content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 License</a>.</p>
+</footer>
+</div>
+<!-- Google Analytics -->
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-24377072-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
 </body>
 </html>
