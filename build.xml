@@ -147,7 +147,7 @@
 		Run Gitblit GO
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	-->
-	<target name="run" depends="compile" description="Run Gitblit GO">
+	<target name="run" depends="compile, downloadTranslation" description="Run Gitblit GO">
         <!-- copy static files -->
         <copy todir="${basedir}/build/classes" overwrite="false">
             <fileset dir="${project.resources.dir}">
@@ -1028,5 +1028,19 @@
 			<arg value="-DcreateChecksum=true" />
 		</exec>
 	</target>
+    
+    <target name="downloadTranslation" description="Download latest documentation from Jabylon">
+        <property name="i18n.base" value="src/main/java/com/gitblit/wicket/GitBlitWebApp" />
+        <property name="i18n.server" value="http://demo-jabylon.rhcloud.com/api/workspace/Gitblit/german-translation" />
+        
+        <get dest="${i18n.base}_de.properties" src="${i18n.server}/de/${i18n.base}_de.properties?type=file" />
+        <get dest="${i18n.base}_es.properties" src="${i18n.server}/es/${i18n.base}_es.properties?type=file" />
+        <get dest="${i18n.base}_ja.properties" src="${i18n.server}/ja/${i18n.base}_ja.properties?type=file" />
+        <get dest="${i18n.base}_ko.properties" src="${i18n.server}/ko/${i18n.base}_ko.properties?type=file" />
+        <get dest="${i18n.base}_nl.properties" src="${i18n.server}/nl/${i18n.base}_nl.properties?type=file" />
+        <get dest="${i18n.base}_pl.properties" src="${i18n.server}/pl/${i18n.base}_pl.properties?type=file" />
+        <get dest="${i18n.base}_pt_BR.properties" src="${i18n.server}/pt_BR/${i18n.base}_pt_BR.properties?type=file" />
+        <get dest="${i18n.base}_zh_CN.properties" src="${i18n.server}/zh_CN/${i18n.base}_zh_CN.properties?type=file" />
+    </target>
 	
 </project>
