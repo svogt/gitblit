@@ -52,7 +52,7 @@
 		<property name="maven.directory" value="${basedir}/../gitblit-maven" />
 
 		<!-- Download links -->
-		<property name="gc.url" value="http://code.google.com/p/gitblit/downloads/detail?name=" />
+		<property name="gc.url" value="http://dl.bintray.com/gitblit/releases/" />
 	</target>
 
 	
@@ -547,16 +547,38 @@
 						<page name="upgrade Express" src="upgrade_express.mkd" />
 					</menu>
 					<divider />
-					<page name="administration" src="administration.mkd" />
-					<page name="authentication" src="setup_authentication.mkd" />
-					<page name="push hooks" src="setup_hooks.mkd" />
-					<page name="lucene indexing" src="setup_lucene.mkd" />
-					<page name="reverse proxies" src="setup_proxy.mkd" />
-					<page name="client app menus" src="setup_clientmenus.mkd" />
+					<menu name="Server Configuration" pager="true" pagerPlacement="bottom" pagerLayout="justified">
+						<page name="administration" src="administration.mkd" />
+						<page name="authentication" src="setup_authentication.mkd" />
+						<page name="push hooks" src="setup_hooks.mkd" />
+						<page name="lucene indexing" src="setup_lucene.mkd" />
+						<page name="reverse proxies" src="setup_proxy.mkd" />
+						<page name="client app menus" src="setup_clientmenus.mkd" />
+						<page name="bugtraq" src="setup_bugtraq.mkd" />
+						<page name="mirrors" src="setup_mirrors.mkd" />
+						<page name="scaling" src="setup_scaling.mkd" />
+						<divider />
+						<page name="Gitblit as a viewer" src="setup_viewer.mkd" />
+					</menu>
 					<divider />
-					<page name="Gitblit as a viewer" src="setup_viewer.mkd" />
+					<menu name="Client Usage" pager="true" pagerPlacement="bottom" pagerLayout="justified">
+						<page name="using HTTP/HTTPS" src="setup_transport_http.mkd" />
+						<page name="using SSH" src="setup_transport_ssh.mkd" />
+						<page name="using the Eclipse plugin" src="eclipse_plugin.mkd" />
+					</menu>
 					<divider />
-					<page name="git client setup" src="setup_client.mkd" />
+					<menu name="Tickets" pager="true" pagerPlacement="bottom" pagerLayout="justified">
+					  <page name="overview" src="tickets_overview.mkd" />
+					  <page name="using" src="tickets_using.mkd" />
+					  <page name="barnum" src="tickets_barnum.mkd" />
+					  <page name="setup" src="tickets_setup.mkd" />
+					  <page name="replication &amp; advanced administration" src="tickets_replication.mkd" />
+					</menu>
+					<divider />
+					<menu name="Plugins" pager="true" pagerPlacement="bottom" pagerLayout="justified">
+					  <page name="overview" src="plugins_overview.mkd" />
+					  <page name="extension points" src="plugins_extensions.mkd" />
+					</menu>
 					<divider />
 					<page name="federation" src="federation.mkd" />
 					<divider />
@@ -588,17 +610,27 @@
 					<link name="Federation Client" src="${gc.url}fedclient-${project.releaseVersion}.zip" />
 					<divider />
 					<link name="API Library" src="${gc.url}gbapi-${project.releaseVersion}.zip" />
+					<divider />
+					<link name="Bintray (1.4.0+)" src="https://bintray.com/gitblit/releases/gitblit" />
+					<link name="GoogleCode (pre-1.4.0)" src="https://code.google.com/p/gitblit/downloads/list?can=1" />
+					<divider />
+					<link name="Maven Repository" src="${project.mavenUrl}" />
 				</menu>
 				
 				<menu name="links">
-					<link name="Gitblit Demo (RELEASE)" src="https://demo-gitblit.rhcloud.com" />
-					<link name="Gitblit Next (SNAPSHOT)" src="https://next-gitblit.rhcloud.com" />
+					<link name="dev.gitblit.com (self-hosted)" src="https://dev.gitblit.com" />
+					<divider />
+					<link name="Plugin Registry" src="http://plugins.gitblit.com" />
 					<divider />
 					<link name="Github" src="${project.scmUrl}" />
 					<link name="Issues" src="${project.issuesUrl}" />
 					<link name="Discussion" src="${project.forumUrl}" />
 					<link name="Google+" src="${project.socialNetworkUrl}" />
+					<link name="Twitter" src="https://twitter.com/gitblit" />
 					<link name="Ohloh" src="http://www.ohloh.net/p/gitblit" />
+					<divider />
+					<link name="+JamesMoger" src="https://plus.google.com/+JamesMoger" />
+					<link name="@JamesMoger" src="https://twitter.com/JamesMoger" />
 				</menu>
 				<divider />
 			</structure>
@@ -609,6 +641,7 @@
 			
 			<regex searchPattern="\b(issue)(\s*[#]?|-){0,1}(\d+)\b" replacePattern="&lt;a href='http://code.google.com/p/gitblit/issues/detail?id=$3'&gt;issue $3&lt;/a&gt;" />
 			<regex searchPattern="\b(pr|pull request)(\s*[#]?|-){0,1}(\d+)\b" replacePattern="&lt;a href='https://github.com/gitblit/gitblit/pull/$3'&gt;pull request #$3&lt;/a&gt;" />
+			<regex searchPattern="\b(ticket)(\s*[#]?|-){0,1}(\d+)\b" replacePattern="&lt;a href='https://dev.gitblit.com/tickets/gitblit.git/$3'&gt;ticket $3&lt;/a&gt;" />
 			
 			<!-- Set the logo from the mx:doc resources -->
 			<logo file="${project.resources.dir}/gitblt_25_white.png" />
@@ -687,79 +720,51 @@
 
 	<!-- 
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		Publish binaries to Google Code
+		Publish binaries to Bintray
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	-->
-	<target name="publishBinaries" depends="prepare" description="Publish the Gitblit binaries to Google Code">
+	<target name="publishBinaries" depends="prepare" description="Publish the Gitblit binaries to Bintray">
 
 		<echo>Uploading Gitblit ${project.version} binaries</echo>
 
 		<!-- Upload Gitblit GO Windows ZIP file -->
-		<mx:gcupload 
-			username="${googlecode.user}"
-			password="${googlecode.password}"
-			projectname="gitblit"
-			filename="${project.targetDirectory}/${distribution.zipfile}" 
-			targetFilename="gitblit-${project.version}.zip"
-			summary="Gitblit GO v${project.version} (standalone, integrated Gitblit server for Windows)" />
+		<bintrayUpload
+			source="${project.targetDirectory}/${distribution.zipfile}" 
+			target="gitblit-${project.version}.zip" />
 
 		<!-- Upload Gitblit GO Linux/Unix tar.gz file -->
-		<mx:gcupload
-			username="${googlecode.user}"
-			password="${googlecode.password}"
-			projectname="gitblit"
-			filename="${project.targetDirectory}/${distribution.tgzfile}" 
-			targetFilename="gitblit-${project.version}.tar.gz"
-			summary="Gitblit GO v${project.version} (standalone, integrated Gitblit server for Linux/Unix)" />
+		<bintrayUpload
+			source="${project.targetDirectory}/${distribution.tgzfile}" 
+			target="gitblit-${project.version}.tar.gz" />
 
 		<!-- Upload Gitblit WAR file -->
-		<mx:gcupload
-			username="${googlecode.user}"
-			password="${googlecode.password}"
-			projectname="gitblit"
-			filename="${project.targetDirectory}/${distribution.warfile}" 
-			targetFilename="gitblit-${project.version}.war"
-			summary="Gitblit WAR v${project.version} (standard WAR webapp for servlet containers)" />
+		<bintrayUpload
+			source="${project.targetDirectory}/${distribution.warfile}" 
+			target="gitblit-${project.version}.war" />
 
 		<!-- Upload Gitblit FedClient -->
-		<mx:gcupload
-			username="${googlecode.user}"
-			password="${googlecode.password}"
-		    projectname="gitblit"
-			filename="${project.targetDirectory}/${fedclient.zipfile}" 
-			targetFilename="fedclient-${project.version}.zip"
-		    summary="Gitblit Federation Client v${project.version} (command-line tool to clone data from federated Gitblit instances)" />
+		<bintrayUpload
+			source="${project.targetDirectory}/${fedclient.zipfile}" 
+			target="fedclient-${project.version}.zip" />
 
 		<!-- Upload Gitblit Manager -->
-		<mx:gcupload
-			username="${googlecode.user}"
-			password="${googlecode.password}"
-			projectname="gitblit"
-			filename="${project.targetDirectory}/${manager.zipfile}" 
-			targetFilename="manager-${project.version}.zip"
-			summary="Gitblit Manager v${project.version} (Swing tool to remotely administer a Gitblit server)" />
+		<bintrayUpload
+			source="${project.targetDirectory}/${manager.zipfile}" 
+			target="manager-${project.version}.zip" />
 
 		<!-- Upload Gitblit API Library -->
-		<mx:gcupload
-			username="${googlecode.user}"
-			password="${googlecode.password}"
-			projectname="gitblit"
-			filename="${project.targetDirectory}/${gbapi.zipfile}" 
-			targetFilename="gbapi-${project.version}.zip"
-			summary="Gitblit API Library v${project.version} (JSON RPC library to integrate with your software)" />
+		<bintrayUpload
+			source="${project.targetDirectory}/${gbapi.zipfile}" 
+			target="gbapi-${project.version}.zip" />
 
 		<!-- Upload Gitblit Express for RedHat OpenShift -->
-		<mx:gcupload
-			username="${googlecode.user}"
-			password="${googlecode.password}"
-			projectname="gitblit"
-			filename="${project.targetDirectory}/${express.zipfile}" 
-			targetFilename="express-${project.version}.zip"
-			summary="Gitblit Express v${project.version} (run Gitblit on RedHat's OpenShift cloud)" />
+		<bintrayUpload
+			source="${project.targetDirectory}/${express.zipfile}" 
+			target="express-${project.version}.zip" />
 
 	</target>
 
-
+	
 	<!--
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 		Publish site to site hosting service
@@ -863,16 +868,38 @@
 							<page name="upgrade Express" src="upgrade_express.mkd" />
 						</menu>
 						<divider />
-						<page name="administration" src="administration.mkd" />
-						<page name="authentication" src="setup_authentication.mkd" />
-						<page name="push hooks" src="setup_hooks.mkd" />
-						<page name="lucene indexing" src="setup_lucene.mkd" />
-						<page name="reverse proxies" src="setup_proxy.mkd" />
-						<page name="client app menus" src="setup_clientmenus.mkd" />
+						<menu name="Server Configuration" pager="true" pagerPlacement="bottom" pagerLayout="justified">
+							<page name="administration" src="administration.mkd" />
+							<page name="authentication" src="setup_authentication.mkd" />
+							<page name="push hooks" src="setup_hooks.mkd" />
+							<page name="lucene indexing" src="setup_lucene.mkd" />
+							<page name="reverse proxies" src="setup_proxy.mkd" />
+							<page name="client app menus" src="setup_clientmenus.mkd" />
+							<page name="bugtraq" src="setup_bugtraq.mkd" />
+							<page name="mirrors" src="setup_mirrors.mkd" />
+							<page name="scaling" src="setup_scaling.mkd" />
+							<divider />
+							<page name="Gitblit as a viewer" src="setup_viewer.mkd" />
+						</menu>
 						<divider />
-						<page name="Gitblit as a viewer" src="setup_viewer.mkd" />
+						<menu name="Client Usage" pager="true" pagerPlacement="bottom" pagerLayout="justified">
+							<page name="using HTTP/HTTPS" src="setup_transport_http.mkd" />
+							<page name="using SSH" src="setup_transport_ssh.mkd" />
+							<page name="using the Eclipse plugin" src="eclipse_plugin.mkd" />
+						</menu>
 						<divider />
-						<page name="git client setup" src="setup_client.mkd" />
+						<menu name="Tickets" pager="true" pagerPlacement="bottom" pagerLayout="justified">
+							<page name="overview" src="tickets_overview.mkd" />
+							<page name="using" src="tickets_using.mkd" />
+							<page name="barnum" src="tickets_barnum.mkd" />
+							<page name="setup" src="tickets_setup.mkd" />
+							<page name="replication &amp; advanced administration" src="tickets_replication.mkd" />
+						</menu>
+						<divider />
+						<menu name="Plugins" pager="true" pagerPlacement="bottom" pagerLayout="justified">
+						  <page name="overview" src="plugins_overview.mkd" />
+						  <page name="extension points" src="plugins_extensions.mkd" />
+						</menu>
 						<divider />
 						<page name="federation" src="federation.mkd" />
 						<divider />
@@ -887,8 +914,9 @@
 						<page name="older releases" src="releasehistory.mkd" />
 					</menu>
 					<menu name="links">
-						<link name="Gitblit Demo (RELEASE)" src="https://demo-gitblit.rhcloud.com" />
-						<link name="Gitbilt Next (SNAPSHOT)" src="https://next-gitblit.rhcloud.com" />
+						<link name="dev.gitblit.com (self-hosted)" src="https://dev.gitblit.com" />
+						<divider />
+						<link name="Plugin Registry" src="http://plugins.gitblit.com" />
 						<divider />
 						<link name="Github" src="${project.scmUrl}" />
 						<link name="Issues" src="${project.issuesUrl}" />
@@ -902,6 +930,7 @@
 				
 				<regex searchPattern="\b(issue)(\s*[#]?|-){0,1}(\d+)\b" replacePattern="&lt;a href='http://code.google.com/p/gitblit/issues/detail?id=$3'&gt;issue $3&lt;/a&gt;" />
 				<regex searchPattern="\b(pr|pull request)(\s*[#]?|-){0,1}(\d+)\b" replacePattern="&lt;a href='https://github.com/gitblit/gitblit/pull/$3'&gt;pull request #$3&lt;/a&gt;" />
+				<regex searchPattern="\b(ticket)(\s*[#]?|-){0,1}(\d+)\b" replacePattern="&lt;a href='https://dev.gitblit.com/tickets/gitblit.git/$3'&gt;ticket $3&lt;/a&gt;" />
 
 				<!-- Set the logo from the mx:doc resources -->
 				<logo file="${project.resources.dir}/gitblt_25_white.png" />
@@ -959,6 +988,7 @@
 					<include name="thebuggenie.groovy" />
 					<include name="fisheye.groovy" />
 					<include name="redmine-fetch.groovy" />
+					<include name="subgit.groovy" />
 				</fileset>
 			</copy>
       </sequential>
@@ -966,25 +996,19 @@
 	
 	<!--
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-		Macro to upload binaries to GoogleCode
+		Macro to upload binaries to Bintray
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	-->
-	<macrodef name="googleUpload">
-		<attribute name="sourceFile"/>
-		<attribute name="targetFile"/>
-		<attribute name="description"/>
+	<macrodef name="bintrayUpload">
+		<attribute name="source"/>
+		<attribute name="target"/>
 		<sequential>
-			<gcupload 
-				username="${googlecode.user}" 
-				password="${googlecode.password}" 
-				projectname="gitblit" 
-				filename="${project.targetDirectory}/@{sourceFile}" 
-				targetfilename="@{targetFile}"
-				summary="@{description}"
-				labels="Featured, Type-Package, OpSys-All" />		
-	     </sequential>
+			<echo>uploading @{source} to Bintray</echo>
+			<exec executable="curl">
+				<arg line="--silent --show-error -T @{source} -u${bintray.username}:${bintray.apikey} https://api.bintray.com/content/gitblit/releases/gitblit/${project.version}/@{target}"></arg>
+			</exec>
+		</sequential>
 	</macrodef>
-
 
 	<!--
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -993,13 +1017,23 @@
 	-->
 	<target name="installMaven" depends="compile" description="Install Gitblit JAR as Maven module">
 		<local name="project.jar" />
-		<property name="project.jar" value="${project.outputDirectory}/gitblit.jar" />
+		<property name="project.jar" value="${project.outputDirectory}/${project.artifactId}.jar" />
 		<property name="resourceFolderPrefix" value="" />
-		<mx:jar destfile="${project.jar}" includeresources="true" resourceFolderPrefix="${resourceFolderPrefix}" />
+		<mx:jar destfile="${project.jar}" packageSources="true" includeresources="true" resourceFolderPrefix="${resourceFolderPrefix}" />
 
+		<!-- Install Binary jar -->
 		<exec executable="mvn">
 			<arg value="install:install-file" />
 			<arg value="-Dfile=${project.jar}" />
+			<arg value="-DpomFile=${basedir}/pom.xml" />
+			<arg value="-DcreateChecksum=true" />
+		</exec>
+		
+		<!-- Install Sources  jar -->
+		<exec executable="mvn">
+			<arg value="install:install-file" />
+			<arg value="-Dfile=${project.outputDirectory}/${project.artifactId}-sources.jar" />
+			<arg value="-Dclassifier=sources" />
 			<arg value="-DpomFile=${basedir}/pom.xml" />
 			<arg value="-DcreateChecksum=true" />
 		</exec>
@@ -1017,7 +1051,7 @@
 	<target name="uploadMaven" depends="compile" description="Upload Gitblit JAR to remote Maven repository">
 		<local name="project.jar" />
 		<property name="project.jar" value="${project.outputDirectory}/gitblit.jar" />
-		<mx:jar destfile="${project.jar}" includeresources="true" />
+		<mx:jar destfile="${project.jar}" packageSources="true" includeresources="true" />
 
 		<exec executable="mvn">
 			<arg value="deploy:deploy-file" />
@@ -1029,6 +1063,20 @@
 		</exec>
 	</target>
     
+    <!--
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		Install Gitblit JAR for usage as Moxie artifact
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	-->
+	<target name="installMoxie" depends="compile" description="Install Gitblit JAR as a Moxie artifact">
+		<local name="project.jar" />
+		<property name="project.jar" value="${project.targetDirectory}/${project.artifactId}-${project.version}.jar" />
+		<property name="resourceFolderPrefix" value="" />
+		<mx:jar destfile="${project.jar}" packageSources="true" includeresources="true" resourceFolderPrefix="${resourceFolderPrefix}" />
+
+		<mx:install />
+	</target>
+
     <target name="downloadTranslation" description="Download latest documentation from Jabylon">
         <property name="i18n.base" value="src/main/java/com/gitblit/wicket/GitBlitWebApp" />
         <property name="i18n.server" value="http://demo-jabylon.rhcloud.com/api/workspace/Gitblit/german-translation" />
@@ -1042,5 +1090,5 @@
         <get dest="${i18n.base}_pt_BR.properties" src="${i18n.server}/pt_BR/${i18n.base}_pt_BR.properties?type=file" />
         <get dest="${i18n.base}_zh_CN.properties" src="${i18n.server}/zh_CN/${i18n.base}_zh_CN.properties?type=file" />
     </target>
-	
+
 </project>

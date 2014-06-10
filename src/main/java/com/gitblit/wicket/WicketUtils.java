@@ -38,8 +38,6 @@ import org.apache.wicket.markup.html.image.ContextImage;
 import org.apache.wicket.protocol.http.WebRequest;
 import org.apache.wicket.resource.ContextRelativeResource;
 import org.eclipse.jgit.diff.DiffEntry.ChangeType;
-import org.wicketstuff.googlecharts.AbstractChartData;
-import org.wicketstuff.googlecharts.IChartData;
 
 import com.gitblit.Constants;
 import com.gitblit.Constants.AccessPermission;
@@ -434,7 +432,7 @@ public class WicketUtils {
 		parameterMap.put("pg", String.valueOf(pageNumber));
 		return new PageParameters(parameterMap);
 	}
-	
+
 	public static PageParameters newBlameTypeParameter(String repositoryName,
 			String commitId, String path, String blameType) {
 		Map<String, String> parameterMap = new HashMap<String, String>();
@@ -536,7 +534,7 @@ public class WicketUtils {
 			// past
 			title = timeUtils.timeAgo(date);
 		}
-		if ((System.currentTimeMillis() - date.getTime()) < 10 * 24 * 60 * 60 * 1000L) {
+		if (title != null && (System.currentTimeMillis() - date.getTime()) < 10 * 24 * 60 * 60 * 1000L) {
 			String tmp = dateString;
 			dateString = title;
 			title = tmp;
@@ -589,10 +587,13 @@ public class WicketUtils {
 		if (TimeUtils.isToday(date, timeZone)) {
 			title = timeUtils.today();
 		} else if (TimeUtils.isYesterday(date, timeZone)) {
-				title = timeUtils.yesterday();
+			title = timeUtils.yesterday();
 		} else if (date.getTime() <= System.currentTimeMillis()) {
 			// past
 			title = timeUtils.timeAgo(date);
+		} else {
+			// future
+			title = timeUtils.inFuture(date);
 		}
 		if ((System.currentTimeMillis() - date.getTime()) < 10 * 24 * 60 * 60 * 1000L) {
 			String tmp = dateString;
@@ -632,32 +633,6 @@ public class WicketUtils {
 		return label;
 	}
 
-	public static IChartData getChartData(Collection<Metric> metrics) {
-		final double[] commits = new double[metrics.size()];
-		final double[] tags = new double[metrics.size()];
-		int i = 0;
-		double max = 0;
-		for (Metric m : metrics) {
-			commits[i] = m.count;
-			if (m.tag > 0) {
-				tags[i] = m.count;
-			} else {
-				tags[i] = -1d;
-			}
-			max = Math.max(max, m.count);
-			i++;
-		}
-		IChartData data = new AbstractChartData(max) {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public double[][] getData() {
-				return new double[][] { commits, tags };
-			}
-		};
-		return data;
-	}
-
 	public static double maxValue(Collection<Metric> metrics) {
 		double max = Double.MIN_VALUE;
 		for (Metric m : metrics) {
@@ -667,31 +642,4 @@ public class WicketUtils {
 		}
 		return max;
 	}
-
-	public static IChartData getScatterData(Collection<Metric> metrics) {
-		final double[] y = new double[metrics.size()];
-		final double[] x = new double[metrics.size()];
-		int i = 0;
-		double max = 0;
-		for (Metric m : metrics) {
-			y[i] = m.count;
-			if (m.duration > 0) {
-				x[i] = m.duration;
-			} else {
-				x[i] = -1d;
-			}
-			max = Math.max(max, m.count);
-			i++;
-		}
-		IChartData data = new AbstractChartData(max) {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public double[][] getData() {
-				return new double[][] { x, y };
-			}
-		};
-		return data;
-	}
-
 }

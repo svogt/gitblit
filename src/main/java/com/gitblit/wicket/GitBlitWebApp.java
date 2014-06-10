@@ -34,11 +34,13 @@ import com.gitblit.manager.IAuthenticationManager;
 import com.gitblit.manager.IFederationManager;
 import com.gitblit.manager.IGitblit;
 import com.gitblit.manager.INotificationManager;
+import com.gitblit.manager.IPluginManager;
 import com.gitblit.manager.IProjectManager;
 import com.gitblit.manager.IRepositoryManager;
 import com.gitblit.manager.IRuntimeManager;
 import com.gitblit.manager.IUserManager;
-import com.gitblit.utils.StringUtils;
+import com.gitblit.tickets.ITicketService;
+import com.gitblit.transport.ssh.IPublicKeyManager;
 import com.gitblit.wicket.pages.ActivityPage;
 import com.gitblit.wicket.pages.BlamePage;
 import com.gitblit.wicket.pages.BlobDiffPage;
@@ -49,17 +51,19 @@ import com.gitblit.wicket.pages.CommitPage;
 import com.gitblit.wicket.pages.ComparePage;
 import com.gitblit.wicket.pages.DocPage;
 import com.gitblit.wicket.pages.DocsPage;
+import com.gitblit.wicket.pages.EditTicketPage;
+import com.gitblit.wicket.pages.ExportTicketPage;
 import com.gitblit.wicket.pages.FederationRegistrationPage;
 import com.gitblit.wicket.pages.ForkPage;
 import com.gitblit.wicket.pages.ForksPage;
 import com.gitblit.wicket.pages.GitSearchPage;
-import com.gitblit.wicket.pages.GravatarProfilePage;
 import com.gitblit.wicket.pages.HistoryPage;
 import com.gitblit.wicket.pages.LogPage;
 import com.gitblit.wicket.pages.LogoutPage;
 import com.gitblit.wicket.pages.LuceneSearchPage;
 import com.gitblit.wicket.pages.MetricsPage;
 import com.gitblit.wicket.pages.MyDashboardPage;
+import com.gitblit.wicket.pages.NewTicketPage;
 import com.gitblit.wicket.pages.OverviewPage;
 import com.gitblit.wicket.pages.PatchPage;
 import com.gitblit.wicket.pages.ProjectPage;
@@ -71,6 +75,7 @@ import com.gitblit.wicket.pages.ReviewProposalPage;
 import com.gitblit.wicket.pages.SummaryPage;
 import com.gitblit.wicket.pages.TagPage;
 import com.gitblit.wicket.pages.TagsPage;
+import com.gitblit.wicket.pages.TicketsPage;
 import com.gitblit.wicket.pages.TreePage;
 import com.gitblit.wicket.pages.UserPage;
 import com.gitblit.wicket.pages.UsersPage;
@@ -85,11 +90,15 @@ public class GitBlitWebApp extends WebApplication {
 
 	private final IRuntimeManager runtimeManager;
 
+	private final IPluginManager pluginManager;
+
 	private final INotificationManager notificationManager;
 
 	private final IUserManager userManager;
 
 	private final IAuthenticationManager authenticationManager;
+
+	private final IPublicKeyManager publicKeyManager;
 
 	private final IRepositoryManager repositoryManager;
 
@@ -101,9 +110,11 @@ public class GitBlitWebApp extends WebApplication {
 
 	public GitBlitWebApp(
 			IRuntimeManager runtimeManager,
+			IPluginManager pluginManager,
 			INotificationManager notificationManager,
 			IUserManager userManager,
 			IAuthenticationManager authenticationManager,
+			IPublicKeyManager publicKeyManager,
 			IRepositoryManager repositoryManager,
 			IProjectManager projectManager,
 			IFederationManager federationManager,
@@ -112,9 +123,11 @@ public class GitBlitWebApp extends WebApplication {
 		super();
 		this.settings = runtimeManager.getSettings();
 		this.runtimeManager = runtimeManager;
+		this.pluginManager = pluginManager;
 		this.notificationManager = notificationManager;
 		this.userManager = userManager;
 		this.authenticationManager = authenticationManager;
+		this.publicKeyManager = publicKeyManager;
 		this.repositoryManager = repositoryManager;
 		this.projectManager = projectManager;
 		this.federationManager = federationManager;
@@ -169,6 +182,12 @@ public class GitBlitWebApp extends WebApplication {
 		mount("/users", UsersPage.class);
 		mount("/logout", LogoutPage.class);
 
+		// setup ticket urls
+		mount("/tickets", TicketsPage.class, "r", "h");
+		mount("/tickets/new", NewTicketPage.class, "r");
+		mount("/tickets/edit", EditTicketPage.class, "r", "h");
+		mount("/tickets/export", ExportTicketPage.class, "r", "h");
+
 		// setup the markup document urls
 		mount("/docs", DocsPage.class, "r");
 		mount("/doc", DocPage.class, "r", "h", "f");
@@ -178,7 +197,6 @@ public class GitBlitWebApp extends WebApplication {
 		mount("/registration", FederationRegistrationPage.class, "u", "n");
 
 		mount("/activity", ActivityPage.class, "r", "h");
-		mount("/gravatar", GravatarProfilePage.class, "h");
 		mount("/lucene", LuceneSearchPage.class);
 		mount("/project", ProjectPage.class, "p");
 		mount("/projects", ProjectsPage.class);
@@ -223,9 +241,9 @@ public class GitBlitWebApp extends WebApplication {
 	public final Session newSession(Request request, Response response) {
 		GitBlitWebSession gitBlitWebSession = new GitBlitWebSession(request);
 
-		String forcedLocale = settings.getString(Keys.web.forceDefaultLocale, null);
-		if (!StringUtils.isEmpty(forcedLocale)) {
-			gitBlitWebSession.setLocale(new Locale(forcedLocale));
+		Locale forcedLocale = runtime().getLocale();
+		if (forcedLocale != null) {
+			gitBlitWebSession.setLocale(forcedLocale);
 		}
 		return gitBlitWebSession;
 	}
@@ -259,6 +277,10 @@ public class GitBlitWebApp extends WebApplication {
 		return runtimeManager;
 	}
 
+	public IPluginManager plugins() {
+		return pluginManager;
+	}
+
 	public INotificationManager notifier() {
 		return notificationManager;
 	}
@@ -269,6 +291,10 @@ public class GitBlitWebApp extends WebApplication {
 
 	public IAuthenticationManager authentication() {
 		return authenticationManager;
+	}
+
+	public IPublicKeyManager keys() {
+		return publicKeyManager;
 	}
 
 	public IRepositoryManager repositories() {
@@ -285,6 +311,10 @@ public class GitBlitWebApp extends WebApplication {
 
 	public IGitblit gitblit() {
 		return gitblit;
+	}
+
+	public ITicketService tickets() {
+		return gitblit.getTicketService();
 	}
 
 	public TimeZone getTimezone() {

@@ -29,6 +29,7 @@ import java.util.Set;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.PageParameters;
+import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.behavior.SimpleAttributeModifier;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -56,10 +57,11 @@ import com.gitblit.models.UserModel;
 import com.gitblit.models.UserRepositoryPreferences;
 import com.gitblit.servlet.PagesServlet;
 import com.gitblit.servlet.SyndicationServlet;
+import com.gitblit.tickets.TicketIndexer.Lucene;
 import com.gitblit.utils.ArrayUtils;
+import com.gitblit.utils.BugtraqProcessor;
 import com.gitblit.utils.DeepCopier;
 import com.gitblit.utils.JGitUtils;
-import com.gitblit.utils.MessageProcessor;
 import com.gitblit.utils.RefLogUtils;
 import com.gitblit.utils.StringUtils;
 import com.gitblit.wicket.CacheControl;
@@ -95,7 +97,7 @@ public abstract class RepositoryPage extends RootPage {
 	public RepositoryPage(PageParameters params) {
 		super(params);
 		repositoryName = WicketUtils.getRepositoryName(params);
-		String root =StringUtils.getFirstPathElement(repositoryName);
+		String root = StringUtils.getFirstPathElement(repositoryName);
 		if (StringUtils.isEmpty(root)) {
 			projectName = app().settings().getString(Keys.web.repositoryRootGroupName, "main");
 		} else {
@@ -108,7 +110,7 @@ public abstract class RepositoryPage extends RootPage {
 		}
 
 		if (!getRepositoryModel().hasCommits) {
-			setResponsePage(EmptyRepositoryPage.class, params);
+			throw new RestartResponseException(EmptyRepositoryPage.class, params);
 		}
 
 		if (getRepositoryModel().isCollectingGarbage) {
@@ -176,8 +178,8 @@ public abstract class RepositoryPage extends RootPage {
 		return getClass();
 	}
 
-	protected MessageProcessor messageProcessor() {
-		return new MessageProcessor(app().settings());
+	protected BugtraqProcessor bugtraqProcessor() {
+		return new BugtraqProcessor(app().settings());
 	}
 
 	private Map<String, PageRegistration> registerPages() {
@@ -200,11 +202,18 @@ public abstract class RepositoryPage extends RootPage {
 		}
 		pages.put("commits", new PageRegistration("gb.commits", LogPage.class, params));
 		pages.put("tree", new PageRegistration("gb.tree", TreePage.class, params));
+		if (app().tickets().isReady() && (app().tickets().isAcceptingNewTickets(getRepositoryModel()) || app().tickets().hasTickets(getRepositoryModel()))) {
+			PageParameters tParams = new PageParameters(params);
+			for (String state : TicketsPage.openStatii) {
+				tParams.add(Lucene.status.name(), state);
+			}
+			pages.put("tickets", new PageRegistration("gb.tickets", TicketsPage.class, tParams));
+		}
 		pages.put("docs", new PageRegistration("gb.docs", DocsPage.class, params, true));
-		pages.put("compare", new PageRegistration("gb.compare", ComparePage.class, params, true));
 		if (app().settings().getBoolean(Keys.web.allowForking, true)) {
 			pages.put("forks", new PageRegistration("gb.forks", ForksPage.class, params, true));
 		}
+		pages.put("compare", new PageRegistration("gb.compare", ComparePage.class, params, true));
 
 		// conditional links
 		// per-repository extra page links
@@ -288,6 +297,14 @@ public abstract class RepositoryPage extends RootPage {
 			}
 		}
 
+		// new ticket button
+		if (user.isAuthenticated && app().tickets().isAcceptingNewTickets(getRepositoryModel())) {
+			String newTicketUrl = getRequestCycle().urlFor(NewTicketPage.class, WicketUtils.newRepositoryParameter(repositoryName)).toString();
+			addToolbarButton("newTicketLink", "fa fa-ticket", getString("gb.new"), newTicketUrl);
+		} else {
+			add(new Label("newTicketLink").setVisible(false));
+		}
+
 		// (un)star link allows a user to star a repository
 		if (user.isAuthenticated) {
 			PageParameters starParams = DeepCopier.copy(getPageParameters());
@@ -309,7 +326,7 @@ public abstract class RepositoryPage extends RootPage {
 		}
 
 		// fork controls
-		if (!allowForkControls() || user == null || !user.isAuthenticated) {
+		if (!allowForkControls() || !user.isAuthenticated) {
 			// must be logged-in to fork, hide all fork controls
 			add(new ExternalLink("forkLink", "").setVisible(false));
 			add(new ExternalLink("myForkLink", "").setVisible(false));
@@ -515,7 +532,7 @@ public abstract class RepositoryPage extends RootPage {
 
 	protected void addFullText(String wicketId, String text) {
 		RepositoryModel model = getRepositoryModel();
-		String content = messageProcessor().processCommitMessage(r, model, text);
+		String content = bugtraqProcessor().processCommitMessage(r, model, text);
 		String html;
 		switch (model.commitMessageRenderer) {
 		case MARKDOWN:

@@ -36,6 +36,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
@@ -48,6 +49,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.CollectionModel;
 import org.apache.wicket.model.util.ListModel;
+import org.eclipse.jgit.lib.Repository;
 
 import com.gitblit.Constants;
 import com.gitblit.Constants.AccessRestrictionType;
@@ -59,6 +61,7 @@ import com.gitblit.GitBlitException;
 import com.gitblit.Keys;
 import com.gitblit.models.RegistrantAccessPermission;
 import com.gitblit.models.RepositoryModel;
+import com.gitblit.models.UserChoice;
 import com.gitblit.models.UserModel;
 import com.gitblit.utils.ArrayUtils;
 import com.gitblit.utils.StringUtils;
@@ -172,10 +175,26 @@ public class EditRepositoryPage extends RootSubPage {
 				RegistrantType.TEAM, app().users().getAllTeamNames(), repositoryTeams, getAccessPermissions());
 
 		// owners palette
-		List<String> owners = new ArrayList<String>(repositoryModel.owners);
-		List<String> persons = app().users().getAllUsernames();
-		final Palette<String> ownersPalette = new Palette<String>("owners", new ListModel<String>(owners), new CollectionModel<String>(
-		      persons), new StringChoiceRenderer(), 12, true);
+		List<UserChoice> owners = new ArrayList<UserChoice>();
+		for (String owner : repositoryModel.owners) {
+			UserModel o = app().users().getUserModel(owner);
+			if (o != null) {
+				owners.add(new UserChoice(o.getDisplayName(), o.username, o.emailAddress));
+			} else {
+				owners.add(new UserChoice(owner));
+			}
+		}
+		List<UserChoice> persons = new ArrayList<UserChoice>();
+		for (String person : app().users().getAllUsernames()) {
+			UserModel o = app().users().getUserModel(person);
+			if (o != null) {
+				persons.add(new UserChoice(o.getDisplayName(), o.username, o.emailAddress));
+			} else {
+				persons.add(new UserChoice(person));
+			}
+		}
+		final Palette<UserChoice> ownersPalette = new Palette<UserChoice>("owners", new ListModel<UserChoice>(owners), new CollectionModel<UserChoice>(
+		      persons), new ChoiceRenderer<UserChoice>(null, "userId"), 12, true);
 
 		// indexed local branches palette
 		List<String> allLocalBranches = new ArrayList<String>();
@@ -320,7 +339,9 @@ public class EditRepositoryPage extends RootSubPage {
 
 					// set author metric exclusions
 					String ax = metricAuthorExclusions.getObject();
-					if (!StringUtils.isEmpty(ax)) {
+					if (StringUtils.isEmpty(ax)) {
+						repositoryModel.metricAuthorExclusions = new ArrayList<String>();
+					} else {
 						Set<String> list = new HashSet<String>();
 						for (String exclusion : StringUtils.getStringsFromValue(ax,  " ")) {
 							if (StringUtils.isEmpty(exclusion)) {
@@ -337,7 +358,9 @@ public class EditRepositoryPage extends RootSubPage {
 
 					// set mailing lists
 					String ml = mailingLists.getObject();
-					if (!StringUtils.isEmpty(ml)) {
+					if (StringUtils.isEmpty(ml)) {
+						repositoryModel.mailingLists = new ArrayList<String>();
+					} else {
 						Set<String> list = new HashSet<String>();
 						for (String address : ml.split("(,|\\s)")) {
 							if (StringUtils.isEmpty(address)) {
@@ -358,9 +381,9 @@ public class EditRepositoryPage extends RootSubPage {
 
 					// owners
 					repositoryModel.owners.clear();
-					Iterator<String> owners = ownersPalette.getSelectedChoices();
+					Iterator<UserChoice> owners = ownersPalette.getSelectedChoices();
 					while (owners.hasNext()) {
-						repositoryModel.addOwner(owners.next());
+						repositoryModel.addOwner(owners.next().getUserId());
 					}
 
 					// pre-receive scripts
@@ -392,19 +415,23 @@ public class EditRepositoryPage extends RootSubPage {
 					}
 
 					// save the repository
-					app().repositories().updateRepositoryModel(oldName, repositoryModel, isCreate);
+					app().gitblit().updateRepositoryModel(oldName, repositoryModel, isCreate);
 
 					// repository access permissions
 					if (repositoryModel.accessRestriction.exceeds(AccessRestrictionType.NONE)) {
-						app().repositories().setUserAccessPermissions(repositoryModel, repositoryUsers);
-						app().repositories().setTeamAccessPermissions(repositoryModel, repositoryTeams);
+						app().gitblit().setUserAccessPermissions(repositoryModel, repositoryUsers);
+						app().gitblit().setTeamAccessPermissions(repositoryModel, repositoryTeams);
 					}
 				} catch (GitBlitException e) {
 					error(e.getMessage());
 					return;
 				}
 				setRedirect(false);
-				setResponsePage(RepositoriesPage.class);
+				if (isCreate) {
+					setResponsePage(RepositoriesPage.class);
+				} else {
+					setResponsePage(SummaryPage.class, WicketUtils.newRepositoryParameter(repositoryModel.name));
+				}
 			}
 		};
 
@@ -425,12 +452,24 @@ public class EditRepositoryPage extends RootSubPage {
 
 		// allow relinking HEAD to a branch or tag other than master on edit repository
 		List<String> availableRefs = new ArrayList<String>();
+		List<String> availableBranches = new ArrayList<String>();
 		if (!ArrayUtils.isEmpty(repositoryModel.availableRefs)) {
-			availableRefs.addAll(repositoryModel.availableRefs);
+			for (String ref : repositoryModel.availableRefs) {
+				if (!ref.startsWith(Constants.R_TICKET)) {
+					availableRefs.add(ref);
+					if (ref.startsWith(Constants.R_HEADS)) {
+						availableBranches.add(Repository.shortenRefName(ref));
+					}
+				}
+			}
 		}
 		form.add(new DropDownChoice<String>("HEAD", availableRefs).setEnabled(availableRefs.size() > 0));
 
 		boolean gcEnabled = app().settings().getBoolean(Keys.git.enableGarbageCollection, false);
+		int defaultGcPeriod = app().settings().getInteger(Keys.git.defaultGarbageCollectionPeriod, 7);
+		if (repositoryModel.gcPeriod == 0) {
+			repositoryModel.gcPeriod = defaultGcPeriod;
+		}
 		List<Integer> gcPeriods = Arrays.asList(1, 2, 3, 4, 5, 7, 10, 14 );
 		form.add(new DropDownChoice<Integer>("gcPeriod", gcPeriods, new GCPeriodRenderer()).setEnabled(gcEnabled));
 		form.add(new TextField<String>("gcThreshold").setEnabled(gcEnabled));
@@ -444,11 +483,15 @@ public class EditRepositoryPage extends RootSubPage {
 		}
 		form.add(new DropDownChoice<FederationStrategy>("federationStrategy", federationStrategies,
 				new FederationTypeRenderer()));
+		form.add(new CheckBox("acceptNewPatchsets"));
+		form.add(new CheckBox("acceptNewTickets"));
+		form.add(new CheckBox("requireApproval"));
+		form.add(new DropDownChoice<String>("mergeTo", availableBranches).setEnabled(availableBranches.size() > 0));
 		form.add(new CheckBox("useIncrementalPushTags"));
 		form.add(new CheckBox("showRemoteBranches"));
 		form.add(new CheckBox("skipSizeCalculation"));
 		form.add(new CheckBox("skipSummaryMetrics"));
-		List<Integer> maxActivityCommits  = Arrays.asList(-1, 0, 25, 50, 75, 100, 150, 200, 250, 500 );
+		List<Integer> maxActivityCommits  = Arrays.asList(-1, 0, 25, 50, 75, 100, 150, 200, 250, 500);
 		form.add(new DropDownChoice<Integer>("maxActivityCommits", maxActivityCommits, new MaxActivityCommitsRenderer()));
 
 		metricAuthorExclusions = new Model<String>(ArrayUtils.isEmpty(repositoryModel.metricAuthorExclusions) ? ""
@@ -561,7 +604,11 @@ public class EditRepositoryPage extends RootSubPage {
 
 			@Override
 			public void onSubmit() {
-				setResponsePage(RepositoriesPage.class);
+				if (isCreate) {
+					setResponsePage(RepositoriesPage.class);
+				} else {
+					setResponsePage(SummaryPage.class, WicketUtils.newRepositoryParameter(repositoryModel.name));
+				}
 			}
 		};
 		cancel.setDefaultFormProcessing(false);

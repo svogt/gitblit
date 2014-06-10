@@ -127,12 +127,26 @@ public class StringUtils {
 				retStr.append("%2F");
 			} else if (inStr.charAt(i) == ' ') {
 				retStr.append("%20");
+			} else if (inStr.charAt(i) == '&') {
+				retStr.append("%26");
 			} else {
 				retStr.append(inStr.charAt(i));
 			}
 			i++;
 		}
 		return retStr.toString();
+	}
+
+	/**
+	 * Flatten the list of strings into a single string with the specified
+	 * separator.
+	 *
+	 * @param values
+	 * @param separator
+	 * @return flattened list
+	 */
+	public static String flattenStrings(String[]  values, String separator) {
+		return flattenStrings(Arrays.asList(values), separator);
 	}
 
 	/**
@@ -293,7 +307,7 @@ public class StringUtils {
 	 * @param bytes
 	 * @return byte array as hex string
 	 */
-	private static String toHex(byte[] bytes) {
+	public static String toHex(byte[] bytes) {
 		StringBuilder sb = new StringBuilder(bytes.length * 2);
 		for (int i = 0; i < bytes.length; i++) {
 			if ((bytes[i] & 0xff) < 0x10) {
@@ -628,7 +642,7 @@ public class StringUtils {
 				// ignore unsupported charsets
 			}
 		}
-		if (value.startsWith("\uFEFF")) {
+		if (value != null && value.startsWith("\uFEFF")) {
 			// strip UTF-8 BOM
             return value.substring(1);
         }

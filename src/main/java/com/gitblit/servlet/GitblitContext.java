@@ -43,10 +43,12 @@ import com.gitblit.manager.IFederationManager;
 import com.gitblit.manager.IGitblit;
 import com.gitblit.manager.IManager;
 import com.gitblit.manager.INotificationManager;
+import com.gitblit.manager.IPluginManager;
 import com.gitblit.manager.IProjectManager;
 import com.gitblit.manager.IRepositoryManager;
 import com.gitblit.manager.IRuntimeManager;
 import com.gitblit.manager.IUserManager;
+import com.gitblit.transport.ssh.IPublicKeyManager;
 import com.gitblit.utils.ContainerUtils;
 import com.gitblit.utils.StringUtils;
 
@@ -77,9 +79,7 @@ public class GitblitContext extends DaggerContext {
 	 * Construct a Gitblit WAR/Express context.
 	 */
 	public GitblitContext() {
-		this.goSettings = null;
-		this.goBaseFolder = null;
-		gitblit = this;
+		this(null, null);
 	}
 
 	/**
@@ -149,7 +149,11 @@ public class GitblitContext extends DaggerContext {
 			String contextRealPath = context.getRealPath("/");
 			File contextFolder = (contextRealPath != null) ? new File(contextRealPath) : null;
 
-			if (!StringUtils.isEmpty(System.getenv("OPENSHIFT_DATA_DIR"))) {
+			// if the base folder dosen't match the default assume they don't want to use express,
+			// this allows for other containers to customise the basefolder per context.
+			String defaultBase = Constants.contextFolder$ + "/WEB-INF/data";
+			String base = lookupBaseFolderFromJndi();
+			if (!StringUtils.isEmpty(System.getenv("OPENSHIFT_DATA_DIR")) && defaultBase.equals(base)) {
 				// RedHat OpenShift
 				baseFolder = configureExpress(context, webxmlSettings, contextFolder, runtimeSettings);
 			} else {
@@ -174,14 +178,31 @@ public class GitblitContext extends DaggerContext {
 		startManager(injector, INotificationManager.class);
 		startManager(injector, IUserManager.class);
 		startManager(injector, IAuthenticationManager.class);
+		startManager(injector, IPublicKeyManager.class);
 		startManager(injector, IRepositoryManager.class);
 		startManager(injector, IProjectManager.class);
 		startManager(injector, IFederationManager.class);
 		startManager(injector, IGitblit.class);
 
+		// start the plugin manager last so that plugins can depend on
+		// deterministic access to all other managers in their start() methods
+		startManager(injector, IPluginManager.class);
+
 		logger.info("");
 		logger.info("All managers started.");
 		logger.info("");
+	}
+
+	private String lookupBaseFolderFromJndi() {
+		try {
+			// try to lookup JNDI env-entry for the baseFolder
+			InitialContext ic = new InitialContext();
+			Context env = (Context) ic.lookup("java:comp/env");
+			return (String) env.lookup("baseFolder");
+		} catch (NamingException n) {
+			logger.error("Failed to get JNDI env-entry: " + n.getExplanation());
+		}
+		return null;
 	}
 
 	protected <X extends IManager> X startManager(ObjectGraph injector, Class<X> clazz) {
@@ -268,16 +289,9 @@ public class GitblitContext extends DaggerContext {
 			logger.error("");
 		}
 
-		try {
-			// try to lookup JNDI env-entry for the baseFolder
-			InitialContext ic = new InitialContext();
-			Context env = (Context) ic.lookup("java:comp/env");
-			String val = (String) env.lookup("baseFolder");
-			if (!StringUtils.isEmpty(val)) {
-				path = val;
-			}
-		} catch (NamingException n) {
-			logger.error("Failed to get JNDI env-entry: " + n.getExplanation());
+		String baseFromJndi = lookupBaseFolderFromJndi();
+		if (!StringUtils.isEmpty(baseFromJndi)) {
+			path = baseFromJndi;
 		}
 
 		File base = com.gitblit.utils.FileUtils.resolveParameter(Constants.contextFolder$, contextFolder, path);

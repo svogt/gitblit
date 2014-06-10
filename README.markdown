@@ -4,6 +4,8 @@ Gitblit
 Gitblit is an open source, pure Java Git solution for managing, viewing, and serving [Git](http://git-scm.com) repositories.
 More information about Gitblit can be found [here](http://gitblit.com).
 
+[ ![Download](https://api.bintray.com/packages/gitblit/releases/stable/images/download.png) ](https://bintray.com/gitblit/releases/stable/_latestVersion)
+
 License
 -------
 
@@ -13,7 +15,7 @@ The text of the license is included in the file LICENSE in the root of the proje
 Java Runtime Requirement
 ------------------------------------
 
-Gitblit requires at Java 6 Runtime Environment (JRE) or a Java 6 Development Kit (JDK).
+Gitblit requires at Java 7 Runtime Environment (JRE) or a Java 7 Development Kit (JDK).
 
 Getting help
 ------------

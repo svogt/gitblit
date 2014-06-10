@@ -67,6 +67,7 @@ public class UserModel implements Principal, Serializable, Comparable<UserModel>
 	public boolean canFork;
 	public boolean canCreate;
 	public boolean excludeFromFederation;
+	public boolean disabled;
 	// retained for backwards-compatibility with RPC clients
 	@Deprecated
 	public final Set<String> repositories = new HashSet<String>();
@@ -446,6 +447,31 @@ public class UserModel implements Principal, Serializable, Comparable<UserModel>
 		return canAdmin() || model.isUsersPersonalRepository(username) || model.isOwner(username);
 	}
 
+	public boolean canEdit(TicketModel ticket, RepositoryModel repository) {
+		 return isAuthenticated() &&
+				 (canPush(repository)
+				 || (ticket != null && username.equals(ticket.responsible))
+				 || (ticket != null && username.equals(ticket.createdBy)));
+	}
+
+	public boolean canAdmin(TicketModel ticket, RepositoryModel repository) {
+		 return isAuthenticated() &&
+				 (canPush(repository)
+				 || ticket != null && username.equals(ticket.responsible));
+	}
+
+	public boolean canReviewPatchset(RepositoryModel model) {
+		return isAuthenticated() && canClone(model);
+	}
+
+	public boolean canApprovePatchset(RepositoryModel model) {
+		return isAuthenticated() && canPush(model);
+	}
+
+	public boolean canVetoPatchset(RepositoryModel model) {
+		return isAuthenticated() && canPush(model);
+	}
+
 	/**
 	 * This returns true if the user has fork privileges or the user has fork
 	 * privileges because of a team membership.
@@ -517,7 +543,7 @@ public class UserModel implements Principal, Serializable, Comparable<UserModel>
 			// admins can create any repository
 			return true;
 		}
-		if (canCreate) {
+		if (canCreate()) {
 			String projectPath = StringUtils.getFirstPathElement(repository);
 			if (!StringUtils.isEmpty(projectPath) && projectPath.equalsIgnoreCase(getPersonalPath())) {
 				// personal repository
@@ -525,6 +551,20 @@ public class UserModel implements Principal, Serializable, Comparable<UserModel>
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Returns true if the user is allowed to administer the specified repository
+	 *
+	 * @param repo
+	 * @return true if the user can administer the repository
+	 */
+	public boolean canAdmin(RepositoryModel repo) {
+		return canAdmin() || repo.isOwner(username) || isMyPersonalRepository(repo.name);
+	}
+
+	public boolean isAuthenticated() {
+		return !UserModel.ANONYMOUS.equals(this) && isAuthenticated;
 	}
 
 	public boolean isTeamMember(String teamname) {

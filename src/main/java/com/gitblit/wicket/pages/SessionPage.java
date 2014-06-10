@@ -56,8 +56,18 @@ public abstract class SessionPage extends WebPage {
 			// any changes to permissions or roles (issue-186)
 			UserModel user = app().users().getUserModel(session.getUser().username);
 
+			if (user == null || user.disabled) {
+				// user was deleted/disabled during session
+				HttpServletResponse response = ((WebResponse) getRequestCycle().getResponse())
+						.getHttpServletResponse();
+				app().authentication().logout(response, user);
+				session.setUser(null);
+				session.invalidateNow();
+				return;
+			}
+
 			// validate cookie during session (issue-361)
-			if (app().settings().getBoolean(Keys.web.allowCookieAuthentication, true)) {
+			if (user != null && app().settings().getBoolean(Keys.web.allowCookieAuthentication, true)) {
 				HttpServletRequest request = ((WebRequest) getRequestCycle().getRequest())
 						.getHttpServletRequest();
 				String requestCookie = app().authentication().getCookie(request);

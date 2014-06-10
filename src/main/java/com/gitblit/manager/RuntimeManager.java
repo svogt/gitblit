@@ -18,6 +18,7 @@ package com.gitblit.manager;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -63,6 +64,8 @@ public class RuntimeManager implements IRuntimeManager {
 		logger.info("Settings    : " + settings.toString());
 		logTimezone("JVM timezone: ", TimeZone.getDefault());
 		logTimezone("App timezone: ", getTimezone());
+		logger.info("JVM locale  : " + Locale.getDefault());
+		logger.info("App locale  : " +  (getLocale() == null ? "<client>" : getLocale()));
 		return this;
 	}
 
@@ -116,7 +119,9 @@ public class RuntimeManager implements IRuntimeManager {
 	 */
 	@Override
 	public boolean isServingRepositories() {
-		return settings.getBoolean(Keys.git.enableGitServlet, true) || (settings.getInteger(Keys.git.daemonPort, 0) > 0);
+		return settings.getBoolean(Keys.git.enableGitServlet, true)
+				|| (settings.getInteger(Keys.git.daemonPort, 0) > 0)
+				|| (settings.getInteger(Keys.git.sshPort, 0) > 0);
 	}
 
 	/**
@@ -142,6 +147,22 @@ public class RuntimeManager implements IRuntimeManager {
 		df.setTimeZone(zone);
 		String offset = df.format(new Date());
 		logger.info("{}{} ({})", new Object [] { type, zone.getID(), offset });
+	}
+
+	@Override
+	public Locale getLocale() {
+		String lc = settings.getString(Keys.web.forceDefaultLocale, null);
+		if (!StringUtils.isEmpty(lc)) {
+			int underscore = lc.indexOf('_');
+			if (underscore > 0) {
+				String lang = lc.substring(0, underscore);
+				String cc = lc.substring(underscore + 1);
+				return new Locale(lang, cc);
+			} else {
+				return new Locale(lc);
+			}
+		}
+		return null;
 	}
 
 	/**

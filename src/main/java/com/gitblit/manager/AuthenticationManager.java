@@ -47,6 +47,7 @@ import com.gitblit.auth.SalesforceAuthProvider;
 import com.gitblit.auth.WindowsAuthProvider;
 import com.gitblit.models.TeamModel;
 import com.gitblit.models.UserModel;
+import com.gitblit.transport.ssh.SshKey;
 import com.gitblit.utils.Base64;
 import com.gitblit.utils.HttpUtils;
 import com.gitblit.utils.StringUtils;
@@ -150,7 +151,18 @@ public class AuthenticationManager implements IAuthenticationManager {
 
 	@Override
 	public AuthenticationManager stop() {
+		for (AuthenticationProvider provider : authenticationProviders) {
+			try {
+				provider.stop();
+			} catch (Exception e) {
+				logger.error("Failed to stop " + provider.getClass().getSimpleName(), e);
+			}
+		}
 		return this;
+	}
+
+	public void addAuthenticationProvider(AuthenticationProvider prov) {
+		authenticationProviders.add(prov);
 	}
 
 	/**
@@ -191,7 +203,7 @@ public class AuthenticationManager implements IAuthenticationManager {
 						flagWicketSession(AuthenticationType.CONTAINER);
 						logger.debug(MessageFormat.format("{0} authenticated by servlet container principal from {1}",
 								user.username, httpRequest.getRemoteAddr()));
-						return user;
+						return validateAuthentication(user, AuthenticationType.CONTAINER);
 					} else if (settings.getBoolean(Keys.realm.container.autoCreateAccounts, false)
 							&& !internalAccount) {
 						// auto-create user from an authenticated container principal
@@ -203,7 +215,7 @@ public class AuthenticationManager implements IAuthenticationManager {
 						flagWicketSession(AuthenticationType.CONTAINER);
 						logger.debug(MessageFormat.format("{0} authenticated and created by servlet container principal from {1}",
 								user.username, httpRequest.getRemoteAddr()));
-						return user;
+						return validateAuthentication(user, AuthenticationType.CONTAINER);
 					} else if (!internalAccount) {
 						logger.warn(MessageFormat.format("Failed to find UserModel for {0}, attempted servlet container authentication from {1}",
 								principal.getName(), httpRequest.getRemoteAddr()));
@@ -224,7 +236,7 @@ public class AuthenticationManager implements IAuthenticationManager {
 				flagWicketSession(AuthenticationType.CERTIFICATE);
 				logger.debug(MessageFormat.format("{0} authenticated by client certificate {1} from {2}",
 						user.username, metadata.serialNumber, httpRequest.getRemoteAddr()));
-				return user;
+				return validateAuthentication(user, AuthenticationType.CERTIFICATE);
 			} else {
 				logger.warn(MessageFormat.format("Failed to find UserModel for {0}, attempted client certificate ({1}) authentication from {2}",
 						model.username, metadata.serialNumber, httpRequest.getRemoteAddr()));
@@ -246,7 +258,7 @@ public class AuthenticationManager implements IAuthenticationManager {
 				flagWicketSession(AuthenticationType.COOKIE);
 				logger.debug(MessageFormat.format("{0} authenticated by cookie from {1}",
 					user.username, httpRequest.getRemoteAddr()));
-				return user;
+				return validateAuthentication(user, AuthenticationType.COOKIE);
 			}
 		}
 
@@ -268,7 +280,7 @@ public class AuthenticationManager implements IAuthenticationManager {
 					flagWicketSession(AuthenticationType.CREDENTIALS);
 					logger.debug(MessageFormat.format("{0} authenticated by BASIC request header from {1}",
 							user.username, httpRequest.getRemoteAddr()));
-					return user;
+					return validateAuthentication(user, AuthenticationType.CREDENTIALS);
 				} else {
 					logger.warn(MessageFormat.format("Failed login attempt for {0}, invalid credentials from {1}",
 							username, httpRequest.getRemoteAddr()));
@@ -276,6 +288,58 @@ public class AuthenticationManager implements IAuthenticationManager {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Authenticate a user based on a public key.
+	 *
+	 * This implementation assumes that the authentication has already take place
+	 * (e.g. SSHDaemon) and that this is a validation/verification of the user.
+	 *
+	 * @param username
+	 * @param key
+	 * @return a user object or null
+	 */
+	@Override
+	public UserModel authenticate(String username, SshKey key) {
+		if (username != null) {
+			if (!StringUtils.isEmpty(username)) {
+				UserModel user = userManager.getUserModel(username);
+				if (user != null) {
+					// existing user
+					logger.debug(MessageFormat.format("{0} authenticated by {1} public key",
+							user.username, key.getAlgorithm()));
+					return validateAuthentication(user, AuthenticationType.PUBLIC_KEY);
+				}
+				logger.warn(MessageFormat.format("Failed to find UserModel for {0} during public key authentication",
+							username));
+			}
+		} else {
+			logger.warn("Empty user passed to AuthenticationManager.authenticate!");
+		}
+		return null;
+	}
+
+
+	/**
+	 * This method allows the authentication manager to reject authentication
+	 * attempts.  It is called after the username/secret have been verified to
+	 * ensure that the authentication technique has been logged.
+	 *
+	 * @param user
+	 * @return
+	 */
+	protected UserModel validateAuthentication(UserModel user, AuthenticationType type) {
+		if (user == null) {
+			return null;
+		}
+		if (user.disabled) {
+			// user has been disabled
+			logger.warn("Rejected {} authentication attempt by disabled account \"{}\"",
+					type, user.username);
+			return null;
+		}
+		return user;
 	}
 
 	protected void flagWicketSession(AuthenticationType authenticationType) {
@@ -313,41 +377,52 @@ public class AuthenticationManager implements IAuthenticationManager {
 
 		// try local authentication
 		if (user != null && user.isLocalAccount()) {
-			UserModel returnedUser = null;
-			if (user.password.startsWith(StringUtils.MD5_TYPE)) {
-				// password digest
-				String md5 = StringUtils.MD5_TYPE + StringUtils.getMD5(new String(password));
-				if (user.password.equalsIgnoreCase(md5)) {
-					returnedUser = user;
-				}
-			} else if (user.password.startsWith(StringUtils.COMBINED_MD5_TYPE)) {
-				// username+password digest
-				String md5 = StringUtils.COMBINED_MD5_TYPE
-						+ StringUtils.getMD5(username.toLowerCase() + new String(password));
-				if (user.password.equalsIgnoreCase(md5)) {
-					returnedUser = user;
-				}
-			} else if (user.password.equals(new String(password))) {
-				// plain-text password
-				returnedUser = user;
-			}
-			return returnedUser;
+			return authenticateLocal(user, password);
 		}
 
 		// try registered external authentication providers
-		if (user == null) {
-			for (AuthenticationProvider provider : authenticationProviders) {
-				if (provider instanceof UsernamePasswordAuthenticationProvider) {
-					user = provider.authenticate(usernameDecoded, password);
-					if (user != null) {
-						// user authenticated
-						user.accountType = provider.getAccountType();
-						return user;
-					}
+		for (AuthenticationProvider provider : authenticationProviders) {
+			if (provider instanceof UsernamePasswordAuthenticationProvider) {
+				UserModel returnedUser = provider.authenticate(usernameDecoded, password);
+				if (returnedUser != null) {
+					// user authenticated
+					returnedUser.accountType = provider.getAccountType();
+					return validateAuthentication(returnedUser, AuthenticationType.CREDENTIALS);
 				}
 			}
 		}
-		return user;
+
+		// could not authenticate locally or with a provider
+		return null;
+	}
+
+	/**
+	 * Returns a UserModel if local authentication succeeds.
+	 *
+	 * @param user
+	 * @param password
+	 * @return a UserModel if local authentication succeeds, null otherwise
+	 */
+	protected UserModel authenticateLocal(UserModel user, char [] password) {
+		UserModel returnedUser = null;
+		if (user.password.startsWith(StringUtils.MD5_TYPE)) {
+			// password digest
+			String md5 = StringUtils.MD5_TYPE + StringUtils.getMD5(new String(password));
+			if (user.password.equalsIgnoreCase(md5)) {
+				returnedUser = user;
+			}
+		} else if (user.password.startsWith(StringUtils.COMBINED_MD5_TYPE)) {
+			// username+password digest
+			String md5 = StringUtils.COMBINED_MD5_TYPE
+					+ StringUtils.getMD5(user.username.toLowerCase() + new String(password));
+			if (user.password.equalsIgnoreCase(md5)) {
+				returnedUser = user;
+			}
+		} else if (user.password.equals(new String(password))) {
+			// plain-text password
+			returnedUser = user;
+		}
+		return validateAuthentication(returnedUser, AuthenticationType.CREDENTIALS);
 	}
 
 	/**

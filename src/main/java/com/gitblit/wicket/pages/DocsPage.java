@@ -59,8 +59,9 @@ public class DocsPage extends RepositoryPage {
 		List<MarkupDocument> roots = processor.getRootDocs(r, repositoryName, commitId);
 		Fragment fragment = null;
 		if (roots.isEmpty()) {
-			// no identified root documents just show the standard document list
+			// no identified root documents
 			fragment = new Fragment("docs", "noIndexFragment", this);
+			setResponsePage(NoDocsPage.class, params);
 		} else {
 			// root documents, use tabbed ui of index/root and document list
 			fragment = new Fragment("docs", "tabsFragment", this);
@@ -138,8 +139,8 @@ public class DocsPage extends RepositoryPage {
 				PathModel entry = item.getModelObject();
 				item.add(WicketUtils.newImage("docIcon", "file_world_16x16.png"));
 				item.add(new Label("docSize", byteFormat.format(entry.size)));
-				item.add(new LinkPanel("docName", "list", entry.name, DocPage.class, WicketUtils
-						.newPathParameter(repositoryName, id, entry.path)));
+				item.add(new LinkPanel("docName", "list", StringUtils.stripFileExtension(entry.name),
+						DocPage.class, WicketUtils.newPathParameter(repositoryName, id, entry.path)));
 
 				// links
 				item.add(new BookmarkablePageLink<Void>("view", DocPage.class, WicketUtils
